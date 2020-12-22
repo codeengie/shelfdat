@@ -4,12 +4,14 @@
 An app I created to help me manage my plex media library.
 
 ## Technology
++ Gulp
 + Vue.js
 + AWS
+  + DynamoDB
+  + Lambda
 
 ## Developer
 [Cesar Villanueva Jr](https://codeengie.com)
-
 
 ## License
 + You do not have my written, implied or expressed permission to use.
