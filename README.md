@@ -4,14 +4,22 @@
 An app I created to help me manage my plex media library.
 
 ## Technology
-+ Gulp
-+ Vue.js
 + AWS
+  + API Gateway
   + DynamoDB
   + Lambda
++ CSS3
++ Gulp
++ HTML5
++ JavaScript
++ Node.js
++ Vue.js
 
 ## Developer
 [Cesar Villanueva Jr](https://codeengie.com)
+
+## Credits
+Built and designed by Ardent Forms.
 
 ## License
 + You do not have my written, implied or expressed permission to use.
