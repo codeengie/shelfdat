@@ -17,10 +17,10 @@ exports.handler = async (event, context) => {
     console.log(`Event: ${JSON.stringify(event)}`);
 
     try {
-        // Get movies
-        const movies = await getAllMovies();
+        // Get media from db
+        const media = await getMedia();
         // Convert a DynamoDB record into a JavaScript object
-        const unmarshalled = movies.Items.map(obj => AWS.DynamoDB.Converter.unmarshall(obj));
+        const unmarshalled = media.Items.map(obj => AWS.DynamoDB.Converter.unmarshall(obj));
 
         response = {
             statusCode: 200,
@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
 /**
  * Get all movie data from DynamoDB
  */
-async function getAllMovies() {
+async function getMedia() {
     const dbTableName = process.env.DB_TABLE_NAME;
     const dynamodb = new AWS.DynamoDB({apiVersion: process.env.DB_API_VERSION});
     // Pre-flight data object
