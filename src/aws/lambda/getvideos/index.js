@@ -15,15 +15,17 @@ exports.handler = async (event, context) => {
     let response = '';
 
     console.log(`Event: ${JSON.stringify(event)}`);
-    
+
     try {
         // Get movies
         const movies = await getAllMovies();
+        // Convert a DynamoDB record into a JavaScript object
+        const unmarshalled = movies.Items.map(obj => AWS.DynamoDB.Converter.unmarshall(obj));
 
         response = {
             statusCode: 200,
             body: 'OK',
-            data: movies.Items
+            data: unmarshalled
         }
     } catch(err) {
         console.log(err);
@@ -39,7 +41,6 @@ exports.handler = async (event, context) => {
 
 /**
  * Get all movie data from DynamoDB
- * @todo Figure out how to unmarshall the entire data stream, the AWS API only does one record
  */
 async function getAllMovies() {
     const dbTableName = process.env.DB_TABLE_NAME;
