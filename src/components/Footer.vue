@@ -20,3 +20,9 @@
     methods: {}
   }
 </script>
+
+<style>
+  footer {
+    font-size: 1.4rem;
+  }
+</style>
