@@ -1,0 +1,15 @@
+{
+  "name": "notashelfie",
+  "version": "1.0.0",
+  "description": "Media manager.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cesar Villanueva Jr<cvillanujr@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.817.0",
+    "uui": "^1.0.7"
+  }
+}

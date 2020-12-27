@@ -13,10 +13,10 @@ const uuid = require('uuid/v4'); // Generate universally unique identifier
  * @param context
  * @returns {Promise<{data: *, body: string, statusCode: number}>}
  */
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
     let response = '';
 
-    console.log(`Event: ${JSON.stringify(event)}`);
+    console.log(`Request: ${JSON.stringify(event)}`);
 
     try {
         // Send media data to DynamoDB
@@ -24,7 +24,8 @@ exports.handler = async (event, context) => {
 
         response = {
             statusCode: 200,
-            body: 'OK'
+            body: 'OK',
+            data: event
         }
     } catch(err) {
         console.log(err);
@@ -48,22 +49,23 @@ async function putNewMedia(data) {
     // Create the DynamoDB service object
     const dynamodb = new AWS.DynamoDB({apiVersion: process.env.DB_API_Version});
     const recordId = uuid();
-    // const date = new Date();
     const isCollection = !!data.collection;
     // Pre-flight data object for db insert
     const params = {
         TableName: dbTableName,
         Item: {
-            collection: {S: isCollection},
-            container: {N: data.container},
+            collection: {S: data.collection},
+            container: {N: data.container.toString()},
             format: {S: data.format},
             id: {S: recordId},
             location: {S: data.location},
-            // other: {M: {}},
+            other: {L: data.other},
             title: {S: data.title},
             type: {S: data.type}
         }
     };
+
+    console.log(params);
 
     return dynamodb.putItem(params).promise();
 }
