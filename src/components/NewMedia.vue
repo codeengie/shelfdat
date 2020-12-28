@@ -17,7 +17,7 @@
 
       <div class="media-form__group media-form__group--dropdown">
         <label class="media-form__label" for="format">Format</label>
-        <select class="media-form__select" name="format" id="format">
+        <select class="media-form__select" name="format" id="format" v-model="format">
           <option value="null">Choose option</option>
           <option value="DVD">DVD</option>
           <option value="Blu-ray">Blu-ray</option>
@@ -27,7 +27,7 @@
 
       <div class="media-form__group media-form__group--dropdown">
         <label class="media-form__label" for="type">Type</label>
-        <select class="media-form__select" name="type" id="type">
+        <select class="media-form__select" name="type" id="type" v-model="type">
           <option value="null">Choose option</option>
           <option value="Movie">Movie</option>
           <option value="TV Show">TV Show</option>
@@ -36,7 +36,7 @@
 
       <div class="media-form__group media-form__group--dropdown">
         <label class="media-form__label" for="location">Location</label>
-        <select class="media-form__select" name="location" id="location">
+        <select class="media-form__select" name="location" id="location" v-model="location">
           <option value="null">Choose option</option>
           <option value="1st Floor">1st Floor</option>
           <option value="2nd Floor">2nd Floor</option>
@@ -45,7 +45,7 @@
 
       <div class="media-form__group media-form__group--dropdown">
         <label class="media-form__label" for="container">Container</label>
-        <select class="media-form__select" name="container" id="container">
+        <select class="media-form__select" name="container" id="container" v-model="container">
           <option value="null">Choose option</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -97,10 +97,9 @@
         }
 
         if (!this.errors.length) {
+          // Puf your function here to send the data
           return true;
         }
-
-        console.log('New media submitted');
       }
     }
   }
