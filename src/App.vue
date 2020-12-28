@@ -37,11 +37,9 @@
     },
     methods: {
       async getMedia() {
-        const res = await fetch(process.env.VUE_APP_API_URL, {
-          method: 'GET'
-        });
-        console.log(res);
-        this.collection = await res.json();
+        const response = await fetch(process.env.VUE_APP_API_URL);
+        const media = await response.json();
+        this.collection = media.data;
       }
     }
   }
