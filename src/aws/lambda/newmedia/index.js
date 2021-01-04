@@ -47,24 +47,23 @@ async function putNewMedia(data) {
     // Create the DynamoDB service object
     const dynamodb = new AWS.DynamoDB({apiVersion: process.env.DB_API_Version});
     const recordId = uuid();
-    const isCollection = !!data.collection;
     // Pre-flight data object for db insert
     const params = {
         TableName: dbTableName,
         Item: {
-            collection: {S: data.collection},
+            collection: {BOOL: data.collection},
             container: {N: data.container.toString()},
             format: {S: data.format},
             id: {S: recordId},
             location: {S: data.location},
-            other: {L: data.other},
+            other: {L: [{S: 'N/A'}]},
             title: {S: data.title},
             type: {S: data.type}
         }
     };
 
     console.log(`Generating new DynamoDB record, with ID: ${recordId}`);
-    console.log(`Params: ${params}`);
+    console.log(`Params: ${JSON.stringify(params)}`);
 
     return dynamodb.putItem(params).promise();
 }
