@@ -35,6 +35,15 @@
       </div>
 
       <div class="media-form__group media-form__group--dropdown">
+        <label class="media-form__label" for="collection">Collection</label>
+        <select class="media-form__select" name="collection" id="collection" v-model="collection">
+          <option value="null">Choose option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="media-form__group media-form__group--dropdown">
         <label class="media-form__label" for="location">Location</label>
         <select class="media-form__select" name="location" id="location" v-model="location">
           <option value="null">Choose option</option>
@@ -69,6 +78,7 @@
     data() {
       return {
         errors: [],
+        collection: null,
         container: null,
         format: null,
         location: null,
@@ -80,11 +90,12 @@
     methods: {
       async submitNewMedia() {
         const newMovieData = {
+          collection: (this.collection === 'yes'),
           container: this.container,
           format: this.format,
           location: this.location,
           title: this.title,
-          type: this.title
+          type: this.type
         };
 
         console.log(`New Movie Data: ${JSON.stringify(newMovieData)}`);
@@ -104,6 +115,7 @@
         });
       },
       resetForm() {
+        this.collection = '';
         this.container = '';
         this.format = '';
         this.location = '';
@@ -123,6 +135,10 @@
 
         if (!this.type) {
           this.errors.push('Type is required');
+        }
+
+        if (!this.collection) {
+          this.errors.push('Collection is required');
         }
 
         if (!this.location) {
