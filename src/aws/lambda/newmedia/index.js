@@ -7,10 +7,9 @@ const uuid = require('uuid/v4'); // Generate universally unique identifier
 
 
 /**
- * Node 8.10+ has async/wait support, hend the handler can now accept a promise value, this also
+ * Node 8.10+ has async/wait support, hence the handler can now accept a promise value, this also
  * means we don't need to pass a callback in the parameters of the function.
  * @param event
- * @param context
  * @returns {Promise<{data: *, body: string, statusCode: number}>}
  */
 exports.handler = async (event) => {
@@ -24,8 +23,7 @@ exports.handler = async (event) => {
 
         response = {
             statusCode: 200,
-            body: 'OK',
-            data: event
+            body: 'OK'
         }
     } catch(err) {
         console.log(err);
@@ -65,7 +63,8 @@ async function putNewMedia(data) {
         }
     };
 
-    console.log(params);
+    console.log(`Generating new DynamoDB record, with ID: ${recordId}`);
+    console.log(`Params: ${params}`);
 
     return dynamodb.putItem(params).promise();
 }
