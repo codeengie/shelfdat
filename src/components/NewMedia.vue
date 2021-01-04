@@ -1,5 +1,5 @@
 <template>
-  <form class="media-form" @submit.prevent="submitNewMedia">
+  <form class="media-form" @submit.prevent="validateForm">
     <h3 class="media-form__title">Create A New Movie</h3>
 
     <div class="media-form__errors" v-if="errors.length">
@@ -57,6 +57,10 @@
     <div class="media-form__group media-form__group--button">
       <button>Submit</button>
     </div>
+
+    <div class="media-form__group media-form__group--server" v-if="response">
+      <p class="media-form__response">{{ response }}</p>
+    </div>
   </form>
 </template>
 
@@ -69,11 +73,44 @@
         format: null,
         location: null,
         title: null,
-        type: null
+        type: null,
+        response: ''
       };
     },
     methods: {
-      submitNewMedia() {
+      async submitNewMedia() {
+        const newMovieData = {
+          container: this.container,
+          format: this.format,
+          location: this.location,
+          title: this.title,
+          type: this.title
+        };
+
+        console.log(`New Movie Data: ${JSON.stringify(newMovieData)}`);
+
+        await fetch(process.env.VUE_APP_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newMovieData)
+        })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+          this.response = json;
+          this.resetForm();
+        });
+      },
+      resetForm() {
+        this.container = '';
+        this.format = '';
+        this.location = '';
+        this.title = '';
+        this.type = '';
+      },
+      validateForm() {
         this.errors = [];
 
         if (!this.title) {
@@ -97,7 +134,7 @@
         }
 
         if (!this.errors.length) {
-          // Puf your function here to send the data
+          this.submitNewMedia();
           return true;
         }
       }
@@ -158,6 +195,11 @@
 
   /* Modifiers */
   .media-form__group--button {
+    text-align: center;
+  }
+
+  .media-form__group--server {
+    color: #fff;
     text-align: center;
   }
 </style>
