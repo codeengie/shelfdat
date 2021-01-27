@@ -61,10 +61,13 @@
   html {
     font-size: 62.5%;
   }
+  body, h1, h2 {
+    margin: 0;
+    padding: 0;
+  }
   body {
     background-color: #f0f0f0;
     font-family: Roboto, sans-serif;
-    margin: 0 15px;
   }
   h1 {
     font-size: 3rem;
