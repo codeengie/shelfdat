@@ -1,7 +1,11 @@
 <template>
   <nas-header></nas-header>
-  <nas-newmedia></nas-newmedia><br>
+  <nas-newmedia
+      media-db-data
+      @addLastMedia="updateMedia"
+  ></nas-newmedia><br>
   <input placeholder="Search media..." v-model.trim="searchKey">
+  <!-- Redo this component to use Dynamic Props 93-->
   <section>
     <h3># of Movies in DB: {{ mediaCount }}</h3>
     <dl v-for="media in mediaSearch" :key="media">
@@ -18,7 +22,7 @@
   export default {
     data() {
       return {
-        collection: [],
+        mediaDbData: [],
         searchKey: ''
       };
     },
@@ -27,10 +31,10 @@
     },
     computed: {
       mediaCount() {
-        return this.collection.length;
+        return this.mediaDbData.length;
       },
       mediaSearch() {
-        return this.collection.filter(media => {
+        return this.mediaDbData.filter(media => {
           return media.title.toLowerCase().includes(this.searchKey.toLowerCase());
         });
       }
@@ -39,7 +43,11 @@
       async getMedia() {
         const response = await fetch(process.env.VUE_APP_API_URL);
         const media = await response.json();
-        this.collection = media.data;
+        this.mediaDbData = media.data;
+      },
+      updateMedia(mediaRecord) {
+        // this.mediaDbData.push(mediaRecord);
+        console.log(`Added latest media record: ${mediaRecord}`);
       }
     }
   }

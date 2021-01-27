@@ -75,6 +75,22 @@
 
 <script>
   export default {
+    // This is an interface
+    // props: ['mediaDbData'],
+    props: {
+      mediaDBData: Object
+    },
+    emits: ['add-last-media'],
+    /*emits: {
+      'add-last-media': function(data){
+        if (data) {
+          return true;
+        } else {
+          console.warn('Data is missing!');
+          return false;
+        }
+      }
+    },*/
     data() {
       return {
         errors: [],
@@ -112,6 +128,7 @@
           console.log(json);
           this.response = json;
           this.resetForm();
+          this.addLastMedia();
         });
       },
       resetForm() {
@@ -121,6 +138,10 @@
         this.location = '';
         this.title = '';
         this.type = '';
+      },
+      // Update media data when a new movie is added
+      addLastMedia() {
+        this.$emit('add-last-media', this.response.data); // @todo You'll need to update the API to send this back
       },
       validateForm() {
         this.errors = [];
