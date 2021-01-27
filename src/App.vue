@@ -62,7 +62,9 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-  * {
+  *,
+  *::after,
+  *::before {
     box-sizing: border-box;
   }
 
