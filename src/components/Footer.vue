@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <small>Copyright {{ setCurrentYear }} @ Ardent Forms</small>
+    <small>Copyright {{ setCurrentYear }} @ Ardent Forms. All Rights Reserved.</small>
   </footer>
 </template>
 
