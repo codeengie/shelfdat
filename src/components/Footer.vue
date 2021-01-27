@@ -23,6 +23,8 @@
 
 <style>
   footer {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: center;
   }
 </style>
