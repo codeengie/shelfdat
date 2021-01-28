@@ -59,7 +59,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
   *,
@@ -108,9 +108,9 @@
 
   .search {
     padding: 0 15px;
-  }
 
-  .search__media {
-    width: 100%;
+    &__media {
+      width: 100%;
+    }
   }
 </style>
