@@ -193,9 +193,10 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   :root {
     --form-bg-color: #1d2227;
+    --form-error-color: #c8373d;
     --form-input-border-color: #4a4a4a;
     --form-input-text-color: #fff;
     --form-select-arrow: var(--form-input-border-color);
@@ -207,42 +208,46 @@
     padding: 0 15px;
     min-width: 290px;
     max-width: 450px;
-  }
 
-  .media-form__button {
-    background-color: transparent;
-    border: 2px solid #f0f0f0;
-    color: #f0f0f0;
-    letter-spacing: 2px;
-    padding: 20px 75px;
-    text-transform: uppercase;
-    transition: all .4s;
-  }
+    &__content {
+      margin-top: 20px;
+    }
 
-  .media-form__button:focus,
-  .media-form__button:hover {
-    background-color: #fff;
-    color: #333;
-  }
+    &__button {
+      background-color: transparent;
+      border: 2px solid #f0f0f0;
+      color: #f0f0f0;
+      letter-spacing: 2px;
+      padding: 20px 75px;
+      text-transform: uppercase;
+      transition: all .4s;
 
-  .media-form__content {
-    margin-top: 20px;
+      &:focus,
+      &:hover {
+        background-color: #fff;
+        color: #333;
+      }
+    }
   }
 
   .media-form__errors {
-    color: #ff0000;
+    color: var(--form-error-color);
     font-size: 1.2rem;
   }
 
   .media-form__errors-list {
-    margin-bottom: 0;
-    margin-top: 4px;
+    margin: {
+      bottom: 0;
+      top: 4px;
+    }
     padding-left: 12px;
   }
 
   .media-form__errors-title {
-    margin-bottom: 0;
-    margin-top: 10px;
+    margin: {
+      bottom: 0;
+      top: 10px;
+    }
   }
 
   .media-form__group:not(:first-child) {
@@ -265,8 +270,9 @@
 
   .media-form__input {
     background-color: transparent;
-    border: 0;
-    border-bottom: 2px solid var(--form-input-border-color);
+    border: 0 {
+      bottom: 2px solid var(--form-input-border-color);
+    }
     color: var(--form-input-text-color);
     font-size: 1.8rem;
     letter-spacing: 1px;
@@ -286,8 +292,9 @@
     align-items: center;
     appearance: none;
     background-color: transparent;
-    border: 0;
-    border-bottom: 2px solid var(--form-input-border-color);
+    border: 0 {
+      bottom: 2px solid var(--form-input-border-color);
+    }
     color: var(--form-text-color);
     cursor: pointer;
     display: grid;
@@ -295,8 +302,10 @@
     grid-template-areas: 'select';
     letter-spacing: 2px;
     outline: 0;
-    text-align: center;
-    text-transform: uppercase;
+    text: {
+      align: center;
+      transform: uppercase;
+    }
   }
 
   .media-form__select::after {
@@ -310,8 +319,10 @@
 
   .media-form__title {
     color: var(--form-text-color);
-    font-size: 1.8rem;
-    font-weight: 500;
+    font: {
+      size: 1.8rem;
+      weight: 500;
+    }
     margin: 0;
   }
 

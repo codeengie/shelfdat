@@ -21,10 +21,12 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   footer {
-    font-size: 1.2rem;
-    font-weight: 400;
+    font: {
+      size: 1.2rem;
+      weight: 400;
+    }
     text-align: center;
   }
 </style>

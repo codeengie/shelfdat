@@ -10,7 +10,7 @@
   </header>
 </template>
 
-<style>
+<style lang="scss">
   :root {
     --header-height: 46px;
   }
@@ -22,13 +22,17 @@
   }
 
   .brand__header {
-    font-size: 2rem;
-    font-weight: 500;
+    font: {
+      size: 2rem;
+      weight: 500;
+    }
   }
 
   .brand__subheader {
-    font-size: 1.2rem;
-    font-weight: 400;
+    font: {
+      size: 1.2rem;
+      weight: 400;
+    }
     margin-top: -4px;
   }
 
