@@ -1,6 +1,6 @@
 <template>
-  <footer>
-    <small>Copyright {{ setCurrentYear }} @ Ardent Forms. All Rights Reserved.</small>
+  <footer class="footer">
+    <small class="footer__text">Copyright {{ setCurrentYear }} @ Ardent Forms. All Rights Reserved.</small>
   </footer>
 </template>
 
@@ -22,11 +22,12 @@
 </script>
 
 <style lang="scss">
-  footer {
+  .footer {
     font: {
       size: 1.2rem;
       weight: 400;
     }
+    flex: none;
     text-align: center;
   }
 </style>

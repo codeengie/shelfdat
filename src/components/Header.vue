@@ -41,6 +41,7 @@
   }
 
   .header {
+    flex: none;
     height: var(--header-height);
     padding: 0 15px;
   }
