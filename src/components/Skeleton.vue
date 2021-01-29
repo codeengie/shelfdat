@@ -12,6 +12,7 @@
   $skeleton-bg-color: #d0d0d0;
   $skeleton-fg-color: #969696;
   $skeleton-height: 164px;
+  $skeleton-spacing: 10px;
   $skeleton-width: 290px;
 
   .skeleton {
@@ -19,6 +20,7 @@
     display: flex;
     flex-flow: row wrap;
     height: $skeleton-height;
+    margin-bottom: $skeleton-spacing;
     overflow: hidden;
     padding: 10px 15px;
     position: relative;

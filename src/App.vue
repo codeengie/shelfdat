@@ -11,7 +11,13 @@
     <!-- Redo this component to use Dynamic Props 93-->
     <section>
       <h3># of Movies in DB: {{ mediaCount }}</h3>
-      <nas-skeleton></nas-skeleton>
+
+      <div v-if="isLoading">
+        <nas-skeleton
+            v-for="skeleton in skeletons"
+            :key="skeleton"></nas-skeleton>
+      </div>
+
       <div class="inventory">
         <div class="inventory__list">
           <div class="inventory__item" v-for="media in mediaSearch" :key="media">
@@ -39,6 +45,8 @@
   export default {
     data() {
       return {
+        isLoading: true,
+        skeletons: 6,
         mediaDbData: [],
         searchKey: ''
       };
@@ -61,6 +69,7 @@
         const response = await fetch(process.env.VUE_APP_API_URL);
         const media = await response.json();
         this.mediaDbData = media.data;
+        this.isLoading = false;
       },
       updateMedia(mediaRecord) {
         // this.mediaDbData.push(mediaRecord);
