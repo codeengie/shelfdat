@@ -11,6 +11,7 @@
     <!-- Redo this component to use Dynamic Props 93-->
     <section>
       <h3># of Movies in DB: {{ mediaCount }}</h3>
+      <nas-skeleton></nas-skeleton>
       <div class="inventory">
         <div class="inventory__list">
           <div class="inventory__item" v-for="media in mediaSearch" :key="media">
