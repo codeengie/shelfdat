@@ -3,15 +3,60 @@
   <div class="content">
     <nas-newmedia
         media-db-data
-        @addLastMedia="updateMedia"
-    ></nas-newmedia><br>
+        @addLastMedia="updateMedia">
+    </nas-newmedia>
+
+    <div class="stats">
+      <h2 class="stats__title">Media</h2>
+      <nas-stat
+          statFilter="4K Blu-ray"
+          statKey="format"
+          statTitle="4K"
+          :dataToFilter="mediaDbData"
+          v-if="mediaDbData">
+      </nas-stat>
+      <nas-stat
+          statFilter="Blu-ray"
+          statKey="format"
+          statTitle="BRays"
+          :dataToFilter="mediaDbData"
+          v-if="mediaDbData">
+      </nas-stat>
+      <nas-stat
+          statFilter="DVD"
+          statKey="format"
+          statTitle="DVDs"
+          :dataToFilter="mediaDbData"
+          v-if="mediaDbData">
+      </nas-stat>
+      <nas-stat
+          statFilter="Movie"
+          statKey="type"
+          statTitle="Movies"
+          :dataToFilter="mediaDbData"
+          v-if="mediaDbData">
+      </nas-stat>
+      <nas-stat
+          statFilter="TV Show"
+          statKey="type"
+          statTitle="TV Shows"
+          :dataToFilter="mediaDbData"
+          v-if="mediaDbData">
+      </nas-stat>
+      <nas-stat
+          statFilter=""
+          statKey="title"
+          statTitle="Total"
+          :dataToFilter="mediaDbData"
+          v-if="mediaDbData">
+      </nas-stat>
+    </div>
+
     <div class="search">
       <input class="search__media" placeholder="Search media..." v-model.trim="searchKey">
     </div>
     <!-- Redo this component to use Dynamic Props 93-->
     <section>
-      <h3># of Movies in DB: {{ mediaCount }}</h3>
-
       <div v-if="isLoading">
         <nas-skeleton
             v-for="skeleton in skeletons"
@@ -55,9 +100,6 @@
       this.getMedia()
     },
     computed: {
-      mediaCount() {
-        return this.mediaDbData.length;
-      },
       mediaSearch() {
         return this.mediaDbData.filter(media => {
           return media.title.toLowerCase().includes(this.searchKey.toLowerCase());
@@ -92,7 +134,7 @@
     font-size: 62.5%;
   }
 
-  body, button, dl, h1, h2, p {
+  body, button, dl, h1, h2, h3, h4, p {
     margin: 0;
     padding: 0;
   }
@@ -211,9 +253,27 @@
   }
 
   .search {
+    margin: 15px 0;
     padding: 0 15px;
 
     &__media {
+      width: 100%;
+    }
+  }
+
+  .stats {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    &__title {
+      font: {
+        size: 1.8rem;
+        weight: 500;
+      }
+      margin: 8px 0;
+      padding: 0 15px;
+      text-align: center;
       width: 100%;
     }
   }
