@@ -6,7 +6,8 @@
         @addLastMedia="updateMedia">
     </nas-newmedia>
 
-    <div class="stats">
+    <nas-stat header="Media" :modules="stats" :data="mediaDbData" v-if="mediaDbData"></nas-stat>
+    <!--<div class="stats">
       <h2 class="stats__title">Media</h2>
       <nas-stat
           statFilter="4K Blu-ray"
@@ -15,42 +16,7 @@
           :dataToFilter="mediaDbData"
           v-if="mediaDbData">
       </nas-stat>
-      <nas-stat
-          statFilter="Blu-ray"
-          statKey="format"
-          statTitle="BRays"
-          :dataToFilter="mediaDbData"
-          v-if="mediaDbData">
-      </nas-stat>
-      <nas-stat
-          statFilter="DVD"
-          statKey="format"
-          statTitle="DVDs"
-          :dataToFilter="mediaDbData"
-          v-if="mediaDbData">
-      </nas-stat>
-      <nas-stat
-          statFilter="Movie"
-          statKey="type"
-          statTitle="Movies"
-          :dataToFilter="mediaDbData"
-          v-if="mediaDbData">
-      </nas-stat>
-      <nas-stat
-          statFilter="TV Show"
-          statKey="type"
-          statTitle="TV Shows"
-          :dataToFilter="mediaDbData"
-          v-if="mediaDbData">
-      </nas-stat>
-      <nas-stat
-          statFilter=""
-          statKey="title"
-          statTitle="Total"
-          :dataToFilter="mediaDbData"
-          v-if="mediaDbData">
-      </nas-stat>
-    </div>
+    </div>-->
 
     <div class="search">
       <input class="search__media" placeholder="Search media..." v-model.trim="searchKey">
@@ -72,10 +38,10 @@
             <p class="inventory__location">This movie is located on the {{ media.location }}.</p>
             <div class="inventory__actions">
               <button class="inventory__button inventory__button--edit" type="button">
-                <img src="images/edit-24px.svg" alt="Edit">
+                <img class="inventory__icon" src="images/edit-24px.svg" alt="Edit">
               </button>
               <button class="inventory__button inventory__button--delete" type="button">
-                <img src="images/delete-24px.svg" alt="Delete">
+                <img class="inventory__icon" src="images/delete-24px.svg" alt="Delete">
               </button>
             </div>
           </div>
@@ -93,7 +59,34 @@
         isLoading: true,
         skeletons: 6,
         mediaDbData: [],
-        searchKey: ''
+        searchKey: '',
+        stats: [
+          {
+            filter: '4K Blu-ray',
+            key: 'format',
+            title: '4K'
+          },
+          {
+            filter: 'Blu-ray',
+            key: 'format',
+            title: 'BRay'
+          },
+          {
+            filter: 'DVD',
+            key: 'format',
+            title: 'DVD'
+          },
+          {
+            filter: 'Movie',
+            key: 'type',
+            title: 'Movies'
+          },
+          {
+            filter: 'TV Show',
+            key: 'type',
+            title: 'TV Shows'
+          }
+        ]
       };
     },
     beforeMount() {
@@ -197,6 +190,10 @@
 
     &__button {
       background-color: transparent;
+
+      &:last-child {
+        margin-left: 10px;
+      }
     }
 
     &__format,
@@ -212,6 +209,11 @@
 
     &__format {
       text-align: right;
+    }
+
+    &__icon {
+      height: auto;
+      width: 20px;
     }
 
     &__item {
@@ -261,7 +263,7 @@
     }
   }
 
-  .stats {
+  /*.stats {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -276,5 +278,5 @@
       text-align: center;
       width: 100%;
     }
-  }
+  }*/
 </style>
