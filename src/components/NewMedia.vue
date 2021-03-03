@@ -12,7 +12,7 @@
 
       <div class="media-form__content">
         <div
-            :class="{toggleFocus, isValid}"
+            :class="[toggleFocus, isValid]"
             class="media-form__group media-form__group--input">
           <label class="media-form__label" for="title">Title</label>
           <input class="media-form__input" id="title" type="text" v-model="title" @blur="handleFocus" @focus="handleFocus">
@@ -207,6 +207,8 @@
   }
 
   .media-form {
+    $this: &; // Let's cache the root selector
+
     margin: 16px auto 0;
     padding: 0 15px;
     min-width: 290px;
@@ -231,131 +233,135 @@
         color: #333;
       }
     }
-  }
 
-  .media-form__errors {
-    color: var(--form-error-color);
-    font-size: 1.2rem;
-  }
+    &__errors {
+      color: var(--form-error-color);
+      font-size: 1.2rem;
 
-  .media-form__errors-list {
-    margin: {
-      bottom: 0;
-      top: 4px;
+      &-list {
+        margin: {
+          bottom: 0;
+          top: 4px;
+        }
+        padding-left: 12px;
+      }
+
+      &-title {
+        margin: {
+          bottom: 0;
+          top: 10px;
+        }
+      }
     }
-    padding-left: 12px;
-  }
 
-  .media-form__errors-title {
-    margin: {
-      bottom: 0;
-      top: 10px;
+    &__group {
+
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+
+      &--dropdown {
+        #{$this}__label {
+          display: none;
+        }
+      }
+
+      &--input {
+        &.focused {
+          #{$this}__label {
+            transform: translateY(0);
+            transition: all .3s;
+          }
+        }
+
+        #{$this}__label {
+          transform: translateY(28px);
+        }
+      }
+
+      &--server {
+        color: #fff;
+        //text-align: center;
+      }
     }
-  }
 
-  .media-form__group:not(:first-child) {
-    margin-top: 20px;
-  }
-
-  .media-form__label {
-    color: var(--form-text-color);
-    display: inline-block;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: all .2s;
-  }
-
-  .media-form__input,
-  .media-form__select {
-    width: 100%;
-  }
-
-  .media-form__input {
-    background-color: transparent;
-    border: 0 {
-      bottom: 2px solid var(--form-input-border-color);
+    &__input,
+    &__select {
+      width: 100%;
     }
-    color: var(--form-input-text-color);
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    outline: 0;
-    padding: 5px 20px;
-    position: relative;
-    text-align: center;
-    z-index: 1;
-  }
 
-  .media-form__select,
-  .media-form__select::after {
-    grid-area: select;
-  }
-
-  .media-form__select {
-    align-items: center;
-    appearance: none;
-    background-color: transparent;
-    border: 0 {
-      bottom: 2px solid var(--form-input-border-color);
+    &__input {
+      background-color: transparent;
+      border: 0 {
+        bottom: 2px solid var(--form-input-border-color);
+      }
+      color: var(--form-input-text-color);
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      outline: 0;
+      padding: 5px 20px;
+      position: relative;
+      text-align: center;
+      z-index: 1;
     }
-    color: var(--form-text-color);
-    cursor: pointer;
-    display: grid;
-    font-size: 1.4rem;
-    grid-template-areas: 'select';
-    letter-spacing: 2px;
-    outline: 0;
-    text: {
-      align: center;
-      transform: uppercase;
+
+    &__label {
+      color: var(--form-text-color);
+      display: inline-block;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all .2s;
     }
-  }
 
-  .media-form__select::after {
-    background-color: var(--form-select-arrow);
-    content: '';
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-    height: .5em;
-    justify-self: end;
-    width: .8em;
-  }
-
-  .media-form__title {
-    color: var(--form-text-color);
-    font: {
-      size: 1.8rem;
-      weight: 500;
+    &__select,
+    &__select::after {
+      grid-area: select;
     }
-    margin: 0;
-  }
 
-  .media-form__wrap {
-    background-color: var(--form-bg-color);
-    border-radius: 6px;
-    padding: 30px;
-    text-align: center;
-  }
+    &__select {
+      align-items: center;
+      appearance: none;
+      background-color: transparent;
+      border: 0 {
+        bottom: 2px solid var(--form-input-border-color);
+      }
+      color: var(--form-text-color);
+      cursor: pointer;
+      display: grid;
+      font-size: 1.4rem;
+      grid-template-areas: 'select';
+      letter-spacing: 2px;
+      outline: 0;
+      text: {
+        align: center;
+        transform: uppercase;
+      }
 
-  /* Modifiers */
-  .media-form__group--button {
-    /*text-align: center;*/
-  }
+      &::after {
+        background-color: var(--form-select-arrow);
+        content: '';
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        height: .5em;
+        justify-self: end;
+        width: .8em;
+      }
+    }
 
-  .media-form__group--dropdown .media-form__label {
-    display: none;
-  }
+    &__title {
+      color: var(--form-text-color);
+      font: {
+        size: 1.8rem;
+        weight: 500;
+      }
+      margin: 0;
+    }
 
-  .media-form__group--input .media-form__label {
-    transform: translateY(28px);
-  }
-
-  .media-form__group--input.focused .media-form__label {
-    transform: translateY(0);
-    transition: all .3s;
-  }
-
-  .media-form__group--server {
-    color: #fff;
-    /*text-align: center;*/
+    &__wrap {
+      background-color: var(--form-bg-color);
+      border-radius: 6px;
+      padding: 30px;
+      text-align: center;
+    }
   }
 </style>
