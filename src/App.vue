@@ -6,6 +6,13 @@
         @addLastMedia="updateMedia">
     </nas-newmedia>
 
+    <nas-modwrap>
+      <template #heading>Media</template>
+      <template #default>
+        <p>Si tu que!</p>
+      </template>
+    </nas-modwrap>
+
     <nas-stat header="Media" :modules="stats" :data="mediaDbData" v-if="mediaDbData"></nas-stat>
     <!--<div class="stats">
       <h2 class="stats__title">Media</h2>
