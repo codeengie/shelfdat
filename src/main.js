@@ -6,7 +6,8 @@ import Footer from './components/Footer';
 import NewMedia from './components/NewMedia';
 import Skeleton from './components/Skeleton';
 import Stat from './components/Stat';
-import ModWrap from './components/ModWrap'
+import ModWrap from './components/ModWrap';
+import DoughnutChart from './components/DoughnutChart';
 
 const app = createApp(App);
 
@@ -16,5 +17,6 @@ app.component('nas-newmedia', NewMedia);
 app.component('nas-skeleton', Skeleton);
 app.component('nas-stat', Stat);
 app.component('nas-modwrap', ModWrap);
+app.component('nas-doughnut-chart', DoughnutChart);
 
 app.mount('#app');

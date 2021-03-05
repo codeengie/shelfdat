@@ -7,13 +7,6 @@
     </nas-newmedia>
 
     <nas-modwrap>
-      <template #heading>Gauge</template>
-      <template #default>
-        <p>Donut chart here...</p>
-      </template>
-    </nas-modwrap>
-
-    <nas-modwrap>
       <template #heading>Media</template>
       <template #default v-if="mediaDbData">
         <nas-stat
@@ -23,6 +16,12 @@
             :filter-by="stat.filterBy"
             :filter-key="stat.filterKey"
             :title="stat.title"></nas-stat>
+      </template>
+    </nas-modwrap>
+
+    <nas-modwrap>
+      <template #default>
+        <nas-doughnut-chart></nas-doughnut-chart>
       </template>
     </nas-modwrap>
 

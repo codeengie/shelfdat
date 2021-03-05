@@ -1,6 +1,6 @@
 <template>
   <div class="modwrap">
-    <h2 class="modwrap__title"><slot name="heading"></slot></h2>
+    <h2 class="modwrap__title" v-if="$slots.heading"><slot name="heading"></slot></h2>
     <slot></slot>
   </div>
 </template>
