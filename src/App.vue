@@ -7,23 +7,24 @@
     </nas-newmedia>
 
     <nas-modwrap>
-      <template #heading>Media</template>
+      <template #heading>Gauge</template>
       <template #default>
-        <p>Si tu que!</p>
+        <p>Donut chart here...</p>
       </template>
     </nas-modwrap>
 
-    <nas-stat header="Media" :modules="stats" :data="mediaDbData" v-if="mediaDbData"></nas-stat>
-    <!--<div class="stats">
-      <h2 class="stats__title">Media</h2>
-      <nas-stat
-          statFilter="4K Blu-ray"
-          statKey="format"
-          statTitle="4K"
-          :dataToFilter="mediaDbData"
-          v-if="mediaDbData">
-      </nas-stat>
-    </div>-->
+    <nas-modwrap>
+      <template #heading>Media</template>
+      <template #default v-if="mediaDbData">
+        <nas-stat
+            v-for="stat in stats"
+            :key="stat"
+            :db-data="mediaDbData"
+            :filter-by="stat.filterBy"
+            :filter-key="stat.filterKey"
+            :title="stat.title"></nas-stat>
+      </template>
+    </nas-modwrap>
 
     <div class="search">
       <input class="search__media" placeholder="Search media..." v-model.trim="searchKey">
@@ -69,28 +70,28 @@
         searchKey: '',
         stats: [
           {
-            filter: '4K Blu-ray',
-            key: 'format',
+            filterKey: '4K Blu-ray',
+            filterBy: 'format',
             title: '4K'
           },
           {
-            filter: 'Blu-ray',
-            key: 'format',
+            filterKey: 'Blu-ray',
+            filterBy: 'format',
             title: 'BRay'
           },
           {
-            filter: 'DVD',
-            key: 'format',
+            filterKey: 'DVD',
+            filterBy: 'format',
             title: 'DVD'
           },
           {
-            filter: 'Movie',
-            key: 'type',
+            filterKey: 'Movie',
+            filterBy: 'type',
             title: 'Movies'
           },
           {
-            filter: 'TV Show',
-            key: 'type',
+            filterKey: 'TV Show',
+            filterBy: 'type',
             title: 'TV Shows'
           }
         ]

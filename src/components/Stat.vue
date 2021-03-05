@@ -1,66 +1,33 @@
 <template>
-  <!--<div class="stat">
-    <h3 class="stat__title">{{ statTitle }}</h3>
-    <h4 class="stat__reading">{{ statCount.length }}</h4>
-  </div>-->
-
-  <div class="stats">
-    <h2 class="stats__title">{{ header }}</h2>
-    <div class="stat" v-for="module in modules" :key="module">
-      <h3 class="stat__title">{{ module.title }}</h3>
-      <!--<h4 class="stat__reading">{{ statCounter(module.key, module.filter) }}</h4>-->
-      <h4 class="stat__reading">{{ statCount }}</h4>
-    </div>
+  <div class="stat">
+    <h3 class="stat__title">{{ title }}</h3>
+    <h4 class="stat__reading">{{ statCounter.length }}</h4>
   </div>
 </template>
 
 <script>
   export default {
     props: {
-      data: Object,
-      modules: Object,
-      header: String
+      dbData: Object,
+      title: String,
+      filterBy: String,
+      filterKey: String
     },
     data() {
-      return {};
+      return {
+        statNum: 0
+      };
     },
     computed: {
-      statCount() {
-        return this.data.length;
+      statCounter() {
+        return this.dbData.filter(data => {
+          return data[this.filterBy] === this.filterKey;
+        });
       }
-      /*statCounter(key, filter) {
-        return this.data.filter(word => {
-          return word[key] === filter;
-        });
-      }*/
-      /*statCount() {
-        return this.dataToFilter.filter(data => {
-          // return data[this.statKey].includes(this.statFilter);
-          return data[this.statKey] === this.statFilter;
-        });
-      }*/
-    },
-    methods: {}
+    }
   }
 </script>
 <style lang="scss" scoped>
-  .stats {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-
-    &__title {
-      font: {
-        size: 1.8rem;
-        weight: 500;
-      }
-      margin: 8px 0;
-      padding: 0 15px;
-      text-align: center;
-      width: 100%;
-    }
-  }
-
   .stat {
     display: flex;
     flex-direction: column-reverse;
