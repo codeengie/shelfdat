@@ -1,6 +1,10 @@
 <template>
     <nas-header></nas-header>
     <div class="content">
+
+        <!-- Remove this -->
+        <h2 class="temp">Dashboard</h2>
+
         <nas-newmedia
             media-db-data
             @addLastMedia="updateMedia">
@@ -116,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 *,
 *::after,
@@ -134,7 +138,7 @@ body, button, dl, h1, h2, h3, h4, p {
 }
 
 body {
-    background-color: #f0f0f0;
+    background-color: #fff;
     font-family: Roboto, sans-serif;
 }
 
@@ -184,5 +188,15 @@ section {
     &__box {
         width: 100%;
     }
+}
+
+// Temp, remove once component is materialized
+.temp {
+    font: {
+        size: 1.6rem;
+        weight: 500;
+    }
+    margin-top: 15px;
+    padding: 0 15px;
 }
 </style>
