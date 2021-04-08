@@ -5,11 +5,6 @@
         <!-- Remove this -->
         <h2 class="temp">Dashboard</h2>
 
-        <nas-newmedia
-            media-db-data
-            @addLastMedia="updateMedia">
-        </nas-newmedia>
-
         <nas-modwrap modifier="flex">
             <template #heading>Media</template>
             <template #default v-if="mediaDbData">
@@ -23,11 +18,16 @@
             </template>
         </nas-modwrap>
 
-        <!--<nas-modwrap>
+        <nas-modwrap>
           <template #default>
             <nas-doughnut-chart></nas-doughnut-chart>
           </template>
-        </nas-modwrap>-->
+        </nas-modwrap>
+
+        <nas-newmedia
+            media-db-data
+            @addLastMedia="updateMedia">
+        </nas-newmedia>
 
         <div class="search">
             <input class="search__box" placeholder="Search media..." v-model.trim="searchKey">
