@@ -8,11 +8,16 @@ export default {
             chartData: {
                 labels: ['4K', 'Blu-ray', 'DVD'],
                 datasets: [{
-                    backgroundColor: ['#36a2eb', '#ffcd56', '#ff6384'],
-                    data: [151, 172, 14]
+                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
+                    data: [153, 173, 14]
                 }]
             },
             options: {
+                /*animation: {
+                  animateScale: true
+                },*/
+                cutoutPercentage: 65,
+                rotation: Math.PI * 1.5,
                 layout: {
                   padding: {
                       top: 15,

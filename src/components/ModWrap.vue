@@ -1,5 +1,5 @@
 <template>
-    <div class="modwrap" :class="setClass">
+    <div class="modwrap" :class="setClasses">
         <h2 class="modwrap__title" v-if="$slots.heading">
             <slot name="heading"></slot>
         </h2>
@@ -11,11 +11,24 @@
 export default {
     name: "ModWrap",
     props: {
-        modifier: String
+        modifier: [Array, String]
     },
     computed: {
-        setClass() {
+        /*setClass() {
             return this.modifier ? `modwrap--${this.modifier}` : '';
+        },*/
+        setClasses() {
+            let classesToSet = '';
+
+            if (Array.isArray(this.modifier)) {
+                this.modifier.forEach(element => {
+                   classesToSet += `modwrap--${element} `;
+                });
+            } else {
+                classesToSet = this.modifier ? `modwrap--${this.modifier}` : '';
+            }
+
+            return classesToSet;
         }
     }
 }
@@ -23,6 +36,8 @@ export default {
 
 <style lang="scss" scoped>
 .modwrap {
+    padding: 15px 0 10px;
+
     &__title {
         font: {
             size: 1.8rem;
@@ -35,6 +50,10 @@ export default {
     }
 
     // Modifiers
+    &--bg {
+        background-color: var(--bg-color);
+    }
+
     &--flex {
         display: flex;
         flex-flow: row wrap;

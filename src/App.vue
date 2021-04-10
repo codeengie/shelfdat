@@ -5,30 +5,50 @@
         <!-- Remove this -->
         <h2 class="temp">Dashboard</h2>
 
-        <nas-modwrap modifier="flex">
+        <!-- Media Section -->
+        <nas-modwrap :modifier="['foobar', 'bg']">
             <template #heading>Media</template>
             <template #default v-if="mediaDbData">
-                <nas-stat
-                    v-for="stat in stats"
-                    :key="stat"
-                    :db-data="mediaDbData"
-                    :filter-by="stat.filterBy"
-                    :filter-key="stat.filterKey"
-                    :title="stat.title"></nas-stat>
+                <div class="doughnut">
+                    <nas-doughnut-chart></nas-doughnut-chart>
+                </div>
+
+                <div class="media-stats">
+                    <nas-stat
+                        v-for="stat in stats"
+                        :key="stat"
+                        :db-data="mediaDbData"
+                        :filter-by="stat.filterBy"
+                        :filter-key="stat.filterKey"
+                        :modifier="stat.modifier"
+                        :title="stat.title"></nas-stat>
+                </div>
             </template>
         </nas-modwrap>
 
         <nas-modwrap>
-          <template #default>
-            <nas-doughnut-chart></nas-doughnut-chart>
-          </template>
+            <template #default>
+                <div class="sub-stats">
+                    <nas-stat
+                        v-for="stat in subStats"
+                        :key="stat"
+                        :db-data="mediaDbData"
+                        :iconName="stat.iconName"
+                        :filter-by="stat.filterBy"
+                        :filter-key="stat.filterKey"
+                        :modifier="stat.modifier"
+                        :title="stat.title"></nas-stat>
+                </div>
+            </template>
         </nas-modwrap>
 
+        <!-- New Media Form -->
         <nas-newmedia
             media-db-data
             @addLastMedia="updateMedia">
         </nas-newmedia>
 
+        <!-- Search Form -->
         <div class="search">
             <input class="search__box" placeholder="Search media..." v-model.trim="searchKey">
         </div>
@@ -69,26 +89,35 @@ export default {
                 {
                     filterKey: '4K Blu-ray',
                     filterBy: 'format',
+                    modifier: 'picton',
                     title: '4K'
                 },
                 {
                     filterKey: 'Blu-ray',
                     filterBy: 'format',
+                    modifier: 'golden',
                     title: 'BRay'
                 },
                 {
                     filterKey: 'DVD',
                     filterBy: 'format',
+                    modifier: 'wild',
                     title: 'DVD'
-                },
+                }
+            ],
+            subStats: [
                 {
                     filterKey: 'Movie',
                     filterBy: 'type',
+                    iconName: 'movie.svg',
+                    modifier: 'icon',
                     title: 'Movies'
                 },
                 {
                     filterKey: 'TV Show',
                     filterBy: 'type',
+                    iconName: 'tv.svg',
+                    modifier: 'icon',
                     title: 'TV Shows'
                 }
             ]
@@ -120,7 +149,25 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+:root {
+    // Color scheme
+    --alabaster: #f9f9f9;
+    --black: #000000;
+    --golden-tainoi: #feb914;
+    --picton-blue: #36a2eb;
+    --white: #ffffff;
+    --wild-watermelon: #ff6384;
+
+    // Site wide
+    --bg-color: var(--alabaster);
+    --weight-light: 300;
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-bold: 700;
+    --weight-xbold: 900;
+}
 
 *,
 *::after,
@@ -190,7 +237,7 @@ section {
     }
 }
 
-// Temp, remove once component is materialized
+// @todo Remove once component is materialized
 .temp {
     font: {
         size: 1.6rem;
@@ -199,4 +246,42 @@ section {
     margin-top: 15px;
     padding: 0 15px;
 }
+
+// More temp stuff
+.doughnut {
+    position: relative;
+
+    canvas {
+        height: 146px;
+        width: 146px;
+    }
+}
+
+.media-stats {
+    display: flex;
+    justify-content: center;
+
+    .stat:nth-child(2) {
+        margin: 0 30px;
+    }
+}
+
+.sub-stats {
+    display: flex;
+    justify-content: center;
+
+    .stat:nth-child(2) {
+        margin: 0 0 0 8px;
+    }
+}
+
+// Disabled for now since I'm focusing on bottom media stats, I'll come back to this
+/*.stat:first-of-type {
+    left: 50%;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+}*/
 </style>
