@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import App from './App';
 import Header from './components/Header';
@@ -8,10 +9,30 @@ import Skeleton from './components/Skeleton';
 import Stat from './components/Stat';
 import ModWrap from './components/ModWrap';
 import DoughnutChart from './components/DoughnutChart';
-import Inventory from "@/components/Inventory";
-import Actions from "@/components/Actions";
+import Inventory from '@/components/Inventory';
+import Actions from '@/components/Actions';
+import Login from '@/views/Login';
+import Dashboard from '@/views/Dashboard';
+
+const router = createRouter({
+    history: createWebHistory(),
+   routes: [
+       {
+           path: '/login',
+           name: 'Login',
+           component: Login
+       },
+       {
+           path: '/dashboard',
+           name: 'Dashboard',
+           component: Dashboard
+       }
+   ]
+});
 
 const app = createApp(App);
+
+app.use(router);
 
 app.component('nas-header', Header);
 app.component('nas-footer', Footer);

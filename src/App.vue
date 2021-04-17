@@ -1,5 +1,6 @@
 <template>
     <nas-header></nas-header>
+    <router-view></router-view>
     <div class="content">
 
         <!-- Remove this -->
@@ -10,6 +11,10 @@
             <template #heading>Media</template>
             <template #default v-if="mediaDbData">
                 <div class="doughnut">
+                    <div class="stat stat--flip">
+                        <h3 class="stat__title">Total</h3>
+                        <h4 class="stat__reading">334</h4>
+                    </div>
                     <nas-doughnut-chart></nas-doughnut-chart>
                 </div>
 
