@@ -160,13 +160,20 @@ export default {
     // Color scheme
     --alabaster: #f9f9f9;
     --black: #000000;
+    --dodger-blue: #00b9ff;
     --golden-tainoi: #feb914;
+    --persian-blue: #2346d4;
     --picton-blue: #36a2eb;
     --white: #ffffff;
     --wild-watermelon: #ff6384;
 
     // Site wide
     --bg-color: var(--alabaster);
+    // Forms
+    --form-btn-bg-color: var(--dodger-blue);
+    --form-btn-text-color: var(--white);
+    --form-focus-highlight: var(--persian-blue);
+    // Typeface weights
     --weight-light: 300;
     --weight-normal: 400;
     --weight-medium: 500;
