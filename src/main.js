@@ -11,6 +11,7 @@ import ModWrap from './components/ModWrap';
 import DoughnutChart from './components/DoughnutChart';
 import Inventory from '@/components/Inventory';
 import Actions from '@/components/Actions';
+import InputField from '@/components/InputField';
 import Login from '@/views/Login';
 import Dashboard from '@/views/Dashboard';
 
@@ -43,5 +44,6 @@ app.component('nas-modwrap', ModWrap);
 app.component('nas-doughnut-chart', DoughnutChart);
 app.component('nas-inventory', Inventory);
 app.component('nas-actions', Actions);
+app.component('nas-input-field', InputField);
 
 app.mount('#app');
