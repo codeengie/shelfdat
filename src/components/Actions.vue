@@ -3,7 +3,7 @@
         <button class="actions__button actions__button--edit">
             <img class="actions__icon" src="images/edit-24px.svg" alt="Edit">
         </button>
-        <button class="actions__button actions__button--delete">
+        <button class="actions__button actions__button--delete" @click="deleteInventoryItem">
             <img class="actions__icon" src="images/delete-24px.svg" alt="Delete">
         </button>
     </div>
@@ -11,7 +11,13 @@
 
 <script>
 export default {
-    name: "Actions"
+    name: "Actions",
+    emits: ['delete'],
+    methods: {
+        deleteInventoryItem() {
+            this.$emit('delete');
+        }
+    }
 }
 </script>
 

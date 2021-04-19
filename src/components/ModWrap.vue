@@ -14,9 +14,6 @@ export default {
         modifier: [Array, String]
     },
     computed: {
-        /*setClass() {
-            return this.modifier ? `modwrap--${this.modifier}` : '';
-        },*/
         setClasses() {
             let classesToSet = '';
 

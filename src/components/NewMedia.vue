@@ -15,7 +15,7 @@
             :class="[toggleFocus, isValid]"
             class="media-form__group media-form__group--input">
           <label class="media-form__label" for="title">Title</label>
-          <input class="media-form__input" id="title" type="text" v-model="title" @blur="handleFocus" @focus="handleFocus">
+          <input class="media-form__input" id="title" type="text" v-model.trim="title" @blur="handleFocus" @focus="handleFocus">
         </div>
 
         <div class="media-form__group media-form__group--dropdown">

@@ -38,10 +38,6 @@ export default {
         };
     },
     computed: {
-        /*setClass() {
-            console.log(`Stat modifier: ${this.modifier}`);
-            return this.modifier ? `stat--${this.modifier}` : '';
-        },*/
         setClasses() {
             let classesToSet = '';
 
@@ -112,6 +108,23 @@ export default {
     }
 
     // Modifiers
+    &--flip {
+        #{$this}__reading {
+            font: {
+                size: 2.4rem;
+                weight: var(--weight-medium);
+            }
+        }
+
+        #{$this}__title {
+            font: {
+                family: 'Roboto Condensed', sans-serif;
+                size: .8rem;
+                weight: var(--weight-bold);
+            }
+        }
+    }
+
     &--icon {
         align-items: center;
         background-color: var(--alabaster);
