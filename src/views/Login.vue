@@ -1,16 +1,18 @@
 <template>
-    <h1>Login</h1>
-    <form class="login-form" @submit.prevent="validateLoginForm">
+    <h1>NotAShelfie</h1>
+    <form class="login-form" @submit.prevent="submitLoginForm">
         <nas-input-field
             field-name="Email"
-            field-type="email"></nas-input-field>
+            field-type="email"
+            v-model="emailInput"></nas-input-field>
 
         <nas-input-field
             field-name="Password"
-            field-type="password"></nas-input-field>
+            field-type="password"
+            v-model="passwordInput"></nas-input-field>
 
         <button class="login-form__button">Login</button>
-        <p>Don&rsquo;t have an account? Sign Up</p>
+        <p class="login-form__signup">Don&rsquo;t have an account? <strong>Sign Up</strong></p>
     </form>
 </template>
 
@@ -21,27 +23,78 @@
 export default {
     name: "Login",
     // components: {InputField},
+    data() {
+        return {
+            emailInput: null,
+            passwordInput: null
+        }
+    },
     methods: {
-        validateLoginForm() {
-            console.log('Validating login form.');
+        submitLoginForm() {
+            console.log(`Submitting login form: ${this.emailInput}, ${this.passwordInput}`);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+h1 {
+    font: {
+        size: 2.4rem;
+        weight: var(--weight-bold);
+    }
+    margin: 40px 0;
+    text-align: center;
+}
+
 .login-form {
     $this: &; // Let's cache the root selector @todo remove if not used
+    margin: 0 auto;
+    width: 290px;
 
     &__button {
         background-color: var(--form-btn-bg-color);
+        border-radius: 4px;
         color: var(--form-btn-text-color);
         font: {
             size: 1.6rem;
             weight: var(--weight-medium);
         };
         height: 40px;
+        margin-top: 20px;
+        overflow: hidden;
+        position: relative;
         width: 290px;
+
+        &:active {
+            &:after {
+                height: 0;
+                opacity: 1;
+                transition: 0s;
+                width: 0;
+            }
+        }
+
+        &:after {
+            background-color: lighten(#00b9ff, 25%); // @todo need to figure out why I cant use css variables
+            border-radius: 50%;
+            content: '';
+            height: 310px;
+            opacity: 0;
+            position: absolute;
+            transition: all .6s;
+            width: 310px;
+        }
+
+        &:hover {
+            background-color: darken(#00b9ff, 5%);
+        }
+    }
+
+    &__signup {
+        font-size: 1rem;
+        margin-top: 12px;
+        text-align: center;
     }
 }
 </style>

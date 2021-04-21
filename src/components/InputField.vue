@@ -8,11 +8,12 @@
         <input
             :id="fieldName.toLowerCase()"
             :type="fieldType"
-            @blur="handleFocus"
+            @blur="handleEvents"
             @focus="handleFocus"
             class="form__input">
         <label
             :for="fieldName.toLowerCase()"
+            v-if="isValid"
             class="form__error">Please enter {{ `${insertAOrAn} ${fieldName.toLowerCase()}` }}.</label>
     </div>
 </template>
@@ -22,12 +23,15 @@ export default {
     name: 'InputField',
     props: {
         fieldName: String,
-        fieldType: String
+        fieldType: String,
+        modelValue: String
     },
+    emits: ['update:modelValue'],
     data() {
         return {
             focused: false,
-            isValid: null
+            inputValue: this.modelValue,
+            isValid: false
         };
     },
     computed: {
@@ -40,9 +44,30 @@ export default {
         }
     },
     methods: {
+        handleEvents(event) {
+          const inputData = event.target.value;
+
+          if (inputData) {
+              // this.focused = !this.focused;
+              this.focused = true;
+              this.$emit('update:modelValue', inputData);
+          } else {
+              this.focused = false;
+              this.isValid = true;
+          }
+        },
         handleFocus(event) {
+            console.log(`Focus: ${event.target}`); // @todo remove
             this.focused = !this.focused;
-            console.log(`Focus: ${event.target}`);
+            this.isValid = false;
+        },
+        validateField(event) {
+            const inputData = event.target.value;
+            if (inputData) {
+                this.$emit('update:modelValue', inputData);
+            } else {
+                this.isValid = true;
+            }
         }
     }
 }
@@ -52,7 +77,15 @@ export default {
 .form {
     $this: &;
 
+    &__error {
+        color: var(--form-error-color);
+    }
+
     &__group {
+        &:not(:first-of-type) {
+            margin-top: 15px;
+        }
+
         &--input {
             &.focused {
                 #{$this} {
@@ -84,6 +117,10 @@ export default {
         position: relative;
         width: 100%;
         z-index: 1;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__label {

@@ -162,6 +162,7 @@ export default {
     --black: #000000;
     --dodger-blue: #00b9ff;
     --golden-tainoi: #feb914;
+    --mandy: #e34850;
     --persian-blue: #2346d4;
     --picton-blue: #36a2eb;
     --white: #ffffff;
@@ -172,6 +173,7 @@ export default {
     // Forms
     --form-btn-bg-color: var(--dodger-blue);
     --form-btn-text-color: var(--white);
+    --form-error-color: var(--mandy);
     --form-focus-highlight: var(--persian-blue);
     // Typeface weights
     --weight-light: 300;
