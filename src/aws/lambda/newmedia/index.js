@@ -20,6 +20,7 @@ exports.handler = async (event) => {
     try {
         // Send media data to DynamoDB
         const db = await putNewMedia(event);
+        console.log(`Return from putNewMedia: ${JSON.stringify(db)}`);
 
         response = {
             statusCode: 200,
