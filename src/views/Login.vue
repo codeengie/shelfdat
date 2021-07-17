@@ -53,14 +53,17 @@ h1 {
     width: 290px;
 
     &__button {
+        align-items: center;
         background-color: var(--form-btn-bg-color);
         border-radius: 4px;
         color: var(--form-btn-text-color);
+        display: flex;
         font: {
             size: 1.6rem;
             weight: var(--weight-medium);
         };
         height: 40px;
+        justify-content: center;
         margin-top: 20px;
         overflow: hidden;
         position: relative;
