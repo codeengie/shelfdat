@@ -21,12 +21,22 @@ const router = createRouter({
        {
            path: '/login',
            name: 'Login',
-           component: Login
+           component: Login,
+           meta: {
+               title: 'Login',
+               description: 'Quisque id volutpat risus.',
+               header: false
+           }
        },
        {
            path: '/dashboard',
            name: 'Dashboard',
-           component: Dashboard
+           component: Dashboard,
+           meta: {
+               title: 'Dashboard',
+               description: 'Praesent rhoncus id ligula id consequat',
+               header: true
+           }
        }
    ]
 });

@@ -1,8 +1,21 @@
 <template>
-    <nas-header></nas-header>
+    <nas-header v-if="this.$route.meta.header"></nas-header>
     <router-view></router-view>
     <nas-footer></nas-footer>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+
+            }
+        },
+        beforeUpdate() {
+            console.log(`Route data: ${this.$route.meta.title}`);
+        }
+    }
+</script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300;400;500;700;900&display=swap');
