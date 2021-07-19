@@ -41,6 +41,12 @@ const router = createRouter({
    ]
 });
 
+router.beforeEach((to, from, next) => {
+    console.log(to);
+    document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
+    next(); // This should only be called once, reference vue docs when you start expanding
+});
+
 const app = createApp(App);
 
 app.use(router);
