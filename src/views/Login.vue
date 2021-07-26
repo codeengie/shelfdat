@@ -1,5 +1,5 @@
 <template>
-    <h1>NotAShelfie</h1>
+    <h1>{{ titleLogo }}</h1>
     <form class="login-form" @submit.prevent="submitLoginForm">
         <nas-input-field
             field-name="Email"
@@ -26,7 +26,8 @@ export default {
     data() {
         return {
             emailInput: null,
-            passwordInput: null
+            passwordInput: null,
+            titleLogo: process.env.VUE_APP_TITLE
         }
     },
     methods: {

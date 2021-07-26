@@ -4,13 +4,23 @@
             <img src="images/menu-24px.svg" width="18" height="18" alt="Hamburger menu">
         </div>
         <div class="brand">
-            <h1 class="brand__header">NotAShelfie</h1>
+            <h1 class="brand__header">{{ titleLogo }}</h1>
         </div>
         <div class="login">
             <img src="images/account_circle-24px.svg" width="20" height="20" alt="Simple humanoid upper body surrounded by a black circle">
         </div>
     </header>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                titleLogo: process.env.VUE_APP_TITLE
+            }
+        }
+    }
+</script>
 
 <style lang="scss">
 :root {
