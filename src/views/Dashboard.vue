@@ -65,10 +65,12 @@
                     <nas-inventory
                         v-for="media in mediaSearch"
                         :key="media.id"
+                        :id="media.id"
                         :type="media.type"
                         :format="media.format"
                         :title="media.title"
-                        :location="media.location"></nas-inventory>
+                        :location="media.location"
+                        @relay-inventory-id="deleteMedia"></nas-inventory>
                 </template>
             </nas-modwrap>
         </section>
@@ -133,6 +135,9 @@ export default {
         }
     },
     methods: {
+        async deleteMedia(event) {
+            console.log(`Received event from GC: ${event}`);
+        },
         async getMedia() {
             const response = await fetch(process.env.VUE_APP_API_URL);
             const media = await response.json();

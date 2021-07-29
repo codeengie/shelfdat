@@ -4,7 +4,7 @@
         <h2 class="inventory-item__format">{{ format }}</h2>
         <h1 class="inventory-item__title">{{ title }}</h1>
         <p class="inventory-item__location">This movie is located on the {{ location }}</p>
-        <nas-actions></nas-actions>
+        <nas-actions v-bind="$attrs"></nas-actions>
     </div>
 </template>
 

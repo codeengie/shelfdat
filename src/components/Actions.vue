@@ -3,7 +3,7 @@
         <button class="actions__button actions__button--edit">
             <img class="actions__icon" src="images/edit-24px.svg" alt="Edit">
         </button>
-        <button class="actions__button actions__button--delete" @click="deleteInventoryItem">
+        <button class="actions__button actions__button--delete" @click="getInventoryId">
             <img class="actions__icon" src="images/delete-24px.svg" alt="Delete">
         </button>
     </div>
@@ -12,10 +12,10 @@
 <script>
 export default {
     name: "Actions",
-    emits: ['delete'],
+    emits: ['relayInventoryId'],
     methods: {
-        deleteInventoryItem() {
-            this.$emit('delete');
+        getInventoryId(event) {
+            this.$emit('relayInventoryId', event.target.closest('div').parentElement.id);
         }
     }
 }
