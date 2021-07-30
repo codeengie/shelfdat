@@ -16,7 +16,7 @@ exports.handler = async (event) => {
     try {
         // Send media data to DynamoDB
         const db = await deleteMedia(event);
-        console.log(`Return from putNewMedia: ${JSON.stringify(db)}`);
+        console.log(`Return from deleteMedia: ${JSON.stringify(db)}`);
 
         response = {
             statusCode: 200,

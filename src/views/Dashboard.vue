@@ -137,6 +137,16 @@ export default {
     methods: {
         async deleteMedia(event) {
             console.log(`Received event from GC: ${event}`);
+            const response = await fetch(process.env.VUE_APP_API_URL, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(event)
+            });
+
+            const data = await response.json();
+            console.log(`Server response: ${JSON.stringify(data)}`);
         },
         async getMedia() {
             const response = await fetch(process.env.VUE_APP_API_URL);
