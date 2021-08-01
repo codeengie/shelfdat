@@ -19,6 +19,7 @@
 </template>
 
 <script>
+// @todo Add autofocus to input fields, note autofocus had two possible values: autofocus or ""
 export default {
     name: 'InputField',
     props: {

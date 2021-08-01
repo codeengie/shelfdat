@@ -12,6 +12,7 @@ import DoughnutChart from './components/DoughnutChart';
 import Inventory from '@/components/Inventory';
 import Actions from '@/components/Actions';
 import InputField from '@/components/InputField';
+import Sheet from '@/components/Sheet';
 import Login from '@/views/Login';
 import Dashboard from '@/views/Dashboard';
 
@@ -42,7 +43,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(to);
+    // console.log(to);
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
     next(); // This should only be called once, reference vue docs when you start expanding
 });
@@ -61,5 +62,6 @@ app.component('nas-doughnut-chart', DoughnutChart);
 app.component('nas-inventory', Inventory);
 app.component('nas-actions', Actions);
 app.component('nas-input-field', InputField);
+app.component('nas-sheet', Sheet);
 
 app.mount('#app');

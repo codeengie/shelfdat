@@ -10,10 +10,10 @@
             return {
 
             }
-        },
+        }/*,
         beforeUpdate() {
             console.log(`Route data: ${this.$route.meta.title}`);
-        }
+        }*/
     }
 </script>
 
