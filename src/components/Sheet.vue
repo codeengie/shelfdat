@@ -1,12 +1,26 @@
 <template>
     <div class="sheet" :class="toggleAnimation">
-        <button class="sheet__button" @click="handleAnimation">
-            <img class="sheet__icon" src="images/add_24dp.svg" alt="Add">
-        </button>
-        <div class="sheet__content">
-            <form>
-                <input type="text" placeholder="Title">
-            </form>
+        <div class="sheet__blackout"></div>
+        <div class="sheet__wrap">
+            <button class="sheet__button" @click="handleAnimation">
+                <img class="sheet__icon" src="images/add_24dp.svg" alt="Add">
+            </button>
+            <div class="sheet__content">
+                <form>
+                    <h2>Create New Item</h2>
+                    <nas-input-field
+                        field-name="Title"
+                        field-type="text"
+                        v-model="titleInput"></nas-input-field>
+
+                    <nas-input-radio
+                        v-for="radio in radioSettings"
+                        :key="radio"
+                        :radioId="radio.id"
+                        :radioGroup="radio.group"
+                        :radioOptions="radio.options"></nas-input-radio>
+                </form>
+            </div>
         </div>
     </div>
 </template>
@@ -16,7 +30,40 @@
         name: 'Sheet',
         data() {
             return {
-                isSheetUp: null
+                isSheetUp: null,
+                radioSettings: [
+                    {
+                        id: 'mediaFormatChoice',
+                        label: 'Format',
+                        group: 'mediaFormat',
+                        options: ['4K', 'BRAY', 'DVD']
+                    },
+                    {
+                        id: 'mediaTypeChoice',
+                        label: 'Type',
+                        group: 'mediaType',
+                        options: ['Movie', 'TV Show']
+                    },
+                    {
+                        id: 'mediaCollectionChoice',
+                        label: 'Collection',
+                        group: 'mediaCollection',
+                        options: ['No', 'Yes']
+                    },
+                    {
+                        id: 'mediaLocationChoice',
+                        label: 'Location',
+                        group: 'mediaLocation',
+                        options: ['Cave', 'Junk', 'Garage']
+                    },
+                    {
+                        id: 'mediaContainerChoice',
+                        label: 'Container',
+                        group: 'mediaContainer',
+                        options: ['1', '2', '3', '4']
+                    }
+                ],
+                titleInput: null
             };
         },
         computed: {
@@ -33,28 +80,48 @@
 </script>
 
 <style lang="scss" scoped>
+    $content-height: 400px;
+    $ease-in-back: cubic-bezier(.36, 0, .66, -.56);
+    $ease-out-back: cubic-bezier(.34, 1.56, .64, 1);
+
     .sheet {
         $this: &;
-        bottom: 0;
-        left: 0;
-        position: fixed;
-        width: 100%;
-        z-index: 1000;
+
+        &__blackout {
+            background-color: var(--black);
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: fixed;
+            top: 0;
+            transition: all .35s ease-in;
+            visibility: hidden;
+            width: 100%;
+        }
 
         &__button {
             background-color: var(--dodger-blue);
             border-radius: 50%;
+            bottom: 15px;
             height: 48px;
             position: absolute;
             right: 15px;
-            top: -48px;
             width: 48px;
+            z-index: 5;
         }
 
         &__content {
             background-color: var(--white);
-            height: 0;
-            transition: height .15s ease-out;
+            height: 400px;
+            left: 0;
+            overflow: hidden;
+            opacity: 0;
+            position: absolute;
+            top: -30px;
+            transition: opacity .1s ease-out .1s, visibility 0s linear .15s;
+            width: 100%;
+            visibility: hidden;
+            z-index: 4;
         }
 
         &__icon {
@@ -62,13 +129,39 @@
             width: 28px;
         }
 
+        &__wrap {
+            bottom: -10px; // Compensates for the bottom padding
+            left: 0;
+            padding-bottom: 10px;
+            position: fixed;
+            transition: bottom .25s $ease-out-back;
+            width: 100%;
+            z-index: 3;
+        }
+
         &--up {
             #{$this} {
-                &__button {}
+                &__blackout {
+                    opacity: .4;
+                    transition: opacity .2s ease-out;
+                    visibility: visible;
+                }
+
+                &__button {
+                    // bottom: $content-height - 24px; // Half the height of the button
+                    // transition: bottom .4s cubic-bezier(.68, -.6, .32, 1.6);
+                }
 
                 &__content {
-                    height: 400px;
-                    transition: height .2s ease-in;
+                    opacity: 1;
+                    transition: opacity .1s ease-in .1s;
+                    width: 100%;
+                    visibility: visible;
+                }
+
+                &__wrap {
+                    bottom: 360px;
+                    transition: bottom .35s $ease-in-back;
                 }
             }
         }

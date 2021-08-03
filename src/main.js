@@ -12,6 +12,7 @@ import DoughnutChart from './components/DoughnutChart';
 import Inventory from '@/components/Inventory';
 import Actions from '@/components/Actions';
 import InputField from '@/components/InputField';
+import InputRadio from '@/components/InputRadio';
 import Sheet from '@/components/Sheet';
 import Login from '@/views/Login';
 import Dashboard from '@/views/Dashboard';
@@ -62,6 +63,7 @@ app.component('nas-doughnut-chart', DoughnutChart);
 app.component('nas-inventory', Inventory);
 app.component('nas-actions', Actions);
 app.component('nas-input-field', InputField);
+app.component('nas-input-radio', InputRadio);
 app.component('nas-sheet', Sheet);
 
 app.mount('#app');
