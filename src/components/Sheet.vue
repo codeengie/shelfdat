@@ -16,8 +16,7 @@
                     <nas-input-radio
                         v-for="radio in radioSettings"
                         :key="radio"
-                        :radioId="radio.id"
-                        :radioGroup="radio.group"
+                        :radioLabel="radio.label"
                         :radioOptions="radio.options"></nas-input-radio>
                 </form>
             </div>
@@ -33,33 +32,23 @@
                 isSheetUp: null,
                 radioSettings: [
                     {
-                        id: 'mediaFormatChoice',
                         label: 'Format',
-                        group: 'mediaFormat',
                         options: ['4K', 'BRAY', 'DVD']
                     },
                     {
-                        id: 'mediaTypeChoice',
                         label: 'Type',
-                        group: 'mediaType',
                         options: ['Movie', 'TV Show']
                     },
                     {
-                        id: 'mediaCollectionChoice',
                         label: 'Collection',
-                        group: 'mediaCollection',
                         options: ['No', 'Yes']
                     },
                     {
-                        id: 'mediaLocationChoice',
                         label: 'Location',
-                        group: 'mediaLocation',
                         options: ['Cave', 'Junk', 'Garage']
                     },
                     {
-                        id: 'mediaContainerChoice',
                         label: 'Container',
-                        group: 'mediaContainer',
                         options: ['1', '2', '3', '4']
                     }
                 ],

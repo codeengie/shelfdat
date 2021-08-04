@@ -23,8 +23,10 @@
 :root {
     // Color scheme
     --alabaster: #f9f9f9;
+    --alto: #d6d6d6;
     --black: #000000;
     --dodger-blue: #00b9ff;
+    --dove-gray: #707070;
     --golden-tainoi: #feb914;
     --mandy: #e34850;
     --persian-blue: #2346d4;
