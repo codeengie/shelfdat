@@ -1,7 +1,7 @@
 # NotAShelfie
 
 ## Overview
-An app I created to help me manage my plex media library.
+An app I created to help manage and track my massive media library.
 
 ## Technology
 + AWS
@@ -23,4 +23,4 @@ Built and designed by Ardent Forms.
 
 ## License
 + You do not have my written, implied or expressed permission to use.
-+ Copyright 2020 @ Ardent Forms.
++ Copyright 2021 @ Ardent Forms.
