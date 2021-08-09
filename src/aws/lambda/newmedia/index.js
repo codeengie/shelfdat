@@ -54,6 +54,7 @@ async function putNewMedia(data) {
         Item: {
             collection: {BOOL: data.collection},
             container: {N: data.container.toString()},
+            createdate: {S: data.createdate},
             format: {S: data.format},
             id: {S: recordId},
             location: {S: data.location},

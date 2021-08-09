@@ -141,7 +141,8 @@ export default {
                 const response = await fetch(process.env.VUE_APP_API_URL, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json'/*,
+                        'X-Api-Key' : process.env.VUE_APP_SECRET_KEY*/
                     },
                     body: JSON.stringify(event)
                 });
@@ -152,6 +153,14 @@ export default {
         },
         async getMedia() {
             const response = await fetch(process.env.VUE_APP_API_URL);
+
+            // Necessary because fetch() doesn't throw an error
+            // @todo You'll need a try/catch here
+            /*if (!response.ok) {
+                const message = `An error has occurred: ${response.status}`;
+                throw new Error(message);
+            }*/
+
             const media = await response.json();
             this.mediaDbData = media.data;
             this.isLoading = false;
@@ -198,11 +207,32 @@ export default {
 
 // More temp stuff
 .doughnut {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     position: relative;
 
     canvas {
         height: 146px;
         width: 146px;
+    }
+
+    .stat {
+        display: flex;
+        flex-flow: column-reverse;
+
+        &__reading {
+            font-size: 2.4rem;
+        }
+
+        &__title {
+            font-size: .8rem;
+        }
+
+        &--flip {
+            position: absolute;
+            text-align: center;
+        }
     }
 }
 

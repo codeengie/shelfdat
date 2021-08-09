@@ -143,6 +143,7 @@ export default {
             const newMovieData = {
                 collection: (this.collection === 'true'),
                 container: this.container,
+                createdate: new Date(Date.now()).toISOString(),
                 format: this.format,
                 location: this.location,
                 title: this.title,
@@ -160,7 +161,8 @@ export default {
             await fetch(process.env.VUE_APP_API_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'/*,
+                    'X-Api-Key': process.env.VUE_APP_SECRET_KEY*/
                 },
                 body: JSON.stringify(newMovieData)
             })
