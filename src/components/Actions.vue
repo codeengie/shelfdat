@@ -1,10 +1,10 @@
 <template>
     <div class="actions">
         <button class="actions__button actions__button--edit">
-            <img class="actions__icon" src="images/edit-24px.svg" alt="Edit">
+            <img class="actions__icon" src="images/edit_black_48dp.svg" alt="Edit">
         </button>
         <button class="actions__button actions__button--delete" @click="getInventoryId">
-            <img class="actions__icon" src="images/delete-24px.svg" alt="Delete">
+            <img class="actions__icon" src="images/delete_black_48dp.svg" alt="Delete">
         </button>
     </div>
 </template>

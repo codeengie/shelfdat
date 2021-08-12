@@ -60,7 +60,7 @@ html {
     font-size: 62.5%;
 }
 
-body, button, dl, h1, h2, h3, h4, p {
+body, button, figure, dl, h1, h2, h3, h4, p, ul {
     margin: 0;
     padding: 0;
 }
