@@ -37,11 +37,13 @@
     // Site wide
     --bg-main-color: var(--white);
     --bg-color: var(--alabaster);
+
     // Forms
     --form-btn-bg-color: var(--dodger-blue);
     --form-btn-text-color: var(--white);
     --form-error-color: var(--mandy);
     --form-focus-highlight: var(--persian-blue);
+
     // Typeface weights
     --weight-light: 300;
     --weight-normal: 400;

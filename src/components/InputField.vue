@@ -8,7 +8,7 @@
         <input
             :id="fieldName.toLowerCase()"
             :type="fieldType"
-            @blur="handleEvents"
+            @blur="handleBlur"
             @focus="handleFocus"
             class="form__input">
         <label
@@ -45,7 +45,7 @@ export default {
         }
     },
     methods: {
-        handleEvents(event) {
+        handleBlur(event) {
           const inputData = event.target.value;
 
           if (inputData) {
@@ -58,12 +58,14 @@ export default {
           }
         },
         handleFocus(event) {
-            console.log(`Focus: ${event.target}`); // @todo remove
-            this.focused = !this.focused;
-            this.isValid = false;
+            if (event.target.value === '') {
+                this.focused = !this.focused;
+                this.isValid = false;
+            }
         },
         validateField(event) {
             const inputData = event.target.value;
+
             if (inputData) {
                 this.$emit('update:modelValue', inputData);
             } else {
@@ -75,6 +77,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+:root {
+    --form-input-border-color: var(--black);
+    --form-input-text-color: var(--black);
+    --form-label-text-color: var(--black);
+}
+
 .form {
     $this: &;
 
@@ -88,6 +96,8 @@ export default {
         }
 
         &--input {
+            height: 55px;
+
             &.focused {
                 #{$this} {
                     &__input {
@@ -111,9 +121,9 @@ export default {
     &__input {
         background-color: transparent;
         border: 0 {
-            bottom: 2px solid #000000;
+            bottom: 2px solid var(--form-input-border-color);
         }
-        color: #000000;
+        color: var(--form-input-text-color);
         font-size: 1.6rem;
         position: relative;
         width: 100%;
@@ -125,9 +135,10 @@ export default {
     }
 
     &__label {
-        color: #000000;
+        color: var(--form-label-text-color);
         display: inline-block;
         font-size: 1.4rem;
+        height: 17px;
         transform: translateY(20px);
         transition: all .2s;
     }
