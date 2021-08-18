@@ -7,7 +7,7 @@
             </button>
             <div class="sheet__content">
                 <form>
-                    <h2>Create New Item</h2>
+                    <h2 class="sheet__header">Create New Item</h2>
                     <nas-input-field
                         field-name="Title"
                         field-type="text"
@@ -18,6 +18,8 @@
                         :key="radio"
                         :radioLabel="radio.label"
                         :radioOptions="radio.options"></nas-input-radio>
+
+                    <nas-input-file></nas-input-file>
                 </form>
             </div>
         </div>
@@ -100,17 +102,25 @@
         }
 
         &__content {
+            align-items: center;
             background-color: var(--white);
+            display: flex;
             height: 400px;
+            justify-content: center;
             left: 0;
             overflow: hidden;
             opacity: 0;
+            padding: 15px;
             position: absolute;
             top: -30px;
             transition: opacity .1s ease-out .1s, visibility 0s linear .15s;
             width: 100%;
             visibility: hidden;
             z-index: 4;
+        }
+
+        &__header {
+            text-align: center;
         }
 
         &__icon {

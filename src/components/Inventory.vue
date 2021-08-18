@@ -4,10 +4,10 @@
             <img
                 alt="Image of an inventory item"
                 class="inventory-item__pic-poster"
-                height="121"
+                height="120"
                 loading="lazy"
                 :src="setImage"
-                width="96">
+                width="100">
         </figure>
         <div class="inventory-item__wrap">
             <h2 class="inventory-item__type">{{ type }}</h2>
@@ -32,7 +32,7 @@
 export default {
     name: "Inventory",
     props: {
-        container: String,
+        container: Number,
         created: String,
         format: String,
         image: String,
@@ -48,7 +48,7 @@ export default {
             return `${dateGroup[2]} ${dateGroup[3]}, ${dateGroup[4]}`;
         },
         setImage() {
-            return this.image ? `images/${this.image}` : 'images/placeholder.svg'
+            return this.image ? `${process.env.VUE_APP_S3_BUCKET_URL}${this.image}` : 'images/placeholder.svg'
         }
     }
 }

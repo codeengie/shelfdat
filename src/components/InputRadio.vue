@@ -5,6 +5,7 @@
             <div class="form__wrap" v-for="(radioOption, index) in radioOptions" :key="radioOption">
                 <input
                     class="form__radio"
+                    :checked="setChecked(index)"
                     :id="`${convertToLowerCase(radioLabel)}Choice${index}`"
                     :name="convertToLowerCase(radioLabel)"
                     type="radio"
@@ -30,8 +31,12 @@
             }
         },
         methods: {
+            // @todo This might be costly, try as a computed function
             convertToLowerCase(text) {
                 return text.toLowerCase();
+            },
+            setChecked(digit) {
+                return (digit === 0);
             }
         }
     }
@@ -60,6 +65,7 @@
             align-items: center;
             border-radius: 4px;
             color: var(--alto);
+            cursor: pointer;
             display: flex;
             flex-grow: 1;
             font-size: 1.4rem;
@@ -100,6 +106,10 @@
                 grow: 1;
             }
             justify-content: center;
+
+            &:not(:last-child) {
+                margin-right: 2px;
+            }
         }
 
         // @todo Remove
