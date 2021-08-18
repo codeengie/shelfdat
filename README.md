@@ -1,7 +1,7 @@
-# NotAShelfie
+# Shelfdat
 
 ## Overview
-An app I created to help manage and track my massive media library.
+An app I created to help manage and track my massive media library. Of course, it can also be used to manage other items.
 
 ## Technology
 + AWS
@@ -13,7 +13,7 @@ An app I created to help manage and track my massive media library.
 + HTML5
 + JavaScript
 + Node.js
-+ Vue.js
++ Vue.js 3
 
 ## Developer
 [Cesar Villanueva Jr](https://codeengie.com)
