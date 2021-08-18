@@ -17,7 +17,7 @@ import InputRadio from '@/components/InputRadio';
 import Sheet from '@/components/Sheet';
 import Login from '@/views/Login';
 import Dashboard from '@/views/Dashboard';
-import NotFoundPage from "@/views/NotFoundPage";
+import NotFound from "@/views/NotFound";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -46,7 +46,7 @@ const router = createRouter({
        {
            path: '/:pathMatch(.*)*',
            name: '404',
-           component: NotFoundPage,
+           component: NotFound,
            meta: {
                title: '404',
                description: '404 Error Page',
