@@ -3,15 +3,12 @@ import {Doughnut} from 'vue3-chart-v2';
 
 export default {
     name: "DoughnutChart",
+    props: {
+      dataSet: Object
+    },
     data() {
         return {
-            chartData: {
-                labels: ['4K', 'Blu-ray', 'DVD'],
-                datasets: [{
-                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
-                    data: [153, 173, 14]
-                }]
-            },
+            chartData: this.dataSet,
             options: {
                 /*animation: {
                   animateScale: true

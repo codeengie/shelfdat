@@ -9,9 +9,10 @@
                 <div class="doughnut">
                     <div class="stat stat--flip">
                         <h3 class="stat__title">Total</h3>
-                        <h4 class="stat__reading">334</h4>
+                        <h4 class="stat__reading">{{ mediaTotal }}</h4>
                     </div>
-                    <nas-doughnut-chart></nas-doughnut-chart>
+                    <nas-doughnut-chart
+                        :data-set="donutData"></nas-doughnut-chart>
                 </div>
                 <div class="media-stats">
                     <nas-stat
@@ -86,6 +87,13 @@ export default {
     name: 'Dashboard',
     data() {
         return {
+            donutData: {
+                labels: ['4K', 'Blu-ray', 'DVD'],
+                datasets: [{
+                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
+                    data: [239, 249, 12]
+                }]
+            },
             isLoading: true,
             skeletons: 6,
             mediaDbData: [],
@@ -136,6 +144,9 @@ export default {
             return this.mediaDbData.filter(media => {
                 return media.title.toLowerCase().includes(this.searchKey.toLowerCase());
             });
+        },
+        mediaTotal() {
+            return this.mediaDbData.length;
         }
     },
     methods: {
