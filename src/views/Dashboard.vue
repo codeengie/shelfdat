@@ -5,7 +5,7 @@
         <!-- Media Section -->
         <nas-modwrap :modifier="['foobar', 'bg']">
             <template #heading>Media</template>
-            <template #default v-if="mediaDbData">
+            <template #default v-if="donutData">
                 <div class="doughnut">
                     <div class="stat stat--flip">
                         <h3 class="stat__title">Total</h3>
@@ -87,13 +87,7 @@ export default {
     name: 'Dashboard',
     data() {
         return {
-            donutData: {
-                labels: ['4K', 'Blu-ray', 'DVD'],
-                datasets: [{
-                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
-                    data: [239, 249, 12]
-                }]
-            },
+            donutData: null,
             isLoading: true,
             skeletons: 6,
             mediaDbData: [],
@@ -139,6 +133,9 @@ export default {
     beforeMount() {
         this.getMedia();
     },
+    /*created() {
+      this.getMedia();
+    },*/
     computed: {
         mediaSearch() {
             return this.mediaDbData.filter(media => {
@@ -150,6 +147,11 @@ export default {
         }
     },
     methods: {
+        countMedia(filterBy, filterKey) {
+            return this.mediaDbData.filter(data => {
+                return (data[filterBy] === filterKey);
+            }).length;
+        },
         async deleteMedia(event) {
             if (window.confirm('Do you really want to delete item?')) {
                 const response = await fetch(process.env.VUE_APP_API_URL, {
@@ -178,6 +180,17 @@ export default {
             const media = await response.json();
             this.mediaDbData = media.data;
             this.isLoading = false;
+
+            /* There's probably a better way of setting data for child component/props but for the
+             * the time being I'll keep it Mickey Mouse.
+             */
+            this.donutData = {
+              labels: ['4k', 'Blu-ray', 'DVD'],
+              datasets: [{
+                  backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
+                  data: [this.countMedia('format', '4K Blu-ray'), this.countMedia('format', 'Blu-ray'), this.countMedia('format', 'DVD')]
+              }]
+            };
         },
         updateMedia(mediaRecord) {
             // this.mediaDbData.push(mediaRecord);
