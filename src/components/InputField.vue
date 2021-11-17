@@ -76,7 +76,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 :root {
     --form-input-border-color: var(--black);
     --form-input-text-color: var(--black);

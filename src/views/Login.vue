@@ -12,7 +12,11 @@
             v-model="passwordInput"></nas-input-field>
 
         <button class="login-form__button">Login</button>
-        <p class="login-form__signup">Don&rsquo;t have an account? <strong>Sign Up</strong></p>
+        <p class="login-form__signup">Don&rsquo;t have an account?
+            <strong>
+                <router-link class="login-form__link" to="/signup">Sign Up</router-link>
+            </strong>
+        </p>
     </form>
 </template>
 
