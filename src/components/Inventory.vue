@@ -1,6 +1,6 @@
 <template>
     <div class="inventory-item">
-        <figure class="inventory-item__pic">
+        <figure class="inventory-item__pic" :class="setFormat">
             <img
                 alt="Image of an inventory item"
                 class="inventory-item__pic-poster"
@@ -46,6 +46,21 @@ export default {
             const pattern = /^([A-Za-z]{3})\s([A-Za-z]{3})\s([0-9]{2})\s([0-9]{4})/g;
             const dateGroup = pattern.exec(newDate);
             return `${dateGroup[2]} ${dateGroup[3]}, ${dateGroup[4]}`;
+        },
+        setFormat() {
+            let formatModifier;
+
+            switch(this.format) {
+                case 'DVD':
+                    formatModifier = 'dvd';
+                    break;
+                case 'Blu-ray':
+                    formatModifier = 'hdx';
+                    break;
+                case '4K Blu-ray':
+                    formatModifier = 'uhd'
+            }
+            return `inventory-item__pic--${formatModifier}`;
         },
         setImage() {
             return this.image ? `${process.env.VUE_APP_S3_BUCKET_URL}${this.image}` : 'images/placeholder.svg'
@@ -121,10 +136,69 @@ export default {
     }
 
     &__pic {
+        border-radius: 4px;
         grid-area: poster;
+        height: 120px;
+        overflow: hidden;
+        position: relative;
+        width: 100px;
+
+        &::after,
+        &::before {
+            left: 0;
+            position: absolute;
+            width: 100px;
+        }
+
+        &::after {
+            bottom: 0;
+            content: '';
+            height: 6px;
+        }
+
+        &::before {
+            color: #fff;
+            font-size: 10px;
+            height: 14px;
+            text-align: center;
+            top: 0;
+        }
 
         &-poster {
-            border-radius: 4px;
+            height: 120px;
+            width: 100px;
+        }
+
+        // Modifiers
+        &--dvd {
+            &::after,
+            &::before {
+                background-color: #daa520;
+            }
+
+            &::before {
+                content: 'DVD'
+            }
+        }
+        &--hdx {
+            &::after,
+            &::before {
+                background-color: #0095d5;
+            }
+
+            &::before {
+                content: 'BLU-RAY HDX'
+            }
+        }
+        &--uhd {
+            &::after,
+            &::before {
+                background-color: #000;
+            }
+
+            &::before {
+                content: '4K UHD';
+            }
         }
     }
 
