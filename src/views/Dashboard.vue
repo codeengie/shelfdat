@@ -74,6 +74,7 @@
                         :title="media.title"
                         :location="media.location"
                         :created="media.createdate"
+                        :notes="media.notes"
                         @relay-inventory-id="deleteMedia"></nas-inventory>
                 </template>
             </nas-modwrap>

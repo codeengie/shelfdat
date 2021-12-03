@@ -11,14 +11,15 @@
         </figure>
         <div class="inventory-item__wrap">
             <h2 class="inventory-item__type">{{ type }}</h2>
-            <h1 class="inventory-item__title">{{ title }}</h1>
+            <h1 class="inventory-item__title" :title="title">{{ title }}</h1>
             <ul class="inventory-item__list">
                 <li class="inventory-item__list-item inventory-item__list-item--format">{{ format }}</li>
                 <li class="inventory-item__list-item inventory-item__list-item--location">{{ `${location} - Container #${container}` }}</li>
             </ul>
-            <!--<details class="inventory-item__details" v-if="created">
+            <details class="inventory-item__details" v-if="notes">
                 <summary class="inventory-item__summary">Details</summary>
-            </details>-->
+                <p class="inventory-item__notes">{{ notes }}</p>
+            </details>
         </div>
         <time
             v-if="created"
@@ -37,6 +38,7 @@ export default {
         format: String,
         image: String,
         location: String,
+        notes: String,
         title: String,
         type: String
     },
@@ -93,6 +95,10 @@ export default {
         grid-area: created;
     }
 
+    &__details {
+        margin-top: 6px;
+    }
+
     &__list {
         margin-top: 8px;
 
@@ -133,6 +139,11 @@ export default {
                 }
             }
         }
+    }
+
+    &__notes {
+        font-size: 1.2rem;
+        padding-top: 4px;
     }
 
     &__pic {
@@ -187,7 +198,7 @@ export default {
             }
 
             &::before {
-                content: 'BLU-RAY HDX'
+                content: 'BLU-RAY'
             }
         }
         &--uhd {
@@ -202,11 +213,27 @@ export default {
         }
     }
 
+    &__summary {
+        cursor: pointer;
+        font: {
+            size: 1.2rem;
+            weight: var(--weight-bold);
+        }
+    }
+
     &__title {
         font: {
             size: 1.8rem;
             weight: var(--weight-bold);
         }
+        // Hacky but will keep for now to limit title to two lines
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit: {
+            box-orient: vertical;
+            line-clamp: 2;
+        }
+        // End hacky code
     }
 
     &__type {

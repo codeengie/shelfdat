@@ -105,7 +105,7 @@
             align-items: center;
             background-color: var(--white);
             display: flex;
-            height: 400px;
+            // height: 400px;
             justify-content: center;
             left: 0;
             overflow: hidden;
@@ -159,7 +159,7 @@
                 }
 
                 &__wrap {
-                    bottom: 360px;
+                    bottom: 400px;
                     transition: bottom .35s $ease-in-back;
                 }
             }
