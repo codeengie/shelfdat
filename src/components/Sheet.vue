@@ -6,7 +6,7 @@
                 <img class="sheet__icon" src="images/add_24dp.svg" alt="Add">
             </button>
             <div class="sheet__content">
-                <form>
+                <form class="sheet__form" @submit.prevent="submitNewItemForm">
                     <h2 class="sheet__header">Create New Item</h2>
                     <nas-input-field
                         field-name="Title"
@@ -20,6 +20,8 @@
                         :radioOptions="radio.options"></nas-input-radio>
 
                     <nas-input-file></nas-input-file>
+
+                    <button class="sheet__form-button">Create</button>
                 </form>
             </div>
         </div>
@@ -65,6 +67,9 @@
         methods: {
             handleAnimation() {
                 this.isSheetUp = !this.isSheetUp;
+            },
+            submitNewItemForm() {
+              console.log('Submitting new item form.');
             }
         }
     }
@@ -112,11 +117,33 @@
             opacity: 0;
             padding: 15px;
             position: absolute;
-            top: -30px;
+            top: -100px;
             transition: opacity .1s ease-out .1s, visibility 0s linear .15s;
             width: 100%;
             visibility: hidden;
             z-index: 4;
+        }
+
+        &__form-button {
+            align-items: center;
+            background-color: #36a2eb;
+            border-radius: 4px;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            font: {
+                size: 1.6rem;
+                weight: var(--weight-medium);
+            }
+            justify-content: center;
+            height: 40px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            width: 290px;
+
+            &:hover {
+                background-color: #2346d4;
+            }
         }
 
         &__header {
@@ -159,7 +186,7 @@
                 }
 
                 &__wrap {
-                    bottom: 400px;
+                    bottom: 543px;
                     transition: bottom .35s $ease-in-back;
                 }
             }
