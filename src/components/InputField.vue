@@ -77,11 +77,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-:root {
+/*:root {
     --form-input-border-color: var(--black);
     --form-input-text-color: var(--black);
     --form-label-text-color: var(--black);
-}
+}*/
 
 .form {
     $this: &;
@@ -121,9 +121,9 @@ export default {
     &__input {
         background-color: transparent;
         border: 0 {
-            bottom: 2px solid var(--form-input-border-color);
+            bottom: 2px solid #000;
         }
-        color: var(--form-input-text-color);
+        color: #000;
         font-size: 1.6rem;
         position: relative;
         width: 100%;
@@ -135,7 +135,7 @@ export default {
     }
 
     &__label {
-        color: var(--form-label-text-color);
+        color: #000;
         display: inline-block;
         font-size: 1.4rem;
         height: 17px;

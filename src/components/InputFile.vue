@@ -12,7 +12,6 @@
         <!-- You can also proxy the label to a button using Vue refs -->
         <label class="form__label" for="upload"><span>Select Image</span></label>
         <input accept="image/png" class="form__input" id="upload" name="upload" type="file" @change="fileSelected">
-        <!--<label class="form__label" for="upload">JPG &amp; PNG Accepted</label>-->
     </div>
 </template>
 
@@ -25,21 +24,16 @@ export default {
           displayFile: null
       }
     },
-    computed: {
-      /*setClass() {
-          return this.displayFile ? 'form__figure--pad' : '';
-      }*/
-    },
+    emits: ['update:modelValue'],
     methods: {
         fileSelected(event) {
             this.selectedFile = event.target.files[0];
             this.previewFile(this.selectedFile);
-            console.log(event);
+            this.$emit('update:modelValue', this.selectedFile);
         },
         previewFile(file) {
             this.displayFile = URL.createObjectURL(file);
-        },
-        uploadFile() {},
+        }
     }
 }
 </script>
@@ -49,7 +43,7 @@ export default {
         $this: &;
 
         &__figure {
-            background: #8e8e8e url('/images/image_white.svg') center center no-repeat {
+            background: #707070 url('/images/image_white.svg') center center no-repeat {
                 size: 32px
             }
             border-radius: 4px;
@@ -100,7 +94,7 @@ export default {
             height: 40px;
             margin-top: 15px;
             text-transform: uppercase;
-            width: 180px;
+            width: 140px;
 
             &:hover {
                 background-color: #2346d4;

@@ -6,7 +6,7 @@
                 <img class="sheet__icon" src="images/add_24dp.svg" alt="Add">
             </button>
             <div class="sheet__content">
-                <form class="sheet__form" @submit.prevent="submitNewItemForm">
+                <form class="sheet__form" @submit.prevent="submitNewItem">
                     <h2 class="sheet__header">Create New Item</h2>
                     <nas-input-field
                         field-name="Title"
@@ -19,7 +19,8 @@
                         :radioLabel="radio.label"
                         :radioOptions="radio.options"></nas-input-radio>
 
-                    <nas-input-file></nas-input-file>
+                    <nas-input-file
+                        v-model="fileInput"></nas-input-file>
 
                     <button class="sheet__form-button">Create</button>
                 </form>
@@ -33,15 +34,16 @@
         name: 'Sheet',
         data() {
             return {
+                fileInput: null,
                 isSheetUp: null,
                 radioSettings: [
                     {
                         label: 'Format',
-                        options: ['4K', 'BRAY', 'DVD']
+                        options: ['DVD', 'BRAY', '4K']
                     },
                     {
                         label: 'Type',
-                        options: ['Movie', 'TV Show']
+                        options: ['TV Show', 'Movie']
                     },
                     {
                         label: 'Collection',
@@ -49,11 +51,11 @@
                     },
                     {
                         label: 'Location',
-                        options: ['Cave', 'Junk', 'Garage']
+                        options: ['Cave', 'Junk', 'Garage', 'Closet']
                     },
                     {
                         label: 'Container',
-                        options: ['1', '2', '3', '4']
+                        options: ['1', '2', '3', '4', '5']
                     }
                 ],
                 titleInput: null
@@ -68,8 +70,12 @@
             handleAnimation() {
                 this.isSheetUp = !this.isSheetUp;
             },
-            submitNewItemForm() {
-              console.log('Submitting new item form.');
+            submitNewItem() {
+                if (this.titleInput && this.fileInput) {
+                   console.log('Submitted new item data');
+                } else {
+                    console.log('You need a title and image');
+                }
             }
         }
     }
@@ -117,7 +123,7 @@
             opacity: 0;
             padding: 15px;
             position: absolute;
-            top: -100px;
+            top: -90px;
             transition: opacity .1s ease-out .1s, visibility 0s linear .15s;
             width: 100%;
             visibility: hidden;
@@ -132,6 +138,7 @@
             cursor: pointer;
             display: flex;
             font: {
+                family: Roboto, sans-serif; // @todo Debug why its not waterfalling from main styles
                 size: 1.6rem;
                 weight: var(--weight-medium);
             }
