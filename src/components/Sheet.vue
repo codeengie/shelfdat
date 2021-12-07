@@ -13,11 +13,18 @@
                         field-type="text"
                         v-model="titleInput"></nas-input-field>
 
+                    <!-- @todo Need to revisit the setting of v-model dynamically, research suggests v-model is expecting
+                            a raw string and not a variable. So using v-model="radio.modelo" will not work. A few examples
+                            online said to use index in the loop v-model=radioSettings[index].modelo but that also didn't
+                            work. Eventually, I stumbled on $data and that did the trick but I still need to understand
+                            the why and if this is the proper syntax as this is from Vue 2.x, Vue 3 is supposed to this the
+                            `this` keyword. -->
                     <nas-input-radio
                         v-for="radio in radioSettings"
                         :key="radio"
                         :radioLabel="radio.label"
-                        :radioOptions="radio.options"></nas-input-radio>
+                        :radioOptions="radio.options"
+                        v-model="$data[radio.modelo]"></nas-input-radio>
 
                     <nas-input-file
                         v-model="fileInput"></nas-input-file>
@@ -35,18 +42,22 @@
         data() {
             return {
                 fileInput: null,
+                formatOption: null,
                 isSheetUp: null,
                 radioSettings: [
                     {
                         label: 'Format',
+                        modelo: 'formatOption',
                         options: ['DVD', 'BRAY', '4K']
                     },
                     {
                         label: 'Type',
+                        modelo: 'typeOption',
                         options: ['TV Show', 'Movie']
                     },
                     {
                         label: 'Collection',
+                        modelo: 'collectionOption',
                         options: ['No', 'Yes']
                     },
                     {
@@ -55,10 +66,12 @@
                     },
                     {
                         label: 'Container',
+                        modelo: 'containerOption',
                         options: ['1', '2', '3', '4', '5']
                     }
                 ],
-                titleInput: null
+                titleInput: null,
+                typeOption: null
             };
         },
         computed: {
@@ -76,6 +89,8 @@
                 } else {
                     console.log('You need a title and image');
                 }
+
+                console.log(`Radio: ${this.formatOption}, ${this.typeOption}`);
             }
         }
     }
