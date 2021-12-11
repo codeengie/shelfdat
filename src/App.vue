@@ -67,9 +67,12 @@ body, button, figure, dl, h1, h2, h3, h4, p, ul {
     padding: 0;
 }
 
+body, button {
+    font-family: Roboto, sans-serif;
+}
+
 body {
     background-color: var(--bg-main-color);
-    font-family: Roboto, sans-serif;
 }
 
 button {

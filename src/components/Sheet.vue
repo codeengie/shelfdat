@@ -153,7 +153,6 @@
             cursor: pointer;
             display: flex;
             font: {
-                family: Roboto, sans-serif; // @todo Debug why its not waterfalling from main styles
                 size: 1.6rem;
                 weight: var(--weight-medium);
             }

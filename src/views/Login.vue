@@ -25,7 +25,7 @@
 // import InputField from "@/components/InputField";
 
 export default {
-    name: "Login",
+    name: 'Login',
     // components: {InputField},
     data() {
         return {
