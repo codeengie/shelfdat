@@ -34,15 +34,20 @@
             }
         },
         emits: ['update:modelValue'],
+        /*mounted() {
+            console.log('Mounted');
+            // This works but I need to figure out how to target each radio group
+            this.$emit('update:modelValue', 'caca');
+        },*/
         methods: {
             // @todo This might be costly, try as a computed function
             convertToLowerCase(text) {
                 return text.toLowerCase();
             },
             radioOptionSelected(event) {
+                // console.log(`radioOptionSelected: ${event.target.checked}`);
                 this.activeOption = event.target.value;
                 this.$emit('update:modelValue', event.target.value);
-                // console.log(`InputRadio Event: ${event.target.value}`);
             },
             setChecked(digit) {
                 return (digit === 0);
