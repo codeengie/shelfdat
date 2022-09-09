@@ -6,10 +6,13 @@ An app I created to help manage and track my massive media library. Of course, i
 ## Technology
 + AWS
   + API Gateway
+  + CloudFront
   + DynamoDB
   + Lambda
+  + Route 53
+  + S3
 + CSS3
-+ Gulp
++ Gulp 4
 + HTML5
 + JavaScript
 + Node.js
@@ -19,7 +22,7 @@ An app I created to help manage and track my massive media library. Of course, i
 [Cesar Villanueva Jr](https://codeengie.com)
 
 ## Credits
-Built and designed by Ardent Forms.
+Designed and built by Ardent Forms.
 
 ## License
 + You do not have my written, implied or expressed permission to use.
