@@ -1,43 +1,58 @@
 import { createStore } from 'vuex';
 
-// There can only be a single store for an application, but you can have multiple states
+/**
+ * "There Can Be Only One", store for an application. But you can have multiple states
+ * @todo Once code starts getting out of hand consider splitting the store into modules
+ */
 const store = createStore({
     state() {
         return {
-            collections: [],
-            foobar: 0
-        }
-    },
-    // The only way to change state in a store
-    mutations: {
-        foobar(state) {
-            state.foobar++;
+            inventory: [],
+            loadStatus: false
         }
     },
     /**
-     * Actions are similar to mutations except instead of mutating state, actions commit
-     * mutations and can contain arbitrary asynchronous operations.
+     * The only way to change a state in a store is to use mutations, and you can't call them directly. You'll
+     * have to call `store.commit(mutationHandler)`. You can also pass additional arguments to `store.commit`,
+     * these are called payload. Also, mutations are synchronous, you are not allowed to use asynchronous operations.
      */
-    actions: {
-        // You have the same name
-        foobar(context) {
-            context.commit('foobar'); // Action commits foobar
+    mutations: {
+        setLoadStatus(state, status) {
+            state.loadStatus = status;
+        },
+        setInventory(state, inventory) {
+            state.inventory = inventory;
         }
     },
-    // Think of them as computed properties for stores
-    getters: {
-        finalFoobar(state) {
-            return state.foobar * 2;
-        },
-        normalizedFoobar(state) {
-            const finalFoobar = state.counter * 3;
+    /**
+     * Actions are similar to mutations except instead of mutating state, actions commit mutations and can contain
+     * arbitrary asynchronous operations. Its good practice to put actions between components. Actions are triggered
+     * with the `store.dispatch` method.
+     */
+    actions: {
+        async getInventory(context) {
+            context.commit('setLoadStatus', true);
 
-            if (finalFoobar < 0) {
-                return 0;
+            const response = await fetch(process.env.VUE_APP_API_URL);
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                console.log(responseData);
+                throw new Error(responseData.message || `Failed to get inventory data: ${response.status}`);
             }
-        },
+
+            console.log(responseData);
+            context.commit('setInventory', responseData.data);
+            context.commit('setLoadStatus', false);
+        }
+    },
+    /**
+     * Think of them as computed properties for stores because sometimes we need to "compute" derived state based
+     * on store state. A good example is all the repeat code you created in components to get inventory count.
+     */
+    getters: {
         // @todo Consolidate all the inventory counters you have in components
-        inventoryCount(state) {
+        getInventoryCount(state) {
             return state;
         }
     }
