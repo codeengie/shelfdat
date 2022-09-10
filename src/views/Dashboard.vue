@@ -9,7 +9,7 @@
                 <div class="doughnut">
                     <div class="stat stat--flip">
                         <h3 class="stat__title">Total</h3>
-                        <h4 class="stat__reading">{{ mediaTotal }}</h4>
+                        <h4 class="stat__reading">{{ inventoryTotal }}</h4>
                     </div>
                     <nas-doughnut-chart
                         :data-set="donutData"></nas-doughnut-chart>
@@ -53,16 +53,16 @@
             <input class="search__box" placeholder="Search media..." v-model.trim="searchKey">
         </div>
 
-        <!-- Redo this component to use Dynamic Props 93-->
+        <!-- Redo this component to use Dynamic Props 93 -->
         <section>
-            <div v-if="isLoading">
+            <div v-if="loadStatus">
                 <nas-skeleton
                     v-for="skeleton in skeletons"
                     :key="skeleton"></nas-skeleton>
             </div>
 
             <nas-modwrap modifier="grid">
-                <template #default v-if="mediaDbData">
+                <template #default v-if="inventoryData">
                     <nas-inventory
                         v-for="media in mediaSearch"
                         :key="media.id"
@@ -84,12 +84,13 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
     name: 'Dashboard',
     data() {
         return {
             donutData: null,
-            isLoading: true,
             skeletons: 6,
             mediaDbData: [],
             searchKey: '',
@@ -131,23 +132,25 @@ export default {
             ]
         };
     },
-    beforeMount() {
-        this.getMedia();
+    // I was using beforeMount() hook but switched to created() when I added store integration
+    created() {
+        // this.$store.dispatch('getInventory');
+        this.getInventory();
     },
-    /*created() {
-      this.getMedia();
-    },*/
     computed: {
         mediaSearch() {
-            return this.mediaDbData.filter(media => {
+            return this.inventoryData.filter(media => {
                 return media.title.toLowerCase().includes(this.searchKey.toLowerCase());
             });
         },
-        mediaTotal() {
-            return this.mediaDbData.length;
-        }
+        ...mapGetters([
+            'inventoryData',
+            'inventoryTotal',
+            'loadStatus'
+        ]),
     },
     methods: {
+        ...mapActions(['getInventory']),
         countMedia(filterBy, filterKey) {
             return this.mediaDbData.filter(data => {
                 return (data[filterBy] === filterKey);
@@ -169,19 +172,6 @@ export default {
             }
         },
         async getMedia() {
-            const response = await fetch(process.env.VUE_APP_API_URL);
-
-            // Necessary because fetch() doesn't throw an error
-            // @todo You'll need a try/catch here
-            /*if (!response.ok) {
-                const message = `An error has occurred: ${response.status}`;
-                throw new Error(message);
-            }*/
-
-            const media = await response.json();
-            this.mediaDbData = media.data;
-            this.isLoading = false;
-
             /* There's probably a better way of setting data for child component/props but for the
              * the time being I'll keep it Mickey Mouse.
              */

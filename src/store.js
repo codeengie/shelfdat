@@ -36,6 +36,10 @@ const store = createStore({
             const response = await fetch(process.env.VUE_APP_API_URL);
             const responseData = await response.json();
 
+            /**
+             * Necessary because fetch() doesn't throw an error
+             * @todo You'll need a try/catch here...maybe
+             */
             if (!response.ok) {
                 console.log(responseData);
                 throw new Error(responseData.message || `Failed to get inventory data: ${response.status}`);
@@ -52,8 +56,15 @@ const store = createStore({
      */
     getters: {
         // @todo Consolidate all the inventory counters you have in components
-        getInventoryCount(state) {
-            return state;
+        inventoryData(state) {
+            return state.inventory;
+        },
+        inventoryTotal(state) {
+            console.log(`inventoryTotal: ${state.inventory.length}`);
+            return state.inventory.length;
+        },
+        loadStatus(state) {
+            return state.loadStatus;
         }
     }
 });
