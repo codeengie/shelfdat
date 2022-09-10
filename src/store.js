@@ -53,6 +53,8 @@ const store = createStore({
     /**
      * Think of them as computed properties for stores because sometimes we need to "compute" derived state based
      * on store state. A good example is all the repeat code you created in components to get inventory count.
+     * When you `console.log()` the mutated data you will see a Proxy object, this is VueJS magic but don't
+     * fret as you can use the mutation as normal. You noticed when you `console.log(state.inventory)`.
      */
     getters: {
         // @todo Consolidate all the inventory counters you have in components
@@ -60,7 +62,6 @@ const store = createStore({
             return state.inventory;
         },
         inventoryTotal(state) {
-            console.log(`inventoryTotal: ${state.inventory.length}`);
             return state.inventory.length;
         },
         loadStatus(state) {

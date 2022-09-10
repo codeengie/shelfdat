@@ -18,7 +18,7 @@
                     <nas-stat
                         v-for="stat in stats"
                         :key="stat"
-                        :db-data="mediaDbData"
+                        :db-data="inventoryData"
                         :filter-by="stat.filterBy"
                         :filter-key="stat.filterKey"
                         :modifier="stat.modifier"
@@ -32,7 +32,7 @@
                     <nas-stat
                         v-for="stat in subStats"
                         :key="stat"
-                        :db-data="mediaDbData"
+                        :db-data="inventoryData"
                         :iconName="stat.iconName"
                         :filter-by="stat.filterBy"
                         :filter-key="stat.filterKey"
@@ -92,7 +92,6 @@ export default {
         return {
             donutData: null,
             skeletons: 6,
-            mediaDbData: [],
             searchKey: '',
             stats: [
                 {
@@ -132,9 +131,12 @@ export default {
             ]
         };
     },
-    // I was using beforeMount() hook but switched to created() when I added store integration
+    beforeMount() {
+        // Create donut...YUM!
+        // @todo Debug random donut not appearing after load
+        this.createDonut();
+    },
     created() {
-        // this.$store.dispatch('getInventory');
         this.getInventory();
     },
     computed: {
@@ -152,9 +154,18 @@ export default {
     methods: {
         ...mapActions(['getInventory']),
         countMedia(filterBy, filterKey) {
-            return this.mediaDbData.filter(data => {
+            return this.inventoryData.filter(data => {
                 return (data[filterBy] === filterKey);
             }).length;
+        },
+        createDonut() {
+            this.donutData = {
+                labels: ['4k', 'Blu-ray', 'DVD'],
+                datasets: [{
+                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
+                    data: [this.countMedia('format', '4K Blu-ray'), this.countMedia('format', 'Blu-ray'), this.countMedia('format', 'DVD')]
+                }]
+            };
         },
         async deleteMedia(event) {
             if (window.confirm('Do you really want to delete item?')) {
@@ -170,18 +181,6 @@ export default {
                 const data = await response.json();
                 console.log(`Server response: ${JSON.stringify(data)}`);
             }
-        },
-        async getMedia() {
-            /* There's probably a better way of setting data for child component/props but for the
-             * the time being I'll keep it Mickey Mouse.
-             */
-            this.donutData = {
-              labels: ['4k', 'Blu-ray', 'DVD'],
-              datasets: [{
-                  backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
-                  data: [this.countMedia('format', '4K Blu-ray'), this.countMedia('format', 'Blu-ray'), this.countMedia('format', 'DVD')]
-              }]
-            };
         },
         updateMedia(mediaRecord) {
             // this.mediaDbData.push(mediaRecord);
