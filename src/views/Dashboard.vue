@@ -41,44 +41,6 @@
                 </div>
             </template>
         </nas-modwrap>
-
-        <!-- New Media Form -->
-        <nas-newmedia
-            media-db-data
-            @addLastMedia="updateMedia">
-        </nas-newmedia>
-
-        <!-- Search Form -->
-        <div class="search">
-            <input class="search__box" placeholder="Search media..." v-model.trim="searchKey">
-        </div>
-
-        <!-- Redo this component to use Dynamic Props 93 -->
-        <section>
-            <div v-if="loadStatus">
-                <nas-skeleton
-                    v-for="skeleton in skeletons"
-                    :key="skeleton"></nas-skeleton>
-            </div>
-
-            <nas-modwrap modifier="grid">
-                <template #default v-if="inventoryData">
-                    <nas-inventory
-                        v-for="media in mediaSearch"
-                        :key="media.id"
-                        :id="media.id"
-                        :container="media.container"
-                        :type="media.type"
-                        :format="media.format"
-                        :image="media.imageurl"
-                        :title="media.title"
-                        :location="media.location"
-                        :created="media.createdate"
-                        :notes="media.notes"
-                        @relay-inventory-id="deleteMedia"></nas-inventory>
-                </template>
-            </nas-modwrap>
-        </section>
     </div>
     <nas-sheet></nas-sheet>
 </template>
@@ -91,8 +53,6 @@ export default {
     data() {
         return {
             donutData: null,
-            skeletons: 6,
-            searchKey: '',
             stats: [
                 {
                     filterKey: '4K Blu-ray',
@@ -140,11 +100,6 @@ export default {
         this.getInventory();
     },
     computed: {
-        mediaSearch() {
-            return this.inventoryData.filter(media => {
-                return media.title.toLowerCase().includes(this.searchKey.toLowerCase());
-            });
-        },
         ...mapGetters([
             'inventoryData',
             'inventoryTotal',
@@ -166,25 +121,6 @@ export default {
                     data: [this.countMedia('format', '4K Blu-ray'), this.countMedia('format', 'Blu-ray'), this.countMedia('format', 'DVD')]
                 }]
             };
-        },
-        async deleteMedia(event) {
-            if (window.confirm('Do you really want to delete item?')) {
-                const response = await fetch(process.env.VUE_APP_API_URL, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'/*,
-                        'X-Api-Key' : process.env.VUE_APP_SECRET_KEY*/
-                    },
-                    body: JSON.stringify(event)
-                });
-
-                const data = await response.json();
-                console.log(`Server response: ${JSON.stringify(data)}`);
-            }
-        },
-        updateMedia(mediaRecord) {
-            // this.mediaDbData.push(mediaRecord);
-            console.log(`Added latest media record: ${mediaRecord}`);
         }
     }
 }
@@ -200,15 +136,6 @@ export default {
         margin-top: 5px;
         height: 0px;
         visibility: hidden;
-    }
-}
-
-.search {
-    margin: 15px 0;
-    padding: 0 15px;
-
-    &__box {
-        width: 100%;
     }
 }
 
