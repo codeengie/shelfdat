@@ -52,7 +52,7 @@ export default {
     name: 'Dashboard',
     data() {
         return {
-            donutData: null,
+            donutData: { foobar: 11 },
             stats: [
                 {
                     filterKey: '4K Blu-ray',
@@ -91,10 +91,10 @@ export default {
             ]
         };
     },
-    beforeMount() {
+    mounted() {
         // Create donut...YUM!
         // @todo Debug random donut not appearing after load
-        this.createDonut();
+        // this.createDonut();
     },
     created() {
         this.getInventory();
