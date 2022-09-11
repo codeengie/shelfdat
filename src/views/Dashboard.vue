@@ -1,6 +1,6 @@
 <template>
-    <div class="content">
-        <h2 class="temp">Dashboard</h2>
+    <div class="content dashboard-pg">
+        <h1 class="content__title">Dashboard</h1>
 
         <!-- Media Section -->
         <nas-modwrap :modifier="['foobar', 'bg']">
@@ -137,16 +137,31 @@ export default {
         height: 0px;
         visibility: hidden;
     }
+
+    &__title {
+        font: {
+            size: 1.6rem;
+            weight: 500;
+        }
+        margin-top: 18px;
+        padding: 0 15px;
+    }
 }
 
-// @todo Remove once component is materialized
-.temp {
-    font: {
-        size: 1.6rem;
-        weight: 500;
+.dashboard-pg {
+    .modwrap {
+        margin-top: 16px;
+        padding-top: 14px;
+
+        &__title {
+            font-size: 1.4rem;
+            margin: {
+                top: 0;
+                bottom: 6px;
+            }
+            text-transform: uppercase;
+        }
     }
-    margin-top: 15px;
-    padding: 0 15px;
 }
 
 // More temp stuff
@@ -183,6 +198,7 @@ export default {
 .media-stats {
     display: flex;
     justify-content: center;
+    margin-top: 18px;
 
     .stat:nth-child(2) {
         margin: 0 30px;

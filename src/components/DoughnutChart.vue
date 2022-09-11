@@ -36,11 +36,11 @@ export default {
             },
             chartId: 'invtotal',
             chartOptions: {
-                cutout: 35,
+                cutout: 50,
                 hoverOffset: 4,
-                layout: {
+                /*layout: {
                     padding: 15
-                },
+                },*/
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {

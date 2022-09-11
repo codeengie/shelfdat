@@ -22,7 +22,7 @@
 
 :root {
     // Color scheme
-    --alabaster: #f9f9f9;
+    --alabaster: #e9e9e9;
     --alto: #d6d6d6;
     --black: #000000;
     --dodger-blue: #00b9ff;

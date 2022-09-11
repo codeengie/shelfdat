@@ -31,7 +31,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<!--
+Need to upgrade to latest VueJS to use this: https://github.com/vuejs/core/pull/3882
+<style lang="scss" slotted></style>
+-->
+<style lang="scss">
 .modwrap {
     padding: 15px 0 10px;
 
