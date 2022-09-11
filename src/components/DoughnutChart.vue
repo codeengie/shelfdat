@@ -8,6 +8,8 @@
 
 <script>
 import { Doughnut } from 'vue-chartjs';
+// @todo Remove unnecessary module objects
+// @todo Remove commented code in data()
 import {
     Chart as ChartJS,
     Title,
@@ -27,17 +29,18 @@ export default {
     },
     data() {
         return {
-            chartData: {
+            /*chartData: {
                 labels: ['4k', 'Blu-ray', 'DVD'],
                 datasets: [{
                     backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
                     data: [40, 20, 80]
                 }]
-            },
+            },*/
+            chartData: this.dataSet,
             chartId: 'invtotal',
             chartOptions: {
                 cutout: 50,
-                hoverOffset: 4,
+                // hoverOffset: 8,
                 /*layout: {
                     padding: 15
                 },*/
@@ -46,6 +49,9 @@ export default {
                     legend: {
                         display: false
                     },
+                    tooltip: {
+                        enabled: false
+                    }
                 },
                 responsive: true,
                 rotation: Math.PI * 1.5

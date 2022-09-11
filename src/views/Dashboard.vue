@@ -5,7 +5,7 @@
         <!-- Media Section -->
         <nas-modwrap :modifier="['foobar', 'bg']">
             <template #heading>Media</template>
-            <template #default v-if="donutData">
+            <template #default v-if="!loadStatus">
                 <div class="doughnut">
                     <div class="stat stat--flip">
                         <h3 class="stat__title">Total</h3>
@@ -52,7 +52,7 @@ export default {
     name: 'Dashboard',
     data() {
         return {
-            donutData: { foobar: 11 },
+            donutData: null,
             stats: [
                 {
                     filterKey: '4K Blu-ray',
@@ -93,8 +93,10 @@ export default {
     },
     mounted() {
         // Create donut...YUM!
-        // @todo Debug random donut not appearing after load
-        // this.createDonut();
+        console.log(this.loadStatus);
+        if (this.loadStatus) {
+            this.createDonut();
+        }
     },
     created() {
         this.getInventory();
@@ -113,6 +115,7 @@ export default {
                 return (data[filterBy] === filterKey);
             }).length;
         },
+        // @todo Refactor to create these dynamically based on the API data
         createDonut() {
             this.donutData = {
                 labels: ['4k', 'Blu-ray', 'DVD'],
@@ -141,7 +144,7 @@ export default {
     &__title {
         font: {
             size: 1.6rem;
-            weight: 500;
+            weight: var(--weight-medium);
         }
         margin-top: 18px;
         padding: 0 15px;
@@ -186,6 +189,7 @@ export default {
 
         &__title {
             font-size: .8rem;
+            text-transform: uppercase;
         }
 
         &--flip {
