@@ -41,15 +41,22 @@
                 </div>
             </template>
         </nas-modwrap>
+        <!-- Display latest inventory items -->
+        <LatestItems
+            v-if="!loadStatus"
+            :db-data="inventoryData"
+            :display-num="12" />
     </div>
     <nas-sheet></nas-sheet>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import LatestItems from '../components/LatestItems';
 
 export default {
     name: 'Dashboard',
+    components: { LatestItems },
     data() {
         return {
             donutData: null,
