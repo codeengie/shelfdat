@@ -49,7 +49,7 @@
             :db-data="inventoryData"
             :display-num="12" />
     </div>
-    <nas-sheet></nas-sheet>
+    <!--<nas-sheet></nas-sheet>-->
 </template>
 
 <script>

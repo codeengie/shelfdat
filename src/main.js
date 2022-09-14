@@ -17,6 +17,7 @@ import InputField from './components/InputField';
 import InputFile from './components/InputFile';
 import InputRadio from './components/InputRadio';
 import Sheet from './components/Sheet';
+import Navi from './components/Navi';
 
 const app = createApp(App);
 
@@ -36,5 +37,6 @@ app.component('nas-input-field', InputField);
 app.component('nas-input-file', InputFile);
 app.component('nas-input-radio', InputRadio);
 app.component('nas-sheet', Sheet);
+app.component('Navi', Navi);
 
 app.mount('#app');

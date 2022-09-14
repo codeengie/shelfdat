@@ -1,7 +1,8 @@
 <template>
     <nas-header v-if="this.$route.meta.header"></nas-header>
     <router-view></router-view>
-    <nas-footer></nas-footer>
+    <!--<nas-footer></nas-footer>-->
+    <Navi v-if="this.$route.meta.navbar"/>
 </template>
 
 <script>
