@@ -15,10 +15,10 @@
                 </router-link>
             </li>
             <li class="navbar__list-item">
-                <a href="#" class="navbar__link">
+                <router-link to="/create" class="navbar__link">
                     <span class="navbar__text">Add Item</span>
                     <img class="navbar__icon" src="images/library_add_48p.svg" alt="Add Item">
-                </a>
+                </router-link>
             </li>
         </ul>
     </nav>
