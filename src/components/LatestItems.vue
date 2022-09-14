@@ -29,8 +29,9 @@ export default {
         }
     },
     methods: {
+        // @todo You have a similar function in Inventory.vue as computed. DRY Principle!
         setImage(imageName) {
-            return `${process.env.VUE_APP_S3_BUCKET_URL}${imageName}`;
+            return imageName ? `${process.env.VUE_APP_S3_BUCKET_URL}${imageName}` : 'images/placeholder.svg';
         }
     }
 }
