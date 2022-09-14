@@ -133,8 +133,8 @@ export default {
     },
     methods: {
         ...mapActions(['getInventory']),
-        // @todo Refactor to create these dynamically based on the API data
-        createDonutData(prop) {
+        // @todo Remove, you refactored this code and combined it in the store
+        /*createDonutData(prop) {
             this.donutData.labels.forEach(label => {
                 console.log(label);
                 this.donutData.datasets[0].data.push(this.inventoryCount(prop, label));
@@ -144,7 +144,7 @@ export default {
             let count = this.inventoryData.filter(item => item[filterBy] === filterKey).length;
             console.log(count);
             return count;
-        }
+        }*/
     }
 }
 </script>
