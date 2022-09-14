@@ -1,5 +1,6 @@
 <template>
     <div class="content dashboard-pg">
+        <!-- @todo This will work better if placed in App.vue rather than adding it on each page/component -->
         <LineLoader v-if="loadStatus"/>
 
         <h1 class="content__title">Dashboard</h1>

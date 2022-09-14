@@ -1,8 +1,10 @@
 <template>
     <nas-header v-if="this.$route.meta.header"></nas-header>
-    <router-view></router-view>
+    <main class="main">
+        <router-view></router-view>
+    </main>
     <!--<nas-footer></nas-footer>-->
-    <Navi v-if="this.$route.meta.navbar"/>
+    <NavBar v-if="this.$route.meta.navbar"/>
 </template>
 
 <script>
@@ -98,8 +100,17 @@ section {
 }
 
 #app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: grid;
+    grid-template: {
+        areas: 'header' 'main' 'navbar';
+        columns: 1fr;
+        rows: auto 1fr auto;
+    }
+    height: 100vh;
+}
+
+.main {
+    grid-area: main;
+    overflow: auto;
 }
 </style>

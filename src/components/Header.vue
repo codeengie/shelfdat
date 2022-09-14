@@ -66,7 +66,7 @@
     background-color: var(--header-bg-color);
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     display: flex;
-    // flex: none;
+    grid-area: header;
     height: var(--header-height);
     justify-content: center;
     padding: 0 15px;

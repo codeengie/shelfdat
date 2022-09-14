@@ -1,23 +1,23 @@
 <template>
     <!-- @todo Convert image icons into a font -->
-    <nav class="bottom-navi">
-        <ul class="bottom-navi__list">
-            <li class="bottom-navi__list-item">
-                <router-link to="/dashboard" class="bottom-navi__link">
-                    <span class="bottom-navi__text">Dashboard</span>
-                    <img class="bottom-navi__icon" src="images/dashboard_48p.svg" alt="Dashboard">
+    <nav class="navbar">
+        <ul class="navbar__list">
+            <li class="navbar__list-item">
+                <router-link to="/dashboard" class="navbar__link">
+                    <span class="navbar__text">Dashboard</span>
+                    <img class="navbar__icon" src="images/dashboard_48p.svg" alt="Dashboard">
                 </router-link>
             </li>
-            <li class="bottom-navi__list-item">
-                <router-link to="/inventory" class="bottom-navi__link">
-                    <span class="bottom-navi__text">Inventory</span>
-                    <img class="bottom-navi__icon" src="images/inventory_48p.svg" alt="Inventory">
+            <li class="navbar__list-item">
+                <router-link to="/inventory" class="navbar__link">
+                    <span class="navbar__text">Inventory</span>
+                    <img class="navbar__icon" src="images/inventory_48p.svg" alt="Inventory">
                 </router-link>
             </li>
-            <li class="bottom-navi__list-item">
-                <a href="#" class="bottom-navi__link">
-                    <span class="bottom-navi__text">Add Item</span>
-                    <img class="bottom-navi__icon" src="images/library_add_48p.svg" alt="Add Item">
+            <li class="navbar__list-item">
+                <a href="#" class="navbar__link">
+                    <span class="navbar__text">Add Item</span>
+                    <img class="navbar__icon" src="images/library_add_48p.svg" alt="Add Item">
                 </a>
             </li>
         </ul>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    name: 'Navi'
+    name: 'NavBar'
 }
 </script>
 
@@ -34,9 +34,10 @@ export default {
 $nav-bg: #2e2e2e;
 $nav-height: 60px;
 
-.bottom-navi {
+.navbar {
     $self: &;
     background-color: $nav-bg;
+    grid-area: navbar;
     height: $nav-height;
 
     &__icon {
