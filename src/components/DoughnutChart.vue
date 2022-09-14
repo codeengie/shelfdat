@@ -9,7 +9,6 @@
 <script>
 import { Doughnut } from 'vue-chartjs';
 // @todo Remove unnecessary module objects
-// @todo Remove commented code in data()
 import {
     Chart as ChartJS,
     Title,
@@ -25,25 +24,15 @@ export default {
     name: 'DoughnutChart',
     components: { Doughnut },
     props: {
-      dataSet: Object
+        chartName: String,
+        dataSet: Object
     },
     data() {
         return {
-            /*chartData: {
-                labels: ['4k', 'Blu-ray', 'DVD'],
-                datasets: [{
-                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
-                    data: [40, 20, 80]
-                }]
-            },*/
             chartData: this.dataSet,
-            chartId: 'invtotal',
+            chartId: this.chartName,
             chartOptions: {
                 cutout: 50,
-                // hoverOffset: 8,
-                /*layout: {
-                    padding: 15
-                },*/
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {

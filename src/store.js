@@ -7,6 +7,7 @@ import { createStore } from 'vuex';
 const store = createStore({
     state() {
         return {
+            donutSegments: [],
             inventory: [],
             loadStatus: false
         }
@@ -22,6 +23,9 @@ const store = createStore({
         },
         setInventory(state, inventory) {
             state.inventory = inventory;
+        },
+        setDonutSegments(state, donutSegments) {
+            state.donutSegments = donutSegments;
         }
     },
     /**
@@ -30,24 +34,39 @@ const store = createStore({
      * with the `store.dispatch` method.
      */
     actions: {
-        async getInventory(context) {
-            context.commit('setLoadStatus', true);
+        async getInventory({commit, dispatch, state}) {
+            commit('setLoadStatus', true);
 
-            const response = await fetch(process.env.VUE_APP_API_URL);
-            const responseData = await response.json();
-
-            /**
-             * Necessary because fetch() doesn't throw an error
-             * @todo You'll need a try/catch here...maybe
-             */
-            if (!response.ok) {
-                console.log(responseData);
-                throw new Error(responseData.message || `Failed to get inventory data: ${response.status}`);
+            try {
+                const response = await fetch(process.env.VUE_APP_API_URL);
+                const responseData = await response.json();
+                commit('setInventory', responseData.data);
+                dispatch('calcDonutSegments', state.inventory);
+                commit('setLoadStatus', false);
+            } catch(err) {
+                console.error(err);
+                throw err;
             }
 
-            console.log(responseData);
-            context.commit('setInventory', responseData.data);
-            context.commit('setLoadStatus', false);
+        },
+        calcDonutSegments({commit, state}, payload) {
+            let segmentLabels = [];
+            let segmentTotals = [];
+
+            // Search through all the formats and collect them
+            payload.forEach(segmentLabel => segmentLabels.push(segmentLabel['format']));
+            // Store all the unique values (Set() returns an object)
+            segmentLabels = new Set(segmentLabels);
+            // Convert object to an array and sort values in alpha order
+            segmentLabels = Array.from(segmentLabels).sort();
+            //console.log(`Segment Labels: ${segmentLabels}`);
+
+            // Tally up numbers with prop 'format'
+            segmentLabels.forEach(label => {
+                segmentTotals.push(state.inventory.filter(item => item['format'] === label).length);
+            });
+            //console.log(`Segment Totals: ${segmentTotals}`);
+            commit('setDonutSegments', segmentTotals);
         }
     },
     /**
@@ -57,10 +76,13 @@ const store = createStore({
      * fret as you can use the mutation as normal. You noticed when you `console.log(state.inventory)`.
      */
     getters: {
-        // @todo Consolidate all the inventory counters you have in components
+        donutSegmentData(state) {
+            return state.donutSegments;
+        },
         inventoryData(state) {
             return state.inventory;
         },
+        // @todo Consolidate all the inventory counters you have in components
         inventoryTotal(state) {
             return state.inventory.length;
         },

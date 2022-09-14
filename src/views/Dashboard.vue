@@ -1,17 +1,20 @@
 <template>
     <div class="content dashboard-pg">
+        <LineLoader v-if="loadStatus"/>
+
         <h1 class="content__title">Dashboard</h1>
 
         <!-- Media Section -->
         <nas-modwrap :modifier="['foobar', 'bg']">
             <template #heading>Media</template>
-            <template #default v-if="!loadStatus">
+            <template #default>
                 <div class="doughnut">
                     <div class="stat stat--flip">
                         <h3 class="stat__title">Total</h3>
                         <h4 class="stat__reading">{{ inventoryTotal }}</h4>
                     </div>
                     <nas-doughnut-chart
+                        :chart-name="donutName"
                         :data-set="donutData"></nas-doughnut-chart>
                 </div>
                 <div class="media-stats">
@@ -43,7 +46,6 @@
         </nas-modwrap>
         <!-- Display latest inventory items -->
         <LatestItems
-            v-if="!loadStatus"
             :db-data="inventoryData"
             :display-num="12" />
     </div>
@@ -53,13 +55,24 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import LatestItems from '../components/LatestItems';
+import LineLoader from '../components/LineLoader';
 
 export default {
     name: 'Dashboard',
-    components: { LatestItems },
+    components: {
+        LatestItems,
+        LineLoader
+    },
     data() {
         return {
-            donutData: null,
+            donutName: 'pinky-w-sprinkles',
+            donutData: {
+                labels: ['4K Blu-ray', 'Blu-ray', 'DVD'],
+                datasets: [{
+                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
+                    data: []
+                }]
+            },
             stats: [
                 {
                     filterKey: '4K Blu-ray',
@@ -98,18 +111,21 @@ export default {
             ]
         };
     },
-    mounted() {
-        // Create donut...YUM!
-        console.log(this.loadStatus);
-        if (this.loadStatus) {
-            this.createDonut();
-        }
-    },
     created() {
         this.getInventory();
     },
+    async mounted() {
+        try {
+            await this.getInventory();
+            this.donutData.datasets[0].data = this.donutSegmentData;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    },
     computed: {
         ...mapGetters([
+            'donutSegmentData',
             'inventoryData',
             'inventoryTotal',
             'loadStatus'
@@ -117,20 +133,17 @@ export default {
     },
     methods: {
         ...mapActions(['getInventory']),
-        countMedia(filterBy, filterKey) {
-            return this.inventoryData.filter(data => {
-                return (data[filterBy] === filterKey);
-            }).length;
-        },
         // @todo Refactor to create these dynamically based on the API data
-        createDonut() {
-            this.donutData = {
-                labels: ['4k', 'Blu-ray', 'DVD'],
-                datasets: [{
-                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
-                    data: [this.countMedia('format', '4K Blu-ray'), this.countMedia('format', 'Blu-ray'), this.countMedia('format', 'DVD')]
-                }]
-            };
+        createDonutData(prop) {
+            this.donutData.labels.forEach(label => {
+                console.log(label);
+                this.donutData.datasets[0].data.push(this.inventoryCount(prop, label));
+            });
+        },
+        inventoryCount(filterBy, filterKey) {
+            let count = this.inventoryData.filter(item => item[filterBy] === filterKey).length;
+            console.log(count);
+            return count;
         }
     }
 }
