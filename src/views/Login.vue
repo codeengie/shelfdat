@@ -1,5 +1,6 @@
 <template>
     <h1>{{ titleLogo }}</h1>
+    <!-- @todo Add `novalidate` attribute once you implement input field validation -->
     <form class="login-form" @submit.prevent="submitLoginForm">
         <nas-input-field
             field-name="Email"
@@ -11,7 +12,8 @@
             field-type="password"
             v-model="passwordInput"></nas-input-field>
 
-        <button class="login-form__button">Login</button>
+        <!-- Do not add `type="button"`, Vue no like, disable @submit -->
+        <button class="login-form__button" :disabled="toggleForm">Login</button>
         <p class="login-form__signup">Don&rsquo;t have an account?
             <strong>
                 <router-link class="login-form__link" to="/signup">Sign Up</router-link>
@@ -21,22 +23,40 @@
 </template>
 
 <script>
-// @todo IntelliJ entered this automagically but you declared it in main.js, need to decide global or local
-// import InputField from "@/components/InputField";
+import Auth from 'aws-amplify';
+// import AmplifyVue from '@aws-amplify/ui-vue';
 
 export default {
     name: 'Login',
-    // components: {InputField},
     data() {
         return {
             emailInput: null,
             passwordInput: null,
-            titleLogo: process.env.VUE_APP_TITLE
+            titleLogo: process.env.VUE_APP_TITLE,
+        }
+    },
+    computed: {
+        toggleForm() {
+            return !(this.emailInput && this.passwordInput);
         }
     },
     methods: {
+        async signIn() {
+            try {
+                const user = await Auth.signIn(this.emailInput, this.passwordInput);
+                console.log(user);
+            } catch(err) {
+                console.log('There was an error signing in', err);
+            }
+        },
         submitLoginForm() {
-            console.log(`Submitting login form: ${this.emailInput}, ${this.passwordInput}`);
+            console.log('submitLoginForm');
+            /*if (this.emailInput || this.passwordInput) {
+                console.log(`Submitting login form: ${this.emailInput}, ${this.passwordInput}`);
+            } else {
+                this.$refs.inputfield.validateField();
+                console.log('Trigger forced validation...');
+            }*/
         }
     }
 }
@@ -73,6 +93,12 @@ h1 {
         overflow: hidden;
         position: relative;
         width: 290px;
+
+        &:disabled {
+            background-color: grey !important;
+            color: darkgrey;
+            cursor: not-allowed;
+        }
 
         &:active {
             &:after {

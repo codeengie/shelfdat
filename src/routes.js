@@ -17,7 +17,8 @@ const router = createRouter({
                 title: 'Login',
                 description: 'Quisque id volutpat risus.',
                 header: false,
-                navbar: false
+                navbar: false,
+                requiresAuth: false
             }
         },
         {
@@ -28,7 +29,8 @@ const router = createRouter({
                 title: 'Dashboard',
                 description: 'Praesent rhoncus id ligula id consequat',
                 header: true,
-                navbar: true
+                navbar: true,
+                requiresAuth: true
             }
         },
         {
@@ -40,7 +42,8 @@ const router = createRouter({
                 title: '404',
                 description: '404 Error Page',
                 header: false,
-                navbar: false
+                navbar: false,
+                requiresAuth: false
             }
         },
         {
@@ -51,7 +54,8 @@ const router = createRouter({
                 title: 'Inventory',
                 description: 'In id eros et est dignissim suscipit',
                 header: true,
-                navbar: true
+                navbar: true,
+                requiresAuth: true
             }
         },
         {
@@ -63,7 +67,8 @@ const router = createRouter({
                 title: 'Create',
                 description: 'Aenean finibus, massa in lacinia viverra',
                 header: true,
-                navbar: true
+                navbar: true,
+                requiresAuth: true
             }
         }
     ]

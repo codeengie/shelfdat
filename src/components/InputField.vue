@@ -10,6 +10,7 @@
             :type="fieldType"
             @blur="handleBlur"
             @focus="handleFocus"
+            @input="$emit('update:modelValue', $event.target.value)"
             class="form__input">
         <label
             :for="fieldName.toLowerCase()"
@@ -63,6 +64,7 @@ export default {
                 this.isValid = false;
             }
         },
+        // @todo Look into refs to access this method from the parent
         validateField(event) {
             const inputData = event.target.value;
 
