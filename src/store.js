@@ -1,4 +1,9 @@
 import { createStore } from 'vuex';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from './aws/auth/config';
+import router from './routes';
+
+Amplify.configure(awsconfig);
 
 /**
  * "There Can Be Only One", store for an application. But you can have multiple states
@@ -19,6 +24,9 @@ const store = createStore({
      * these are called payload. Also, mutations are synchronous, you are not allowed to use asynchronous operations.
      */
     mutations: {
+        setAuthenticated(state, status) {
+            state.isAuthenticated = status;
+        },
         setLoadStatus(state, status) {
             state.loadStatus = status;
         },
@@ -35,6 +43,27 @@ const store = createStore({
      * with the `store.dispatch` method.
      */
     actions: {
+        async login(context, {email, password}) {
+            try {
+                const user = await Auth.signIn(email, password);
+                console.log(user);
+                context.commit('setAuthenticated', true);
+                router.push('/dashboard');
+            } catch(err) {
+                console.log('There was an error with the login', err);
+            }
+        },
+        async logout(context) {
+            if (this.state.isAuthenticated) {
+                try {
+                    await Auth.signOut();
+                    context.commit('setAuthenticated', false);
+                    router.push('/login');
+                } catch (err) {
+                    console.log('There was an error signing out: ', err);
+                }
+            }
+        },
         async getInventory({commit, dispatch, state}) {
             commit('setLoadStatus', true);
 

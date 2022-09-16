@@ -6,20 +6,25 @@
         <div class="brand">
             <h1 class="brand__header">{{ titleLogo }}</h1>
         </div>
-        <div class="login">
+        <!--<div class="login">
             <img src="images/account_circle-24px.svg" width="20" height="20" alt="Simple humanoid upper body surrounded by a black circle">
-        </div>
+        </div>-->
+        <AccountMenu/>
     </header>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                titleLogo: process.env.VUE_APP_TITLE
-            }
+import AccountMenu from "./AccountMenu";
+
+export default {
+    name: 'Header',
+    components: { AccountMenu },
+    data() {
+        return {
+            titleLogo: process.env.VUE_APP_TITLE
         }
     }
+}
 </script>
 
 <style lang="scss">
