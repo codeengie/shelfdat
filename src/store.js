@@ -9,6 +9,7 @@ const store = createStore({
         return {
             donutSegments: [],
             inventory: [],
+            isAuthenticated: false,
             loadStatus: false
         }
     },

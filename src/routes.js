@@ -4,6 +4,7 @@ import Dashboard from "./views/Dashboard";
 import NotFound from "./views/NotFound";
 import Inventory from './views/Inventory';
 import Create from './views/Create';
+import store from './store';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -75,9 +76,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // console.log(to);
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
-    next(); // This should only be called once, reference vue docs when you start expanding
+    //next(); // This should only be called once, reference vue docs when you start expanding
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.state.isAuthenticated) {
+            next();
+        }
+        next('/login');
+    } else {
+        next();
+    }
 });
 
 export default router;

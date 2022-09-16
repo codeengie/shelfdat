@@ -1,7 +1,7 @@
 <template>
     <h1>{{ titleLogo }}</h1>
     <!-- @todo Add `novalidate` attribute once you implement input field validation -->
-    <form class="login-form" @submit.prevent="submitLoginForm">
+    <form class="login-form" @submit.prevent="signIn()">
         <nas-input-field
             field-name="Email"
             field-type="email"
@@ -23,8 +23,11 @@
 </template>
 
 <script>
-import Auth from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 // import AmplifyVue from '@aws-amplify/ui-vue';
+import awsconfig from '../aws/auth/config';
+
+Amplify.configure(awsconfig);
 
 export default {
     name: 'Login',
@@ -45,6 +48,7 @@ export default {
             try {
                 const user = await Auth.signIn(this.emailInput, this.passwordInput);
                 console.log(user);
+                console.log(Auth.currentSession());
             } catch(err) {
                 console.log('There was an error signing in', err);
             }
