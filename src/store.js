@@ -15,7 +15,8 @@ const store = createStore({
             donutSegments: [],
             inventory: [],
             isAuthenticated: false,
-            loadStatus: false
+            loadStatus: false,
+            userInfo: []
         }
     },
     /**
@@ -35,6 +36,9 @@ const store = createStore({
         },
         setDonutSegments(state, donutSegments) {
             state.donutSegments = donutSegments;
+        },
+        setUserInfo(state, userInfo) {
+            state.userInfo = userInfo;
         }
     },
     /**
@@ -47,6 +51,7 @@ const store = createStore({
             try {
                 const user = await Auth.signIn(email, password);
                 console.log(user);
+                context.commit('setUserInfo', Auth.currentAuthenticatedUser());
                 context.commit('setAuthenticated', true);
                 router.push('/dashboard');
             } catch(err) {
@@ -65,17 +70,19 @@ const store = createStore({
             }
         },
         async getInventory({commit, dispatch, state}) {
-            commit('setLoadStatus', true);
+            if (!state.inventory.length) {
+                commit('setLoadStatus', true);
 
-            try {
-                const response = await fetch(process.env.VUE_APP_API_URL);
-                const responseData = await response.json();
-                commit('setInventory', responseData.data);
-                dispatch('calcDonutSegments', state.inventory);
-                commit('setLoadStatus', false);
-            } catch(err) {
-                console.error(err);
-                throw err;
+                try {
+                    const response = await fetch(process.env.VUE_APP_API_URL);
+                    const responseData = await response.json();
+                    commit('setInventory', responseData.data);
+                    dispatch('calcDonutSegments', state.inventory);
+                    commit('setLoadStatus', false);
+                } catch(err) {
+                    console.error(err);
+                    throw err;
+                }
             }
 
         },

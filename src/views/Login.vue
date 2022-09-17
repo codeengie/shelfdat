@@ -13,10 +13,12 @@
             v-model="passwordInput"></nas-input-field>
 
         <!-- Do not add `type="button"`, Vue no like, disable @submit -->
-        <BaseButton
+        <Button
             button-text="Login"
-            class-name="login-form__button"
-            :is-disabled="toggleForm"/>
+            :is-disabled="toggleForm"
+            :class="{ 'button--spinner': spin }"/>
+
+        <a href="#" @click="toggleClass()">Spin!</a>
 
         <p class="login-form__signup">Don&rsquo;t have an account?
             <strong>
@@ -30,16 +32,17 @@
 // @todo Doubt I need this, remove here and from package.json
 // import AmplifyVue from '@aws-amplify/ui-vue';
 import { mapActions } from 'vuex';
-import BaseButton  from '../components/BaseButton';
+import Button  from '../components/Button';
 
 export default {
     name: 'Login',
-    components: { BaseButton },
+    components: { Button },
     data() {
         return {
             emailInput: null,
             passwordInput: null,
             titleLogo: process.env.VUE_APP_TITLE,
+            spin: false
         }
     },
     computed: {
@@ -62,6 +65,9 @@ export default {
                 this.$refs.inputfield.validateField();
                 console.log('Trigger forced validation...');
             }*/
+        },
+        toggleClass() {
+            this.spin = !this.spin;
         }
     }
 }
@@ -79,6 +85,8 @@ h1 {
 
 .login-form {
     $this: &; // Let's cache the root selector @todo remove if not used
+    display: flex;
+    flex-flow: column;
     margin: 0 auto;
     width: 290px;
 
