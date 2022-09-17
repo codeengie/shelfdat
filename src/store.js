@@ -16,7 +16,7 @@ const store = createStore({
             inventory: [],
             isAuthenticated: false,
             loadStatus: false,
-            userInfo: []
+            userInfo: {}
         }
     },
     /**
@@ -50,10 +50,19 @@ const store = createStore({
         async login(context, {email, password}) {
             try {
                 const user = await Auth.signIn(email, password);
-                console.log(user);
-                context.commit('setUserInfo', Auth.currentAuthenticatedUser());
+                const info = {
+                    email: user.attributes.email,
+                    name: user.attributes.name,
+                    picture: user.attributes.picture,
+                    username: user.attributes.preferred_username
+                }
+
+                context.commit('setUserInfo', info);
                 context.commit('setAuthenticated', true);
                 router.push('/dashboard');
+
+                /*let userInfo = await Auth.currentUserInfo();
+                userInfo = userInfo.then(result => result.data);*/
             } catch(err) {
                 console.log('There was an error with the login', err);
             }
@@ -62,6 +71,9 @@ const store = createStore({
             if (this.state.isAuthenticated) {
                 try {
                     await Auth.signOut();
+                    context.commit('setDonutSegments', []);
+                    context.commit('setInventory', []);
+                    context.commit('setUserInfo', {});
                     context.commit('setAuthenticated', false);
                     router.push('/login');
                 } catch (err) {
@@ -125,6 +137,9 @@ const store = createStore({
         },
         loadStatus(state) {
             return state.loadStatus;
+        },
+        userInfo(state) {
+            return state.userInfo;
         }
     }
 });
