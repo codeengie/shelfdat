@@ -65,7 +65,7 @@ export default {
             return `inventory-item__pic--${formatModifier}`;
         },
         setImage() {
-            return this.image ? `${process.env.VUE_APP_S3_BUCKET_URL}${this.image}` : 'images/placeholder.svg';
+            return this.image ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.image}` : 'images/placeholder.svg';
         }
     }
 }
