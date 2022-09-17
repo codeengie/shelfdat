@@ -1,11 +1,11 @@
 <template>
     <div class="account-menu">
-        <img class="account-menu__pic" src="images/account_circle-24px.svg" width="20" height="20" alt="Simple humanoid upper body surrounded by a black circle">
-        <p class="account-menu__user">Hi, <span>CodeEngie</span></p>
+        <img class="account-menu__pic" :src="profileImage(userInfo.picture)" width="20" height="20" alt="Simple humanoid upper body surrounded by a black circle">
+        <p class="account-menu__user">Hi, <span>{{ userInfo.username }}</span></p>
         <div class="account-menu__drawer">
             <div class="account-menu__drawer-profile">
-                <span class="account-menu__drawer-name">Cesar Villanueva</span>
-                <span class="account-menu__drawer-email">cvillanujr@gmail.com</span>
+                <span class="account-menu__drawer-name">{{ userInfo.name }}</span>
+                <span class="account-menu__drawer-email">{{ userInfo.email }}</span>
             </div>
             <ul class="account-menu__drawer-list">
                 <li class="account-menu__drawer-item">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'AccountMenu',
@@ -29,8 +29,14 @@ export default {
 
         }
     },
+    computed: {
+        ...mapGetters(['userInfo'])
+    },
     methods: {
-        ...mapActions(['logout'])
+        ...mapActions(['logout']),
+        profileImage(imageName) {
+            return imageName ? `${process.env.VUE_APP_S3_BUCKET_URL}images/users/codeengie/${imageName}` : 'images/account_circle-24px.svg';
+        }
     }
 }
 </script>
@@ -39,6 +45,7 @@ export default {
 .account-menu {
     $this: &;
     align-items: center;
+    cursor: pointer;
     display: flex;
     height: 38px;
     justify-content: center;
