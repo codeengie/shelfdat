@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: "ModWrap",
+    name: 'ModWrap',
     props: {
         modifier: [Array, String]
     },
@@ -19,7 +19,7 @@ export default {
 
             if (Array.isArray(this.modifier)) {
                 this.modifier.forEach(element => {
-                   classesToSet += `modwrap--${element} `;
+                    classesToSet += `modwrap--${element} `;
                 });
             } else {
                 classesToSet = this.modifier ? `modwrap--${this.modifier}` : '';

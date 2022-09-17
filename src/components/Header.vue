@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AccountMenu from "./AccountMenu";
+import AccountMenu from './AccountMenu';
 
 export default {
     name: 'Header',

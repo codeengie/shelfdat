@@ -97,6 +97,7 @@
 
 <script>
 export default {
+    name: 'NewMedia',
     // This is an interface
     // props: ['mediaDbData'],
     props: {
@@ -166,13 +167,13 @@ export default {
                 },
                 body: JSON.stringify(newMovieData)
             })
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                this.response = json;
-                this.resetForm();
-                this.addLastMedia();
-            });
+                .then(response => response.json())
+                .then(json => {
+                    console.log(json);
+                    this.response = json;
+                    this.resetForm();
+                    this.addLastMedia();
+                });
         },
         resetForm() {
             this.collection = null;

@@ -24,6 +24,7 @@
 
 <script>
 export default {
+    name: 'Stat',
     props: {
         dbData: Object,
         iconName: String,
@@ -52,7 +53,7 @@ export default {
             return classesToSet;
         },
         setStatIcon() {
-          return `images/${this.iconName}`;
+            return `images/${this.iconName}`;
         },
         statCounter() {
             return this.dbData.filter(data => {

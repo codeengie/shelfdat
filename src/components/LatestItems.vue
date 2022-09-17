@@ -38,27 +38,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .latest {
-        margin-top: 16px;
+.latest {
+    margin-top: 16px;
 
-        &__item {
-            float: left;
-        }
-
-        &__title {
-            font: {
-                size: 1.6rem;
-                weight: var(--weight-medium);
-            }
-            padding: 0 15px;
-         }
-
-        &__wrap {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 16px;
-            padding: 0 15px;
-        }
+    &__item {
+        float: left;
     }
+
+    &__title {
+        font: {
+            size: 1.6rem;
+            weight: var(--weight-medium);
+        }
+        padding: 0 15px;
+    }
+
+    &__wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 16px;
+        padding: 0 15px;
+    }
+}
 </style>

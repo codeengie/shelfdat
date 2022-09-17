@@ -14,7 +14,9 @@
             <h1 class="inventory-item__title" :title="title">{{ title }}</h1>
             <ul class="inventory-item__list">
                 <li class="inventory-item__list-item inventory-item__list-item--format">{{ format }}</li>
-                <li class="inventory-item__list-item inventory-item__list-item--location">{{ `${location} - Container #${container}` }}</li>
+                <li class="inventory-item__list-item inventory-item__list-item--location">
+                    {{ `${location} - Container #${container}` }}
+                </li>
             </ul>
             <details class="inventory-item__details" v-if="notes">
                 <summary class="inventory-item__summary">Details</summary>
@@ -24,14 +26,15 @@
         <time
             v-if="created"
             :datetime="Date.parse(created)"
-            class="inventory-item__created">Created - {{ prettifyDate }}</time>
+            class="inventory-item__created">Created - {{ prettifyDate }}
+        </time>
         <nas-actions v-bind="$attrs"></nas-actions>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Inventory",
+    name: 'Inventory',
     props: {
         container: Number,
         created: String,
@@ -52,7 +55,7 @@ export default {
         setFormat() {
             let formatModifier;
 
-            switch(this.format) {
+            switch (this.format) {
                 case 'DVD':
                     formatModifier = 'dvd';
                     break;
@@ -83,8 +86,7 @@ export default {
     display: grid;
     column-gap: 26px;
     grid-template: {
-        areas: 'poster content content'
-                'created created actions';
+        areas: 'poster content content' 'created created actions';
         columns: 96px auto auto;
         rows: auto;
     }
@@ -191,6 +193,7 @@ export default {
                 content: 'DVD'
             }
         }
+
         &--hdx {
             &::after,
             &::before {
@@ -201,6 +204,7 @@ export default {
                 content: 'BLU-RAY'
             }
         }
+
         &--uhd {
             &::after,
             &::before {

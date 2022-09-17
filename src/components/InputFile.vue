@@ -19,10 +19,10 @@
 export default {
     name: 'InputFile',
     data() {
-      return {
-          selectedFile: null,
-          displayFile: null
-      }
+        return {
+            selectedFile: null,
+            displayFile: null
+        }
     },
     emits: ['update:modelValue'],
     methods: {
@@ -39,66 +39,66 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .form {
-        $this: &;
+.form {
+    $this: &;
 
-        &__figure {
-            background: #707070 url('/images/image_white.svg') center center no-repeat {
-                size: 32px
-            }
-            border-radius: 4px;
-            height: 120px;
-            width: 100px;
+    &__figure {
+        background: #707070 url('/images/image_white.svg') center center no-repeat {
+            size: 32px
         }
+        border-radius: 4px;
+        height: 120px;
+        width: 100px;
+    }
 
-        &__group {
-            &--file {
-                align-items: center;
-                border: 2px dashed var(--dove-gray) {
-                    radius: 14px;
-                };
-                display: flex;
-                flex-flow: column;
-                margin-top: 15px;
-                padding: 10px;
-            }
-        }
-
-        &__img {
-            border-radius: 4px;
-            outline: 2px solid var(--dove-gray);
-        }
-
-        &__input {
-            border: 0;
-            height: 1px;
-            overflow: hidden;
-            padding: 0;
-            white-space: nowrap;
-            width: 1px;
-        }
-
-        // Faux upload button
-        &__label {
+    &__group {
+        &--file {
             align-items: center;
-            background-color: #36a2eb;
-            border-radius: 4px;
-            color: #ffffff;
-            cursor: pointer;
+            border: 2px dashed var(--dove-gray) {
+                radius: 14px;
+            };
             display: flex;
-            font: {
-                size: 1.6rem;
-                weight: var(--weight-medium);
-            }
-            justify-content: center;
-            height: 40px;
+            flex-flow: column;
             margin-top: 15px;
-            text-transform: uppercase;
-            width: 140px;
-
-            &:hover {
-                background-color: #2346d4;
-            }
+            padding: 10px;
         }
     }
+
+    &__img {
+        border-radius: 4px;
+        outline: 2px solid var(--dove-gray);
+    }
+
+    &__input {
+        border: 0;
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+        white-space: nowrap;
+        width: 1px;
+    }
+
+    // Faux upload button
+    &__label {
+        align-items: center;
+        background-color: #36a2eb;
+        border-radius: 4px;
+        color: #ffffff;
+        cursor: pointer;
+        display: flex;
+        font: {
+            size: 1.6rem;
+            weight: var(--weight-medium);
+        }
+        justify-content: center;
+        height: 40px;
+        margin-top: 15px;
+        text-transform: uppercase;
+        width: 140px;
+
+        &:hover {
+            background-color: #2346d4;
+        }
+    }
+}
 </style>

@@ -47,16 +47,16 @@ export default {
     },
     methods: {
         handleBlur(event) {
-          const inputData = event.target.value;
+            const inputData = event.target.value;
 
-          if (inputData) {
-              // this.focused = !this.focused;
-              this.focused = true;
-              this.$emit('update:modelValue', inputData);
-          } else {
-              this.focused = false;
-              this.isValid = true;
-          }
+            if (inputData) {
+                // this.focused = !this.focused;
+                this.focused = true;
+                this.$emit('update:modelValue', inputData);
+            } else {
+                this.focused = false;
+                this.isValid = true;
+            }
         },
         handleFocus(event) {
             if (event.target.value === '') {

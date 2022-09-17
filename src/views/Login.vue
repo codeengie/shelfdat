@@ -32,7 +32,7 @@
 // @todo Doubt I need this, remove here and from package.json
 // import AmplifyVue from '@aws-amplify/ui-vue';
 import { mapActions } from 'vuex';
-import Button  from '../components/Button';
+import Button from '../components/Button';
 
 export default {
     name: 'Login',

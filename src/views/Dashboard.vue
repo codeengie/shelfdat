@@ -48,7 +48,7 @@
         <!-- Display latest inventory items -->
         <LatestItems
             :db-data="inventoryData"
-            :display-num="12" />
+            :display-num="12"/>
     </div>
     <!--<nas-sheet></nas-sheet>-->
 </template>
