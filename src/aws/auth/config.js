@@ -6,8 +6,8 @@
 const config = {
     identityPoolId: 'us-west-1:278817031030',
     region: 'us-west-1',
-    userPoolId: 'us-west-1_LNEn6YOW4',
-    userPoolWebClientId: '1ac9mdd0s96fie59rhhc5mi5q6'
+    userPoolId: 'us-west-1_kPZ8hbOd3',
+    userPoolWebClientId: '37hs4426vlgk59c69pu0qg0g76'
 }
 
 export default config;
