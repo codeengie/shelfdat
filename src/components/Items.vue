@@ -28,13 +28,16 @@
             :datetime="Date.parse(created)"
             class="inventory-item__created">Created - {{ prettifyDate }}
         </time>
-        <nas-actions v-bind="$attrs"></nas-actions>
+        <Actions v-bind="$attrs"/>
     </div>
 </template>
 
 <script>
+import Actions from './Actions';
+
 export default {
     name: 'Inventory',
+    components: { Actions },
     props: {
         container: Number,
         created: String,

@@ -3,16 +3,16 @@
         <h1>{{ pageTitle }} Media</h1>
 
         <!-- New Media Form -->
-        <nas-newmedia
-            media-db-data
-            @addLastMedia="updateMedia">
-        </nas-newmedia>
+         <NewMedia media-db-data @addLastMedia="updateMedia"/>
     </div>
 </template>
 
 <script>
+import NewMedia from '../components/NewMedia';
+
 export default {
     name: 'Create',
+    components: { NewMedia },
     data() {
         return {
             pageTitle: this.$route.meta.title

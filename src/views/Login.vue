@@ -2,15 +2,15 @@
     <h1>{{ titleLogo }}</h1>
     <!-- @todo Add `novalidate` attribute once you implement input field validation -->
     <form class="login-form" @submit.prevent="submitForm()">
-        <nas-input-field
+        <InputField
             field-name="Email"
             field-type="email"
-            v-model="emailInput"></nas-input-field>
+            v-model="emailInput"/>
 
-        <nas-input-field
+        <InputField
             field-name="Password"
             field-type="password"
-            v-model="passwordInput"></nas-input-field>
+            v-model="passwordInput"/>
 
         <!-- Do not add `type="button"`, Vue no like, disable @submit -->
         <Button
@@ -33,10 +33,14 @@
 // import AmplifyVue from '@aws-amplify/ui-vue';
 import { mapActions } from 'vuex';
 import Button from '../components/Button';
+import InputField from '../components/InputField';
 
 export default {
     name: 'Login',
-    components: { Button },
+    components: {
+        Button,
+        InputField
+    },
     data() {
         return {
             emailInput: null,

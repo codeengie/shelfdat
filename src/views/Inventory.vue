@@ -10,14 +10,14 @@
         <!-- Redo this component to use Dynamic Props 93 -->
         <section>
             <div v-if="loadStatus">
-                <nas-skeleton
+                <Skeleton
                     v-for="skeleton in skeletons"
-                    :key="skeleton"></nas-skeleton>
+                    :key="skeleton"/>
             </div>
 
             <nas-modwrap modifier="grid">
                 <template #default v-if="inventoryData">
-                    <nas-inventory
+                    <Items
                         v-for="media in mediaSearch"
                         :key="media.id"
                         :id="media.id"
@@ -29,7 +29,7 @@
                         :location="media.location"
                         :created="media.createdate"
                         :notes="media.notes"
-                        @relay-inventory-id="deleteMedia"></nas-inventory>
+                        @relay-inventory-id="deleteMedia"/>
                 </template>
             </nas-modwrap>
         </section>
@@ -37,10 +37,16 @@
 </template>
 
 <script>
+import Items from '../components/Items';
+import Skeleton from '../components/Skeleton';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'Inventory',
+    components: {
+        Items,
+        Skeleton
+    },
     data() {
         return {
             pageTitle: this.$route.meta.title,

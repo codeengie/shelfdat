@@ -8,10 +8,10 @@
             <div class="sheet__content">
                 <form class="sheet__form" @submit.prevent="submitNewItem">
                     <h2 class="sheet__header">Create New Item</h2>
-                    <nas-input-field
+                    <InputField
                         field-name="Title"
                         field-type="text"
-                        v-model="titleInput"></nas-input-field>
+                        v-model="titleInput"/>
 
                     <!-- @todo Need to revisit the setting of v-model dynamically, research suggests v-model is expecting
                             a raw string and not a variable. So using v-model="radio.modelo" will not work. A few examples
@@ -19,15 +19,15 @@
                             work. Eventually, I stumbled on $data and that did the trick but I still need to understand
                             the why and if this is the proper syntax as this is from Vue 2.x, Vue 3 is supposed to this the
                             `this` keyword. -->
-                    <nas-input-radio
+                    <InputRadio
                         v-for="radio in radioSettings"
                         :key="radio"
                         :radioLabel="radio.label"
                         :radioOptions="radio.options"
-                        v-model="$data[radio.modelo]"></nas-input-radio>
+                        v-model="$data[radio.modelo]"/>
 
-                    <nas-input-file
-                        v-model="fileInput"></nas-input-file>
+                    <InputFile
+                        v-model="fileInput"/>
 
                     <button class="sheet__form-button">Create</button>
                 </form>
@@ -37,8 +37,17 @@
 </template>
 
 <script>
+import InputField from './InputField';
+import InputFile from './InputFile';
+import InputRadio from './InputRadio';
+
 export default {
     name: 'Sheet',
+    components: {
+        InputField,
+        InputFile,
+        InputRadio
+    },
     data() {
         return {
             fileInput: null,

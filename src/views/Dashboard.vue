@@ -14,26 +14,26 @@
                         <h3 class="stat__title">Total</h3>
                         <h4 class="stat__reading">{{ inventoryTotal }}</h4>
                     </div>
-                    <nas-doughnut-chart
+                    <DoughnutChart
                         :chart-name="donutName"
-                        :data-set="donutData"></nas-doughnut-chart>
+                        :data-set="donutData"/>
                 </div>
                 <div class="media-stats">
-                    <nas-stat
+                    <Stat
                         v-for="stat in stats"
                         :key="stat"
                         :db-data="inventoryData"
                         :filter-by="stat.filterBy"
                         :filter-key="stat.filterKey"
                         :modifier="stat.modifier"
-                        :title="stat.title"></nas-stat>
+                        :title="stat.title"/>
                 </div>
             </template>
         </nas-modwrap>
         <nas-modwrap>
             <template #default>
                 <div class="sub-stats">
-                    <nas-stat
+                    <Stat
                         v-for="stat in subStats"
                         :key="stat"
                         :db-data="inventoryData"
@@ -41,7 +41,7 @@
                         :filter-by="stat.filterBy"
                         :filter-key="stat.filterKey"
                         :modifier="stat.modifier"
-                        :title="stat.title"></nas-stat>
+                        :title="stat.title"/>
                 </div>
             </template>
         </nas-modwrap>
@@ -50,19 +50,25 @@
             :db-data="inventoryData"
             :display-num="12"/>
     </div>
-    <!--<nas-sheet></nas-sheet>-->
+    <!--<Sheet/>-->
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import DoughnutChart from '../components/DoughnutChart';
+import Stat from '../components/Stat';
 import LatestItems from '../components/LatestItems';
 import LineLoader from '../components/LineLoader';
+//import Sheet from '../components/Sheet';
 
 export default {
     name: 'Dashboard',
     components: {
+        DoughnutChart,
         LatestItems,
-        LineLoader
+        LineLoader,
+        //Sheet,
+        Stat
     },
     data() {
         return {
