@@ -21,8 +21,6 @@
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300;400;500;700;900&display=swap');
-
 :root {
     // Color scheme
     --alabaster: #e9e9e9;
