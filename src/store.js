@@ -59,7 +59,7 @@ const store = createStore({
 
                 context.commit('setUserInfo', info);
                 context.commit('setAuthenticated', true);
-                router.push('/dashboard');
+                await router.push('/dashboard');
 
                 /*let userInfo = await Auth.currentUserInfo();
                 userInfo = userInfo.then(result => result.data);*/
@@ -75,7 +75,7 @@ const store = createStore({
                     context.commit('setInventory', []);
                     context.commit('setUserInfo', {});
                     context.commit('setAuthenticated', false);
-                    router.push('/login');
+                    await router.push('/login');
                 } catch (err) {
                     console.log('There was an error signing out: ', err);
                 }
@@ -83,10 +83,18 @@ const store = createStore({
         },
         async getInventory({commit, dispatch, state}) {
             if (!state.inventory.length) {
+                const settings = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': (await Auth.currentSession()).getIdToken().getJwtToken()
+                    }
+                };
+
                 commit('setLoadStatus', true);
 
                 try {
-                    const response = await fetch(process.env.VUE_APP_API_URL);
+                    const response = await fetch(process.env.VUE_APP_API_URL, settings);
                     const responseData = await response.json();
                     commit('setInventory', responseData.data);
                     dispatch('calcDonutSegments', state.inventory);
