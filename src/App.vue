@@ -3,24 +3,15 @@
     <main class="main">
         <router-view></router-view>
     </main>
-    <!--<nas-footer></nas-footer>-->
     <NavBar v-if="this.$route.meta.navbar"/>
 </template>
 
-<script>
-    export default {
-        data() {
-            return {
-
-            }
-        }/*,
-        beforeUpdate() {
-            console.log(`Route data: ${this.$route.meta.title}`);
-        }*/
-    }
-</script>
-
 <style lang="scss">
+@import './styles/vars';
+@import './styles/reboot';
+@import './styles/global';
+
+// @todo Remove once redesign is done
 :root {
     // Color scheme
     --alabaster: #e9e9e9;
@@ -38,63 +29,6 @@
     // Site wide
     --bg-main-color: var(--white);
     --bg-color: var(--alabaster);
-
-    // Forms
-    --form-btn-bg-color: var(--dodger-blue);
-    --form-btn-text-color: var(--white);
-    --form-error-color: var(--mandy);
-    --form-focus-highlight: var(--persian-blue);
-
-    // Typeface weights
-    --weight-light: 300;
-    --weight-normal: 400;
-    --weight-medium: 500;
-    --weight-bold: 700;
-    --weight-xbold: 900;
-}
-
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 62.5%;
-}
-
-body, button, figure, dl, h1, h2, h3, h4, p, ul {
-    margin: 0;
-    padding: 0;
-}
-
-body, button {
-    font-family: Roboto, sans-serif;
-}
-
-body {
-    background-color: var(--bg-main-color);
-}
-
-button {
-    border-style: none;
-    cursor: pointer;
-}
-
-h1 {
-    font-size: 3rem;
-}
-
-dl, p {
-    font-size: 1.6rem;
-}
-
-dt {
-    font-weight: 500;
-}
-
-section {
-    padding: 0 15px;
 }
 
 #app {

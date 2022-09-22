@@ -1,0 +1,41 @@
+// These variables are rendered globally scoped
+:root {
+  // Color scheme
+  --cobalt: #003fa4;
+  --dark-shark: #1a1c1e;
+  --deep-cerulean: #007aaf;
+  --dusty-gray: #9a9a9a;
+  --radical-red: #fe2946;
+  --shark: #272a30;
+  --white: #ffffff;
+  --woodsmoke: #111315;
+
+  // Typeface weights
+  // @todo Once redesign is finished, remove weights not used
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-xbold: 800;
+  --weight-xxbold: 900;
+
+  // Backgrounds
+  --primary-bg-color: var(--woodsmoke);
+  --secondary-bg-color: var(--dark-shark);
+
+  // Type
+  --primary-text-color: var(--dusty-gray);
+
+  // Links
+  --primary-link-color: var(--deep-cerulean);
+
+  // Buttons
+  --primary-button-bg-color: var(--cobalt);
+  --primary-button-text-color: var(--white);
+
+  // Inputs
+  --input-border-color: var(--shark);
+  --input-focus-color: var(--cobalt);
+  --input-error-color: var(--radical-red);
+  --input-text-color: var(--dusty-gray);
+}

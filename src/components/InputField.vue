@@ -79,17 +79,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/*:root {
-    --form-input-border-color: var(--black);
-    --form-input-text-color: var(--black);
-    --form-label-text-color: var(--black);
-}*/
-
 .form {
     $this: &;
 
     &__error {
-        color: var(--form-error-color);
+        color: var(--input-error-color);
+        display: block;
+        font-size: 1.2rem;
+        margin-top: 8px;
     }
 
     &__group {
@@ -98,18 +95,18 @@ export default {
         }
 
         &--input {
-            height: 55px;
+            height: 63px;
 
             &.focused {
                 #{$this} {
                     &__input {
-                        border-bottom-color: var(--form-focus-highlight);
+                        border-bottom-color: var(--input-focus-color);
                     }
 
                     &__label {
-                        color: var(--form-focus-highlight);
+                        color: var(--input-focus-color);
                         font: {
-                            size: 1rem;
+                            size: 1.2rem;
                             weight: var(--weight-medium);
                         }
                         transform: translateY(0);
@@ -123,24 +120,20 @@ export default {
     &__input {
         background-color: transparent;
         border: 0 {
-            bottom: 2px solid #000;
+            bottom: 2px solid var(--input-border-color);
         }
-        color: #000;
+        color: var(--input-text-color);
         font-size: 1.6rem;
         position: relative;
         width: 100%;
         z-index: 1;
-
-        &:focus {
-            outline: none;
-        }
     }
 
     &__label {
-        color: #000;
+        color: var(--input-text-color);
         display: inline-block;
-        font-size: 1.4rem;
-        height: 17px;
+        font-size: 1.6rem;
+        height: 20px;
         transform: translateY(20px);
         transition: all .2s;
     }

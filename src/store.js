@@ -48,6 +48,8 @@ const store = createStore({
      */
     actions: {
         async login(context, {email, password}) {
+            context.commit('setLoadStatus', true);
+
             try {
                 const user = await Auth.signIn(email, password);
                 const info = {
@@ -59,6 +61,7 @@ const store = createStore({
 
                 context.commit('setUserInfo', info);
                 context.commit('setAuthenticated', true);
+                context.commit('setLoadStatus', false);
                 await router.push('/dashboard');
 
                 /*let userInfo = await Auth.currentUserInfo();

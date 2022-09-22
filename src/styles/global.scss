@@ -1,0 +1,24 @@
+html {
+  font-size: 62.5%;
+}
+
+body, button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  font: {
+    size: 1.4rem;
+    weight: var(--weight-normal);
+  }
+}
+
+a {
+  color: var(--primary-link-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

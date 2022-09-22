@@ -14,11 +14,6 @@ export default {
         buttonText: String,
         className: String,
         isDisabled: Boolean
-    },
-    data() {
-        return {
-
-        }
     }
 }
 </script>
@@ -30,14 +25,11 @@ export default {
         self: center;
         items: center;
     }
-    background-color: var(--form-btn-bg-color);
+    background-color: var(--primary-button-bg-color);
     border-radius: 4px;
-    color: var(--form-btn-text-color);
+    color: var(--primary-button-text-color);
     display: flex;
-    font: {
-        size: 1.6rem;
-        weight: var(--weight-medium);
-    }
+    font-size: 1.4rem;
     height: 40px;
     justify-content: center;
     overflow: hidden;
@@ -48,7 +40,7 @@ export default {
     &::after {
         animation: spinner .8s infinite linear;
         content: '';
-        border: 3px solid #fff {
+        border: 3px solid var(--white) {
             left-color: transparent;
             radius: 50%;
             right-color: transparent;
@@ -62,7 +54,7 @@ export default {
 
     &::before {
         //@todo Need to figure out how to use a css variable here
-        background-color: darken(#00b9ff, 20%);
+        background-color: #052f52;
         border-radius: 50%;
         content: '';
         display: block;
@@ -102,6 +94,10 @@ export default {
         &::after {
             opacity: 1;
             transition: opacity .3s ease-in .5s;
+        }
+
+        &::before {
+            display: none;
         }
 
         #{$this}__text {

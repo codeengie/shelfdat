@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-        <small class="footer__text">Copyright {{ setCurrentYear }} @ Ardent Forms. All Rights Reserved.</small>
+        <small class="footer__text">Copyright &copy; {{ setCurrentYear }} Ardent Forms Inc. All Rights Reserved.</small>
     </footer>
 </template>
 
@@ -17,18 +17,16 @@ export default {
             const date = new Date();
             return date.getFullYear();
         }
-    },
-    methods: {}
+    }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .footer {
-    font: {
-        size: 1.2rem;
-        weight: 400;
-    }
-    flex: none;
     text-align: center;
+
+    &__text {
+        font-size: 1.2rem;
+    }
 }
 </style>
