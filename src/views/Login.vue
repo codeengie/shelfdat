@@ -1,8 +1,6 @@
 <template>
     <div class="wrap">
-        <h1 class="logo">
-            <img class="logo__img" src="/images/logo.svg" height="35" alt="ShelfDat logo">
-        </h1>
+        <Brand img-height="35"/>
 
         <!-- @todo Add `novalidate` attribute once you implement input field validation -->
         <form class="login-form" @submit.prevent="submitForm()">
@@ -39,16 +37,18 @@
 // @todo Doubt I need this, remove here and from package.json
 // import AmplifyVue from '@aws-amplify/ui-vue';
 import { mapActions, mapGetters } from 'vuex';
+import Brand from '../components/Brand';
 import Button from '../components/Button';
-import InputField from '../components/InputField';
 import Footer from '../components/Footer';
+import InputField from '../components/InputField';
 
 export default {
     name: 'Login',
     components: {
+        Brand,
         Button,
-        InputField,
-        Footer
+        Footer,
+        InputField
     },
     data() {
         return {
@@ -127,7 +127,7 @@ h1 {
     padding-bottom: 16px;
 }
 
-.logo {
+.brand {
     margin-top: 90px;
 }
 

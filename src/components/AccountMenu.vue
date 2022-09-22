@@ -1,7 +1,7 @@
 <template>
     <div class="account-menu">
         <img class="account-menu__pic" :src="profileImage(userInfo.picture)" width="20" height="20" alt="Simple humanoid upper body surrounded by a black circle">
-        <p class="account-menu__user">Hi, <span>{{ userInfo.username }}</span></p>
+        <p class="account-menu__user"><span>{{ userInfo.username }}</span></p>
         <div class="account-menu__drawer">
             <div class="account-menu__drawer-profile">
                 <span class="account-menu__drawer-name">{{ userInfo.name }}</span>
@@ -150,6 +150,7 @@ export default {
     }
 
     &__user {
+        color: var(--white);
         font: {
             size: 1.2rem;
             weight: var(--weight-medium);
