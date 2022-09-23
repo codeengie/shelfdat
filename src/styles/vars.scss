@@ -1,10 +1,13 @@
 // These variables are rendered globally scoped
 :root {
   // Color scheme
+  --celadon-blue: #007aaf;
   --cobalt: #003fa4;
   --dark-shark: #1a1c1e;
   --deep-cerulean: #007aaf;
+  --dirt: #a27c4a;
   --dusty-gray: #9a9a9a;
+  --middle-purple: #a24a59;
   --radical-red: #fe2946;
   --shark: #272a30;
   --white: #ffffff;
@@ -41,4 +44,10 @@
 
   // Spacing
   --block-spacing: 20px;
+
+  // Donut chart segments
+  // @todo Figure out how to extract these and use them in JS
+  --donut-slice-bluray: var(--middle-purple);
+  --donut-slice-dvd: var(--dirt);
+  --donut-slice-fourkay: var(--celadon-blue);
 }
