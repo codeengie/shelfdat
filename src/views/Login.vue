@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="content">
         <Brand img-height="35"/>
 
         <!-- @todo Add `novalidate` attribute once you implement input field validation -->
@@ -87,20 +87,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-    font: {
-        size: 2.4rem;
-        weight: var(--weight-bold);
-    }
-    margin: 40px 0;
+.brand {
+    margin-top: 90px;
     text-align: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: auto;
+}
+
+.footer {
+    margin-top: auto;
+    padding-bottom: 16px;
 }
 
 .login-form {
     $this: &; // Let's cache the root selector @todo remove if not used
     display: flex;
     flex-flow: column;
-    margin: 0 auto;
+    margin: 94px auto 0;
     width: 290px;
 
     &__button {
@@ -120,21 +128,5 @@ h1 {
         margin-top: 12px;
         text-align: center;
     }
-}
-
-.footer {
-    margin-top: auto;
-    padding-bottom: 16px;
-}
-
-.brand {
-    margin-top: 90px;
-}
-
-.wrap {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: auto;
 }
 </style>
