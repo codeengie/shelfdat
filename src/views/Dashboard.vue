@@ -1,12 +1,55 @@
 <template>
-    <div class="content dashboard-pg">
+    <div class="content">
         <!-- @todo This will work better if placed in App.vue rather than adding it on each page/component -->
         <LineLoader v-if="loadStatus"/>
 
-        <h1 class="content__title">Dashboard</h1>
+        <!-- Donut chart -->
+        <div class="donut">
+            <h1 class="donut__title">Media</h1>
+            <div class="donut__wrap">
+                <DoughnutChart
+                    :chart-name="donutName"
+                    :data-set="donutData"
+                    css-classes="donut__constrain"/>
+                <ChartStat
+                    :stat-num="inventoryTotal"
+                    stat-label="Total"/>
+            </div>
+
+            <!-- Donut legend with counts -->
+            <!-- @todo Use a loop -->
+            <!-- @todo Change class name to 'legend' and rename ChatStat component -->
+            <div class="segments">
+                <ChartStat
+                    :stat-mods="['icon']"
+                    :stat-num="donutSegmentData[0]"
+                    stat-icon-color="#007aaf"
+                    stat-label="4K"/>
+                <ChartStat
+                    :stat-mods="['icon']"
+                    :stat-num="donutSegmentData[1]"
+                    stat-icon-color="#a24a59"
+                    stat-label="BRAY"/>
+                <ChartStat
+                    :stat-mods="['icon']"
+                    :stat-num="donutSegmentData[2]"
+                    stat-icon-color="#a27c4a"
+                    stat-label="DVD"/>
+            </div>
+
+            <!-- Total inventory count by category -->
+            <div class="category">
+                <ChartStat
+                    stat-num="740"
+                    stat-label="Movies"/>
+                <ChartStat
+                    stat-num="68"
+                    stat-label="TV Shows"/>
+            </div>
+        </div>
 
         <!-- Media Section -->
-        <nas-modwrap :modifier="['foobar', 'bg']">
+        <!--<nas-modwrap :modifier="['foobar', 'bg']">
             <template #heading>Media</template>
             <template #default>
                 <div class="doughnut">
@@ -14,9 +57,6 @@
                         <h3 class="stat__title">Total</h3>
                         <h4 class="stat__reading">{{ inventoryTotal }}</h4>
                     </div>
-                    <DoughnutChart
-                        :chart-name="donutName"
-                        :data-set="donutData"/>
                 </div>
                 <div class="media-stats">
                     <Stat
@@ -29,8 +69,8 @@
                         :title="stat.title"/>
                 </div>
             </template>
-        </nas-modwrap>
-        <nas-modwrap>
+        </nas-modwrap>-->
+        <!--<nas-modwrap>
             <template #default>
                 <div class="sub-stats">
                     <Stat
@@ -44,31 +84,30 @@
                         :title="stat.title"/>
                 </div>
             </template>
-        </nas-modwrap>
+        </nas-modwrap>-->
         <!-- Display latest inventory items -->
         <LatestItems
             :db-data="inventoryData"
             :display-num="12"/>
     </div>
-    <!--<Sheet/>-->
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import ChartStat from '../components/ChartStat';
 import DoughnutChart from '../components/DoughnutChart';
-import Stat from '../components/Stat';
 import LatestItems from '../components/LatestItems';
 import LineLoader from '../components/LineLoader';
-//import Sheet from '../components/Sheet';
+//import Stat from '../components/Stat';
 
 export default {
     name: 'Dashboard',
     components: {
+        ChartStat,
         DoughnutChart,
         LatestItems,
-        LineLoader,
-        //Sheet,
-        Stat
+        LineLoader//,
+        //Stat
     },
     data() {
         return {
@@ -76,7 +115,7 @@ export default {
             donutData: {
                 labels: ['4K Blu-ray', 'Blu-ray', 'DVD'],
                 datasets: [{
-                    backgroundColor: ['#36a2eb', '#feb914', '#ff6384'],
+                    backgroundColor: ['#007aaf', '#a27c4a', '#a24a59'],
                     data: []
                 }]
             },
@@ -157,101 +196,105 @@ export default {
 </script>
 
 <style lang="scss">
-.content {
-    flex: 1 0 auto;
+.category {
+    .chart-stat {
+        &__label {
+            margin: 0 0 12px;
+        }
 
-    &::after {
-        content: '\00a0';
-        display: block;
-        margin-top: 5px;
-        height: 0px;
-        visibility: hidden;
+        &__number {
+            font: {
+                size: 2.6rem;
+                weight: var(--weight-medium);
+            }
+        }
+    }
+}
+
+.segments {
+    .chart-stat {
+        &__label {
+            font-size: 1.6rem;
+            margin-top: 12px;
+        }
+
+        &__number {
+            font: {
+                size: 2.6rem;
+                weight: var(--weight-medium);
+            }
+        }
+    }
+}
+</style>
+
+<style lang="scss" scoped>
+.category {
+    background-color: var(--primary-bg-color);
+    display: flex;
+    margin-top: 28px;
+    padding: 8px;
+
+    .chart-stat {
+        background-color: var(--dark-shark);
+        flex-flow: column-reverse;
+        height: 74px;
+        width: 128px;
+
+        &:nth-child(even) {
+            margin-left: 4px;
+        }
+
+        &:nth-child(odd) {
+            margin-right: 4px;
+        }
+    }
+}
+
+.donut {
+    align-items: center;
+    background-color: var(--dark-shark);
+    display: flex;
+    flex-direction: column;
+    height: 410px;
+    padding-top: 32px;
+
+    &__constrain {
+        height: 180px;
+        width: 180px;
     }
 
     &__title {
+        color: var(--white);
         font: {
-            size: 1.6rem;
+            size: 2.2rem;
             weight: var(--weight-medium);
         }
-        margin-top: 18px;
-        padding: 0 15px;
-    }
-}
-
-.dashboard-pg {
-    .modwrap {
-        margin-top: 16px;
-        padding-top: 14px;
-
-        &__title {
-            font-size: 1.4rem;
-            margin: {
-                top: 0;
-                bottom: 6px;
-            }
-            text-transform: uppercase;
-        }
-    }
-}
-
-// More temp stuff
-.doughnut {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    canvas {
-        height: 146px;
-        width: 146px;
     }
 
-    .stat {
-        display: flex;
-        flex-flow: column-reverse;
+    &__wrap {
+        margin-top: 26px;
+        position: relative;
 
-        &__reading {
-            font-size: 2.4rem;
-        }
-
-        &__title {
-            font-size: .8rem;
-            text-transform: uppercase;
-        }
-
-        &--flip {
+        .chart-stat {
+            bottom: 0;
+            left: 0;
+            margin: auto;
             position: absolute;
-            text-align: center;
+            right: 0;
+            top: 0;
         }
     }
 }
 
-.media-stats {
+.segments {
     display: flex;
-    justify-content: center;
-    margin-top: 18px;
+    margin-top: 26px;
 
-    .stat:nth-child(2) {
-        margin: 0 30px;
+    .chart-stat {
+        &:nth-child(even) {
+            margin: 0 32px;
+        }
     }
 }
-
-.sub-stats {
-    display: flex;
-    justify-content: center;
-
-    .stat:nth-child(2) {
-        margin: 0 0 0 8px;
-    }
-}
-
-// Disabled for now since I'm focusing on bottom media stats, I'll come back to this
-/*.stat:first-of-type {
-    left: 50%;
-    margin-top: 0 !important;
-    padding: 0 !important;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-}*/
 </style>
