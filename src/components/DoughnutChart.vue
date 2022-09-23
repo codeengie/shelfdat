@@ -1,8 +1,11 @@
 <template>
+    <!-- @todo Review and update props
+        @link: https://vue-chartjs.org/guide/#creating-your-first-chart -->
     <Doughnut
         :chart-data="chartData"
         :chart-id="chartId"
         :chart-options="chartOptions"
+        :css-classes="wrapClass"
     />
 </template>
 
@@ -25,6 +28,7 @@ export default {
     components: { Doughnut },
     props: {
         chartName: String,
+        wrapClass: String,
         dataSet: Object
     },
     data() {
@@ -32,7 +36,8 @@ export default {
             chartData: this.dataSet,
             chartId: this.chartName,
             chartOptions: {
-                cutout: 50,
+                borderWidth: 0,
+                cutout: 65, // pixels
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
@@ -43,8 +48,9 @@ export default {
                     }
                 },
                 responsive: true,
-                rotation: Math.PI * 1.5
-            }
+                rotation: 180
+            },
+            cssClasses: this.wrapClass
         }
     }
 }
