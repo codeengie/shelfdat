@@ -12,15 +12,15 @@ export default {
 $loader-height: 3px;
 
 .line-loader {
-    background-color: #ddd;
+    background-color: var(--line-loader-bg);
     height: $loader-height;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     width: 100%;
 
     &::before {
         animation: lineAnime 1s linear infinite;
-        background-color: coral;
+        background-color: var(--line-loader-fg);
         content: '';
         height: $loader-height;
         left: -50%;

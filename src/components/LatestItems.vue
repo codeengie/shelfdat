@@ -1,6 +1,6 @@
 <template>
     <div class="latest">
-        <h2 class="latest__title">Latest</h2>
+        <h2 class="latest__title">Latest Additions</h2>
         <div class="latest__wrap">
             <figure class="latest__item" v-for="dataItem in filterLatest" :key="dataItem">
                 <img

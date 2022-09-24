@@ -38,9 +38,9 @@
             </div>
         </div>
         <!-- Display latest inventory items -->
-        <!--<LatestItems
+        <LatestItems
             :db-data="inventoryData"
-            :display-num="12"/>-->
+            :display-num="12"/>
     </div>
 </template>
 
@@ -48,7 +48,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import ChartStat from '../components/ChartStat';
 import DoughnutChart from '../components/DoughnutChart';
-//import LatestItems from '../components/LatestItems';
+import LatestItems from '../components/LatestItems';
 import LineLoader from '../components/LineLoader';
 
 export default {
@@ -56,7 +56,7 @@ export default {
     components: {
         ChartStat,
         DoughnutChart,
-        //LatestItems,
+        LatestItems,
         LineLoader
     },
     data() {
@@ -154,6 +154,11 @@ export default {
             margin-right: 4px;
         }
     }
+}
+
+// @todo Apply this globally if you add LineLoader component in other pages
+.content {
+    position: relative;
 }
 
 .donut {
