@@ -16,6 +16,7 @@ const store = createStore({
             donutTypes: [],
             inventory: [],
             isAuthenticated: false,
+            isUserSession: false,
             loadStatus: false,
             userInfo: {}
         }
@@ -43,6 +44,9 @@ const store = createStore({
         },
         setUserInfo(state, userInfo) {
             state.userInfo = userInfo;
+        },
+        setUserSession(state, session) {
+            state.isUserSession = session;
         }
     },
     /**
@@ -51,25 +55,41 @@ const store = createStore({
      * with the `store.dispatch` method.
      */
     actions: {
-        async login(context, {email, password}) {
-            context.commit('setLoadStatus', true);
+        async checkUserSession({commit, dispatch}) {
+            try {
+                const session = (await Auth.currentSession()).getIdToken().getJwtToken();
+                const user = (await Auth.currentUserInfo());
+                // console.log(user);
+
+                if (session) {
+                    dispatch('getUserSession', user);
+                    commit('setUserSession', true);
+                    commit('setAuthenticated', true);
+                }
+            } catch(err) {
+                console.log('There was an error with verifying session', err);
+            }
+        },
+        getUserSession(context, payload) {
+            const userData =  {
+                email: payload.attributes.email,
+                name: payload.attributes.name,
+                picture: payload.attributes.picture,
+                username: payload.attributes.preferred_username
+            }
+
+            context.commit('setUserInfo', userData);
+        },
+        async login({commit, dispatch}, {email, password}) {
+            commit('setLoadStatus', true);
 
             try {
                 const user = await Auth.signIn(email, password);
-                const info = {
-                    email: user.attributes.email,
-                    name: user.attributes.name,
-                    picture: user.attributes.picture,
-                    username: user.attributes.preferred_username
-                }
-
-                context.commit('setUserInfo', info);
-                context.commit('setAuthenticated', true);
-                context.commit('setLoadStatus', false);
+                dispatch('getUserSession', user);
+                commit('setAuthenticated', true);
+                commit('setLoadStatus', false);
                 await router.push('/dashboard');
 
-                /*let userInfo = await Auth.currentUserInfo();
-                userInfo = userInfo.then(result => result.data);*/
             } catch(err) {
                 console.log('There was an error with the login', err);
             }

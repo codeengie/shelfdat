@@ -76,10 +76,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    const isUserLoggedIn = store.dispatch('checkUserSession');
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
     //next(); // This should only be called once, reference vue docs when you start expanding
 
-    if (to.name !== 'Login' && !store.state.isAuthenticated) {
+    if (to.name !== 'Login' && !store.state.isAuthenticated && !isUserLoggedIn) {
         next({ name: 'Login' });
     } else {
         next();
