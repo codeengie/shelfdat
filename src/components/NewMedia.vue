@@ -96,6 +96,8 @@
 </template>
 
 <script>
+import { Auth } from 'aws-amplify';
+
 export default {
     name: 'NewMedia',
     // This is an interface
@@ -162,8 +164,8 @@ export default {
             await fetch(process.env.VUE_APP_API_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'/*,
-                    'X-Api-Key': process.env.VUE_APP_SECRET_KEY*/
+                    'Content-Type': 'application/json',
+                    'Authorization': (await Auth.currentSession()).getIdToken().getJwtToken()
                 },
                 body: JSON.stringify(newMovieData)
             })
