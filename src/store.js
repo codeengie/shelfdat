@@ -13,6 +13,7 @@ const store = createStore({
     state() {
         return {
             donutSegments: [],
+            donutTypes: [],
             inventory: [],
             isAuthenticated: false,
             loadStatus: false,
@@ -33,6 +34,9 @@ const store = createStore({
         },
         setInventory(state, inventory) {
             state.inventory = inventory;
+        },
+        setDonutTypes(state, donutTypes) {
+            state.donutTypes = donutTypes;
         },
         setDonutSegments(state, donutSegments) {
             state.donutSegments = donutSegments;
@@ -100,7 +104,8 @@ const store = createStore({
                     const response = await fetch(process.env.VUE_APP_API_URL, settings);
                     const responseData = await response.json();
                     commit('setInventory', responseData.data);
-                    dispatch('calcDonutSegments', state.inventory);
+                    dispatch('calcDonutLegend', {data: state.inventory, key: 'format', mutant:'setDonutSegments'});
+                    dispatch('calcDonutLegend', {data: state.inventory, key: 'type', mutant: 'setDonutTypes'})
                     commit('setLoadStatus', false);
                 } catch(err) {
                     console.error(err);
@@ -109,24 +114,23 @@ const store = createStore({
             }
 
         },
-        calcDonutSegments({commit, state}, payload) {
-            let segmentLabels = [];
-            let segmentTotals = [];
+        // Action cannot have multiple parameters e.g,. foobar(state, {payload, url})
+        calcDonutLegend({commit, state}, payload) {
+            let legendLabels = [];
+            let legendTotals = [];
 
-            // Search through all the formats and collect them
-            payload.forEach(segmentLabel => segmentLabels.push(segmentLabel['format']));
-            // Store all the unique values (Set() returns an object)
-            segmentLabels = new Set(segmentLabels);
+            // Use parameter as key to search through the data and collect it
+            payload.data.forEach(legendLabel => legendLabels.push(legendLabel[payload.key]));
+            // Store all the values (Set() returns an object)
+            legendLabels = new Set(legendLabels);
             // Convert object to an array and sort values in alpha order
-            segmentLabels = Array.from(segmentLabels).sort();
-            //console.log(`Segment Labels: ${segmentLabels}`);
-
-            // Tally up numbers with prop 'format'
-            segmentLabels.forEach(label => {
-                segmentTotals.push(state.inventory.filter(item => item['format'] === label).length);
+            legendLabels = Array.from(legendLabels).sort();
+            // Tally up the numbers with key
+            legendLabels.forEach(label => {
+                legendTotals.push(state.inventory.filter(item => item[payload.key] === label).length);
             });
-            //console.log(`Segment Totals: ${segmentTotals}`);
-            commit('setDonutSegments', segmentTotals);
+
+            commit(payload.mutant, legendTotals);
         }
     },
     /**
@@ -136,6 +140,9 @@ const store = createStore({
      * fret as you can use the mutation as normal. You noticed when you `console.log(state.inventory)`.
      */
     getters: {
+        donutLegendData(state) {
+            return state.donutTypes;
+        },
         donutSegmentData(state) {
             return state.donutSegments;
         },

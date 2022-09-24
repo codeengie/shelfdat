@@ -38,12 +38,13 @@
             </div>
 
             <!-- Total inventory count by category -->
+            <!-- @todo Use a loop -->
             <div class="category">
                 <ChartStat
-                    stat-num="740"
+                    :stat-num="donutLegendData[0]"
                     stat-label="Movies"/>
                 <ChartStat
-                    stat-num="68"
+                    :stat-num="donutLegendData[1]"
                     stat-label="TV Shows"/>
             </div>
         </div>
@@ -86,9 +87,9 @@
             </template>
         </nas-modwrap>-->
         <!-- Display latest inventory items -->
-        <LatestItems
+        <!--<LatestItems
             :db-data="inventoryData"
-            :display-num="12"/>
+            :display-num="12"/>-->
     </div>
 </template>
 
@@ -96,7 +97,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import ChartStat from '../components/ChartStat';
 import DoughnutChart from '../components/DoughnutChart';
-import LatestItems from '../components/LatestItems';
+//import LatestItems from '../components/LatestItems';
 import LineLoader from '../components/LineLoader';
 //import Stat from '../components/Stat';
 
@@ -105,7 +106,7 @@ export default {
     components: {
         ChartStat,
         DoughnutChart,
-        LatestItems,
+        //LatestItems,
         LineLoader//,
         //Stat
     },
@@ -171,6 +172,7 @@ export default {
     },
     computed: {
         ...mapGetters([
+            'donutLegendData',
             'donutSegmentData',
             'inventoryData',
             'inventoryTotal',
