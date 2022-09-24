@@ -39,15 +39,14 @@ export default {
 
 <style lang="scss" scoped>
 .latest {
-    margin-top: 16px;
-
     &__item {
         float: left;
     }
 
     &__title {
+        color: var(--secondary-text-color);
         font: {
-            size: 1.6rem;
+            size: var(--primary-text-size);
             weight: var(--weight-medium);
         }
         padding: 0 15px;

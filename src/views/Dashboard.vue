@@ -167,6 +167,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 410px;
+    margin-bottom: 48px; // Addresses the offset of the categories
     padding-top: 32px;
 
     &__constrain {
@@ -175,9 +176,9 @@ export default {
     }
 
     &__title {
-        color: var(--white);
+        color: var(--secondary-text-color);
         font: {
-            size: 2.2rem;
+            size: var(--primary-text-size);
             weight: var(--weight-medium);
         }
     }
@@ -195,6 +196,11 @@ export default {
             top: 0;
         }
     }
+}
+
+.latest {
+    display: inline-block; // Fix collapsible margin
+    margin-top: 32px;
 }
 
 .segments {
