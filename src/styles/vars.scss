@@ -4,6 +4,7 @@
   --celadon-blue: #007aaf;
   --cobalt: #003fa4;
   --dark-shark: #1a1c1e;
+  --dark-jungle: #1d1f24;
   --deep-cerulean: #007aaf;
   --dirt: #a27c4a;
   --dusty-gray: #9a9a9a;
@@ -50,4 +51,8 @@
   --donut-slice-bluray: var(--middle-purple);
   --donut-slice-dvd: var(--dirt);
   --donut-slice-fourkay: var(--celadon-blue);
+
+  // Navbar
+  --navbar-bg: var(--shark);
+  --navbar-hover: var(--dark-jungle);
 }

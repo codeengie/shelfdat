@@ -31,12 +31,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$nav-bg: #2e2e2e;
 $nav-height: 60px;
 
 .navbar {
     $self: &;
-    background-color: $nav-bg;
+    background-color: var(--navbar-bg);
     grid-area: navbar;
     height: $nav-height;
 
@@ -48,7 +47,7 @@ $nav-height: 60px;
 
     &__link {
         align-items: center;
-        background-color: $nav-bg;
+        background-color: var(--navbar-bg);
         display: flex;
         height: 100%;
         justify-content: center;
@@ -56,7 +55,7 @@ $nav-height: 60px;
         width: 100%;
 
         &:hover {
-            background-color: darken($nav-bg, 10%);
+            background-color: var(--navbar-hover);
             transition: background-color .5s ease-out;
         }
 
