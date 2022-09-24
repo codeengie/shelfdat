@@ -60,7 +60,13 @@
   --navbar-bg: var(--shark);
   --navbar-hover: var(--dark-jungle);
 
-  // Line Loader
+  // Line loader
   --line-loader-bg: var(--shark);
   --line-loader-fg: var(--celadon-blue);
+
+  // Account menu
+  --account-menu-bg-color: var(--primary-bg-color);
+  --account-menu-text-color: var(--white);
+  --account-menu-subtext-color: var(--primary-text-color);
+  --account-menu-hover-color: var(--secondary-bg-color);
 }

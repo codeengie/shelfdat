@@ -5,10 +5,10 @@
             <figure class="latest__item" v-for="dataItem in filterLatest" :key="dataItem">
                 <img
                     class="latest__pic"
-                    height="147"
+                    height="162"
                     loading="lazy"
                     :src="setImage(dataItem.imageurl)"
-                    width="100">
+                    width="108">
             </figure>
         </div>
     </div>

@@ -58,7 +58,7 @@ export default {
     }
 
     &__drawer {
-        background: #fff;
+        background: var(--account-menu-bg-color);
         border-radius: 12px;
         display: none;
         padding: 20px;
@@ -74,7 +74,7 @@ export default {
         }
 
         &-email {
-            color: #8e8e8e;
+            color: var(--account-menu-subtext-color);
             font: {
                 size: 1.2rem;
                 weight: var(--weight-medium);
@@ -105,11 +105,11 @@ export default {
             &:active,
             &:link,
             &:visited {
-                color: black;
+                color: var(--account-menu-text-color);
             }
 
             &:hover {
-                background-color: #ccc;
+                background-color: var(--account-menu-hover-color);
                 transition: all .3s ease-in;
             }
 
@@ -118,6 +118,7 @@ export default {
                 &::before {
                     content: '';
                     display: block;
+                    filter: invert(100%); // @todo Update with white icons
                     height: 32px;
                     margin-right: 6px;
                     width: 32px;
@@ -142,6 +143,7 @@ export default {
         }
 
         &-name {
+            color: var(--account-menu-text-color);
             font: {
                 size: 1.6rem;
                 weight: var(--weight-bold);
@@ -150,7 +152,7 @@ export default {
     }
 
     &__user {
-        color: var(--white);
+        color: var(--account-menu-text-color);
         font: {
             size: 1.2rem;
             weight: var(--weight-medium);
