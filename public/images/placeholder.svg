@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 26.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="placeholder" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" viewBox="0 0 100 120" style="enable-background:new 0 0 100 120;" xml:space="preserve">
+	 y="0px" viewBox="0 0 108 162" style="enable-background:new 0 0 108 162;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#8E8E8E;}
-	.st1{fill:#FFFFFF;}
+	.st0{fill:#272A30;}
+	.st1{fill:#F5F7FB;}
+	.st2{fill:#2F3131;}
+	.st3{fill:#D9DCE4;}
+	.st4{fill:#AEDD84;}
+	.st5{fill:#91C777;}
+	.st6{fill:#FAD884;}
+	.st7{fill:#E5B468;}
 </style>
-<rect id="rectangle" class="st0" width="100" height="120"/>
-<path id="image" class="st1" d="M68,74V46c0-2.2-1.8-4-4-4H36c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28C66.2,78,68,76.2,68,74z
-	 M43,63l5,6l7-9l9,12H36L43,63z"/>
+<rect id="background" class="st0" width="108" height="162"/>
+<g id="frame_00000041258575196261060630000017418929378186838677_">
+	<g id="frame">
+		<rect x="24.2" y="61.2" class="st1" width="59.5" height="39.5"/>
+		<path class="st2" d="M83.5,61.5v39h-59v-39H83.5 M84,61H24v40h60V61L84,61z"/>
+	</g>
+	<g id="shadow_00000110438131630553755180000012126938740651700399_">
+		<path class="st3" d="M24.5,81c0,0,2.3-18.1,28.9-18.1S83.5,81,83.5,81V61.4h-59V81z"/>
+	</g>
+	<g id="border">
+		<path class="st2" d="M83.5,61.5v39h-59v-39H83.5 M84,61H24v40h60V61L84,61z"/>
+	</g>
+</g>
+<g id="mountain_x5F_big">
+	<g id="mountain">
+		<polygon class="st4" points="36.3,100.8 62.5,74.5 83.6,95.6 83.6,100.8 		"/>
+		<path class="st2" d="M62.5,74.9l20.9,20.9v4.8H36.9L62.5,74.9 M62.5,74.2L35.7,101h48.2v-5.5L62.5,74.2L62.5,74.2z"/>
+	</g>
+	<g id="shadow_00000080191843924528773640000010945123439229815948_">
+		<path class="st5" d="M36.9,100.5l4.4-4.4c0,0,27,3,30.2-2.1c3.3-5.1-12-16.2-12-16.2l2.9-2.9l20.9,20.9v4.7L36.9,100.5z"/>
+	</g>
+</g>
+<g id="mountain_x5F_small">
+	<g id="mountain_00000036249788842011102380000000013693635636834225_">
+		<polygon class="st4" points="40.1,86.3 54.4,100.6 25.6,100.7 		"/>
+		<path class="st2" d="M40.1,86.6l13.7,13.7l-27.6,0.1L40.1,86.6 M40.1,85.9L25,101l30-0.1L40.1,85.9L40.1,85.9z"/>
+	</g>
+	<g id="shadow_00000091712853020377069230000004163195518629200274_">
+		<path class="st5" d="M26.2,100.5l9-9c0,0-3.7,6.4,2.3,5.1c7.4-1.6,6.4-6.2,6.4-6.2l10,9.9L26.2,100.5z"/>
+	</g>
+</g>
+<g id="sun_00000000185733476675690190000014100644254664204724_">
+	<g id="sun">
+		<circle class="st6" cx="41" cy="75" r="3.8"/>
+		<path class="st2" d="M41,71.5c1.9,0,3.5,1.6,3.5,3.5s-1.6,3.5-3.5,3.5s-3.5-1.6-3.5-3.5S39.1,71.5,41,71.5 M41,71
+			c-2.2,0-4,1.8-4,4s1.8,4,4,4s4-1.8,4-4S43.2,71,41,71L41,71z"/>
+	</g>
+	<g id="shadow">
+		<path class="st7" d="M37.5,75c0,1.9,1.6,3.5,3.5,3.5c1.9,0,3.5-1.6,3.5-3.5c0-1.9-1.6-3.5-3.5-3.5c-1,0,5.6,0.7,1.5,5.2
+			C38.3,79.4,37.5,74.1,37.5,75z"/>
+	</g>
+</g>
 </svg>
