@@ -69,4 +69,14 @@
   --account-menu-text-color: var(--white);
   --account-menu-subtext-color: var(--primary-text-color);
   --account-menu-hover-color: var(--secondary-bg-color);
+
+  // Search
+  --search-bg-color: var(--shark);
+  --search-text-color: var(--primary-text-color);
+
+  // Filter buttons
+  --filter-button-bg: var(--shark);
+  --filter-button-hover: var(--cobalt);
+  --filter-button-text-color: var(--dusty-gray);
+  --filter-button-text-hover: var(--white);
 }

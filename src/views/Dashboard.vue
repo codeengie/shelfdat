@@ -201,6 +201,7 @@ export default {
 .latest {
     display: inline-block; // Fix collapsible margin
     margin-top: 32px;
+    width: 100%; // Compliments `inline-block` above
 }
 
 .segments {
