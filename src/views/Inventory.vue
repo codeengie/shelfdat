@@ -15,18 +15,20 @@
                 :button-name="filterLabel"/>
         </div>
 
-        <!-- Search Form -->
-        <!--<div class="search">
-            <input class="search__box" placeholder="Search media..." v-model.trim="searchKey">
-        </div>-->
-
         <!-- Inventory -->
         <div class="inventory">
-
+            <Poster
+                v-for="media in mediaSearch"
+                :key="media.id"
+                :poster-id="media.id"
+                poster-height="162"
+                :poster-title="media.title"
+                poster-width="108"
+                :poster-src="media.imageurl"/>
         </div>
 
         <!-- Redo this component to use Dynamic Props 93 -->
-        <section>
+        <!--<section>
             <nas-modwrap modifier="grid">
                 <template #default v-if="inventoryData">
                     <Items
@@ -44,29 +46,33 @@
                         @relay-inventory-id="deleteMedia"/>
                 </template>
             </nas-modwrap>
-        </section>
+        </section>-->
     </div>
+    <Details/>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import FilterButton from '../components/FilterButton';
-import Items from '../components/Items';
+//import Items from '../components/Items';
 import Search from '../components/Search';
+import Poster from '../components/Poster';
+import Details from '../components/Details';
 
 export default {
     name: 'Inventory',
     components: {
+        Details,
+        Poster,
         FilterButton,
-        Items,
+        //Items,
         Search
     },
     data() {
         return {
             filterLabels: ['All', '4K', 'BRAY', 'DVD'],
             pageTitle: this.$route.meta.title,
-            searchInput: null,
-            searchKey: ''
+            searchInput: ''
         }
     },
     created() {
@@ -76,7 +82,7 @@ export default {
         ...mapGetters(['inventoryData', 'loadStatus']),
         mediaSearch() {
             return this.inventoryData.filter(media => {
-                return media.title.toLowerCase().includes(this.searchKey.toLowerCase());
+                return media.title.toLowerCase().includes(this.searchInput.toLowerCase());
             });
         }
     },
@@ -120,6 +126,14 @@ export default {
     gap: 8px;
     grid-template-columns: repeat(4, 60px);
     margin-top: 16px;
+}
+
+.inventory {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fill, 108px);
+    grid-auto-rows: 162px;
+    margin-top: 40px;
 }
 
 .search {
