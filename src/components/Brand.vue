@@ -4,7 +4,7 @@
             :height="imgHeight"
             :width="imgWidth"
             alt="ShelfDat logo"
-            class="logo__img"
+            class="brand__img"
             src="images/logo.svg">
     </h1>
 </template>
@@ -19,4 +19,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.brand {
+    &__img {
+        display: inline;
+    }
+}
+</style>

@@ -5,19 +5,34 @@
             <li class="navbar__list-item">
                 <router-link to="/dashboard" class="navbar__link">
                     <span class="navbar__text">Dashboard</span>
-                    <img class="navbar__icon" src="images/dashboard_48p.svg" alt="Dashboard">
+                    <img
+                        alt="Dashboard"
+                        class="navbar__icon"
+                        height="22"
+                        src="images/icons/dashboard.svg"
+                        width="22">
                 </router-link>
             </li>
             <li class="navbar__list-item">
                 <router-link to="/inventory" class="navbar__link">
                     <span class="navbar__text">Inventory</span>
-                    <img class="navbar__icon" src="images/inventory_48p.svg" alt="Inventory">
+                    <img
+                        alt="Inventory"
+                        class="navbar__icon"
+                        height="22"
+                        src="images/icons/inventory.svg"
+                        width="22">
                 </router-link>
             </li>
             <li class="navbar__list-item">
                 <router-link to="/create" class="navbar__link">
                     <span class="navbar__text">Add Item</span>
-                    <img class="navbar__icon" src="images/library_add_48p.svg" alt="Add Item">
+                    <img
+                        alt="Add Item"
+                        class="navbar__icon"
+                        height="22"
+                        src="images/icons/library_add.svg"
+                        width="22">
                 </router-link>
             </li>
         </ul>
@@ -40,9 +55,8 @@ $nav-height: 60px;
     height: $nav-height;
 
     &__icon {
-        filter: invert(38%);
-        height: 32px;
-        width: 32px;
+        height: 22px;
+        width: 22px;
     }
 
     &__link {
@@ -60,10 +74,11 @@ $nav-height: 60px;
         }
 
         // These classes are added by Vue Router
+        // @link https://codepen.io/sosuke/pen/Pjoqqp
         &.router-link-active,
         &.router-link-exact-active {
             #{$self}__icon {
-                filter: invert(100%);
+                //filter: invert(16%) sepia(76%) saturate(2869%) hue-rotate(210deg) brightness(94%) contrast(105%);
             }
         }
     }

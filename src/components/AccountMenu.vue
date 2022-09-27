@@ -35,7 +35,7 @@ export default {
     methods: {
         ...mapActions(['logout']),
         profileImage(imageName) {
-            return imageName ? `${process.env.VUE_APP_S3_BUCKET_URL}images/users/codeengie/${imageName}` : 'images/account_circle-24px.svg';
+            return imageName ? `${process.env.VUE_APP_S3_BUCKET_URL}images/users/codeengie/${imageName}` : 'images/icons/account_circle.svg';
         }
     }
 }
@@ -118,22 +118,21 @@ export default {
                 &::before {
                     content: '';
                     display: block;
-                    filter: invert(100%); // @todo Update with white icons
-                    height: 32px;
+                    height: 22px;
                     margin-right: 6px;
-                    width: 32px;
+                    width: 22px;
                 }
             }
 
             &--account {
                 &::before {
-                    background: transparent url('/images/account_48p.svg') 0 0/32px no-repeat;
+                    background: transparent url('/images/icons/account.svg') 0 0/22px no-repeat;
                 }
             }
 
             &--logout {
                 &::before {
-                    background: transparent url('/images/logout_48p.svg') 0 0/32px no-repeat;
+                    background: transparent url('/images/icons/logout.svg') 0 0/22px no-repeat;
                 }
             }
         }
