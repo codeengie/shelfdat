@@ -51,10 +51,13 @@
     </div>
     <Details
         :bin="details.bin"
-        :location="details.location"
+        :collection="details.collection"
+        :format="details.format"
         :img-src="details.image"
+        :location="details.location"
         :timestamp="details.timestamp"
         :title="details.title"
+        :type="details.type"
         ref="details"/>
 </template>
 
@@ -81,9 +84,14 @@ export default {
             pageTitle: this.$route.meta.title,
             searchInput: '',
             details: {
+                bin: 0,
+                collection: false,
+                format: '',
                 image: '',
+                location: '',
                 timestamp: '',
-                title: ''
+                title: '',
+                type: ''
             }
         }
     },
@@ -104,10 +112,13 @@ export default {
             //console.log('UID received from Poster: ', event);
             const found = this.inventoryData.find(element => element.id === event);
             this.details.bin = found.container;
+            this.details.collection = found.collection;
+            this.details.format = found.format;
             this.details.image = found.imageurl;
             this.details.location = found.location;
             this.details.timestamp = found.createdate;
             this.details.title = found.title;
+            this.details.type = found.type;
             this.$refs.details.toggleDialog();
         },
         async deleteMedia(event) {

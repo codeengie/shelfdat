@@ -13,9 +13,14 @@
             <button class="details__edit" @click="edit">Edit</button>
             <h2 class="details__title">{{ titles[0] }} <span class="details__year">{{ titles[2] }}</span></h2>
             <h3 class="details__subtitle">{{ titles[1] }}</h3>
-            <ul></ul>
+            <ul class="details__icons">
+                <li class="details__icons-item" :class="rez" :title="format">{{ format }}</li>
+                <li class="details__icons-item" :class="typeSet" :title="type">{{ type }}</li>
+                <li class="details__icons-item details__icons-item--collection"
+                    v-if="collection" title="Collection">Collection</li>
+            </ul>
             <h4 class="details__header">Location</h4>
-            <p class="details__text">{{ location }} - Bin: {{ bin }}</p>
+            <p class="details__text">{{ location }}<span class="details__bullet">Bin:</span> {{ bin }}</p>
 
             <h4 class="details__header">Notes</h4>
             <p class="details__text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.</p>
@@ -29,11 +34,14 @@
 export default {
     name: 'Details',
     props: {
-        bin: String,
+        bin: Number,
+        collection: Boolean,
+        format: String,
         imgSrc: String,
         location: String,
         title: String,
         timestamp: String,
+        type: String
     },
     data() {
         return {
@@ -41,12 +49,27 @@ export default {
         }
     },
     computed: {
+        dialogMod() {
+            return this.isDialogOpen ? 'details--open' : '';
+        },
         prettyDate() {
             if (this.timestamp) {
                 const newDate = new Date(this.timestamp).toDateString().split(' ');
                 return `${newDate[1]} ${newDate[2]}, ${newDate[3]}`;
             } else {
                 return 'No date available';
+            }
+        },
+        rez() {
+            let modifier = 'details__icons-item--';
+
+            switch(this.format) {
+                case '4K Blu-ray':
+                    return `${modifier}fourkay`;
+                case 'Blu-ray':
+                    return `${modifier}hd`;
+                default:
+                    return `${modifier}sd`;
             }
         },
         setImage() {
@@ -57,8 +80,9 @@ export default {
                 return (/[)]/.test(title)) ? title = '('.concat(title) : title.trim();
             });
         },
-        dialogMod() {
-            return this.isDialogOpen ? 'details--open' : '';
+        typeSet() {
+            let modifier = 'details__icons-item--';
+            return this.type.toLocaleLowerCase() === 'movie' ? `${modifier}movie` : `${modifier}tv`;
         }
     },
     methods: {
@@ -82,12 +106,19 @@ export default {
 
 .details {
     background-color: var(--dialog-bg-color);
-    height: 0;
+    //height: 0;
     inset: 0; // Equivalent to top, right, bottom, left = 0
     overflow: hidden;
     position: fixed;
-    transition: all .2s ease-in;
+    transition: all .3s cubic-bezier(.08,.82,.17,1);;
     transform: translateY(100%);
+
+    &__bullet {
+        &::before {
+            content: '\00B7';
+            padding: 0 6px;
+        }
+    }
 
     &__close {
         @extend %hide-text;
@@ -156,6 +187,52 @@ export default {
         margin-top: 30px;
     }
 
+    &__icons {
+        display: flex;
+        margin-top: 18px;
+
+        &-item {
+            &:not(:first-child) {
+                margin-left: 10px;
+            }
+
+            &--collection,
+            &--fourkay,
+            &--hd,
+            &--movie,
+            &--sd,
+            &--tv {
+                @extend %hide-text;
+                height: 24px;
+                width: 24px;
+            }
+
+            &--collection {
+                background: transparent url('/images/icons/collections.svg') center center/24px no-repeat;
+            }
+
+            &--fourkay {
+                background: transparent url('/images/icons/4k.svg') center center/24px no-repeat;
+            }
+
+            &--hd {
+                background: transparent url('/images/icons/hd.svg') center center/24px no-repeat;
+            }
+
+            &--movie {
+                background: transparent url('/images/icons/movie.svg') center center/24px no-repeat;
+            }
+
+            &--sd {
+                background: transparent url('/images/icons/sd.svg') center center/24px no-repeat;
+            }
+
+            &--tv {
+                background: transparent url('/images/icons/tv.svg') center center/24px no-repeat;
+            }
+        }
+    }
+
     &__img {
         position: absolute;
         height: 100vh;
@@ -180,15 +257,11 @@ export default {
         margin-top: 12px;
     }
 
-    &__title {
-        //margin-top: 32px;
-    }
-
     &--open {
-        height: 100%;
+        //height: 100%;
         top: 52px;
         transform: translateY(0);
-        transition: all .2s ease-out;
+        transition: all .2s cubic-bezier(.65,.05,.36,1);;
     }
 }
 </style>
