@@ -43,6 +43,7 @@
 
 .main {
     grid-area: main;
+    position: relative;
     overflow: auto;
 }
 </style>

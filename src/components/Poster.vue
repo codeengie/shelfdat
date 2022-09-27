@@ -9,7 +9,7 @@
                 :width="posterWidth"
                 @click="getId"
                 alt="Poster"
-                class="poster_img"
+                class="poster__img"
                 loading="lazy">
         </a>
     </figure>
@@ -18,6 +18,7 @@
 <script>
 export default {
     name: 'Poster',
+    emits: ['broadcastId'],
     props: {
         posterHeight: {
             default: '248',
@@ -38,7 +39,8 @@ export default {
     },
     methods: {
         getId(event) {
-            console.log(event);
+            this.$emit('broadcastId', event.target.dataset.uid);
+            //console.log(event.target.dataset.uid);
         }
     }
 }

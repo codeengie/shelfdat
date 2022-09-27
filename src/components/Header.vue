@@ -28,6 +28,7 @@ export default {
     background-color: var(--woodsmoke);
     display: flex;
     height: 52px;
-    margin: 0 var(--block-spacing);
+    padding: 0 var(--block-spacing);
+    z-index: 10;
 }
 </style>

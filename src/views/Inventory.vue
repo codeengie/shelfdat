@@ -24,7 +24,8 @@
                 poster-height="162"
                 :poster-title="media.title"
                 poster-width="108"
-                :poster-src="media.imageurl"/>
+                :poster-src="media.imageurl"
+                @broadcast-id="showDetails"/>
         </div>
 
         <!-- Redo this component to use Dynamic Props 93 -->
@@ -48,7 +49,13 @@
             </nas-modwrap>
         </section>-->
     </div>
-    <Details/>
+    <Details
+        :bin="details.bin"
+        :location="details.location"
+        :img-src="details.image"
+        :timestamp="details.timestamp"
+        :title="details.title"
+        ref="details"/>
 </template>
 
 <script>
@@ -72,7 +79,12 @@ export default {
         return {
             filterLabels: ['All', '4K', 'BRAY', 'DVD'],
             pageTitle: this.$route.meta.title,
-            searchInput: ''
+            searchInput: '',
+            details: {
+                image: '',
+                timestamp: '',
+                title: ''
+            }
         }
     },
     created() {
@@ -88,13 +100,22 @@ export default {
     },
     methods: {
         ...mapActions(['getInventory']),
+        showDetails(event) {
+            //console.log('UID received from Poster: ', event);
+            const found = this.inventoryData.find(element => element.id === event);
+            this.details.bin = found.container;
+            this.details.image = found.imageurl;
+            this.details.location = found.location;
+            this.details.timestamp = found.createdate;
+            this.details.title = found.title;
+            this.$refs.details.toggleDialog();
+        },
         async deleteMedia(event) {
             if (window.confirm('Do you really want to delete item?')) {
                 const response = await fetch(process.env.VUE_APP_API_URL, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json'/*,
-                        'X-Api-Key' : process.env.VUE_APP_SECRET_KEY*/
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(event)
                 });

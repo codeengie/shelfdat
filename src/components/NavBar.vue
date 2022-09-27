@@ -53,6 +53,7 @@ $nav-height: 60px;
     background-color: var(--navbar-bg);
     grid-area: navbar;
     height: $nav-height;
+    z-index: 10;
 
     &__icon {
         height: 22px;
