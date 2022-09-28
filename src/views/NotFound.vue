@@ -1,10 +1,17 @@
 <template>
-    <div class="not-found">
-        <h1 class="not-found__header">
-            <span class="not-found__header-main">404 Page Not Found</span>
-            <span class="not-found__header-subtitle">There was a glitch in the Matrix!</span>
-        </h1>
-        <p class="not-found__text">We could&rsquo;t find the page you are looking, but don't fret sometimes getting lost is a good thing.</p>
+    <div class="content">
+        <div class="not-found">
+            <figure class="not-found__fig">
+                <img
+                    alt="Command line window displaying error"
+                    class="not-found__img"
+                    height="218"
+                    src="/images/pages/404/error.svg"
+                    width="306">
+            </figure>
+            <p class="not-found__text">We couldn&rsquo;t find the page you&rsquo;re looking for</p>
+            <router-link to="/login" class="not-found__button" tag="button">Go Back</router-link>
+        </div>
     </div>
 </template>
 
@@ -15,22 +22,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.content {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    padding: 0 20px;
+}
+
 .not-found {
-    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
-    &__header {
-        &-main,
-        &-subtitle {
-            display: block;
-        }
+    &__button {
+        align-items: center;
+        background-color: var(--cobalt);
+        display: flex;
+        font-size: 1.4rem;
+        height: 40px;
+        justify-content: center;
+        text-decoration: none;
+        margin-top: 32px;
+        width: 120px;
 
-        &-main {
-            font-size: 2.6rem;
+        &:link,
+        &:hover,
+        &:visited {
+            color: var(--white);
         }
+    }
 
-        &-subtitle {
-            font-size: 1.8rem;
+    &__fig {
+        width: 306px;
+    }
+
+    &__img {
+        box-shadow: rgba(0, 0, 0, .35) 0 5px 15px;
+    }
+
+    &__text {
+        color: var(--white);
+        font: {
+            size: 2.2rem;
+            weight: var(--weight-semibold);
         }
+        line-height: 1.4;
+        margin-top: 24px;
     }
 }
 </style>

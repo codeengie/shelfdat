@@ -24,11 +24,6 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'AccountMenu',
-    data() {
-        return {
-
-        }
-    },
     computed: {
         ...mapGetters(['userInfo'])
     },
