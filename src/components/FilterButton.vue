@@ -11,9 +11,20 @@ export default {
     props: {
         buttonName: String
     },
+    computed: {
+        isActive() {
+            return this.active ? 'filter__button--active' : '';
+        }
+    },
     methods: {
         filterBy(event) {
-            console.log('Filter button clicked:', event.target);
+            let currElement = event.target;
+            const buttons = currElement
+                .closest('div')
+                .querySelectorAll('.filter__button--active');
+
+            buttons.forEach(button => button.classList.remove('filter__button--active'));
+            currElement.classList.add('filter__button--active');
         }
     }
 }
@@ -32,6 +43,11 @@ $button-spacing: 4px;
         &:hover {
             background-color: var(--filter-button-hover);
             color: var(--filter-button-text-hover);
+        }
+
+        &--active {
+            background-color: var(--primary-button-bg-color);
+            color: var(--white);
         }
     }
 }
