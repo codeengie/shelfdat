@@ -5,7 +5,7 @@
             :width="imgWidth"
             alt="ShelfDat logo"
             class="brand__img"
-            src="images/logo.svg">
+            src="/images/global/logo.svg">
     </h1>
 </template>
 

@@ -34,7 +34,7 @@ export default {
     },
     computed: {
         srcImage() {
-            return this.posterSrc ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.posterSrc}` : 'images/placeholder.svg';
+            return this.posterSrc ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.posterSrc}` : 'images/global/placeholder.svg';
         }
     },
     methods: {

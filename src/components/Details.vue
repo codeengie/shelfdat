@@ -73,7 +73,7 @@ export default {
             }
         },
         setImage() {
-            return this.imgSrc ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.imgSrc}` : 'images/placeholder.svg';
+            return this.imgSrc ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.imgSrc}` : 'images/global/placeholder.svg';
         },
         titles() {
             return this.title.split(/[:(]/).map(title => {
