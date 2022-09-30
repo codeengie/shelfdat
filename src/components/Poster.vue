@@ -40,7 +40,6 @@ export default {
     methods: {
         getId(event) {
             this.$emit('broadcastId', event.target.dataset.uid);
-            //console.log(event.target.dataset.uid);
         }
     }
 }

@@ -96,6 +96,7 @@ export default {
 
         &--input {
             height: 63px;
+            position: relative;
 
             &.focused {
                 #{$this} {
@@ -124,6 +125,7 @@ export default {
         }
         color: var(--input-text-color);
         font-size: 1.6rem;
+        margin-top: 20px;
         position: relative;
         width: 100%;
         z-index: 1;
@@ -131,9 +133,10 @@ export default {
 
     &__label {
         color: var(--input-text-color);
-        display: inline-block;
         font-size: 1.6rem;
-        height: 20px;
+        left: 0;
+        position: absolute;
+        top: 0;
         transform: translateY(20px);
         transition: all .2s;
     }
