@@ -37,10 +37,10 @@
                     :stat-label="donutTypes[index]"/>
             </div>
         </div>
-        <!-- Display latest inventory items -->
-        <LatestItems
+        <!-- Display recent inventory items -->
+        <Recent
             :db-data="inventoryData"
-            :display-num="12"/>
+            :display-num="6"/>
     </div>
 </template>
 
@@ -48,7 +48,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import ChartStat from '../components/ChartStat';
 import DoughnutChart from '../components/DoughnutChart';
-import LatestItems from '../components/LatestItems';
+import Recent from '../components/Recent';
 import LineLoader from '../components/LineLoader';
 
 export default {
@@ -56,7 +56,7 @@ export default {
     components: {
         ChartStat,
         DoughnutChart,
-        LatestItems,
+        Recent,
         LineLoader
     },
     data() {
@@ -159,6 +159,7 @@ export default {
 // @todo Apply this globally if you add LineLoader component in other pages
 .content {
     position: relative;
+    padding-bottom: 20px;
 }
 
 .donut {

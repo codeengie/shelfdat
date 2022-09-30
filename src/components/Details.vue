@@ -255,6 +255,7 @@ export default {
     }
 
     &__text {
+        line-height: 1.2;
         margin-top: 12px;
     }
 

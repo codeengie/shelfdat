@@ -43,11 +43,15 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import FilterButton from '../components/FilterButton';
 import Search from '../components/Search';
 import Poster from '../components/Poster';
-import Details from '../components/Details';
+//import Details from '../components/Details';
+
+// Let's be lazy
+const Details = defineAsyncComponent(() => import('../components/Details'));
 
 export default {
     name: 'Inventory',
@@ -145,8 +149,10 @@ export default {
 .inventory {
     display: grid;
     gap: 24px;
-    grid-template-columns: repeat(auto-fill, 108px);
-    grid-auto-rows: 162px;
+    grid: {
+        template-columns: repeat(auto-fill, 108px);
+        auto-rows: 162px;
+    }
     margin-top: 40px;
 }
 
