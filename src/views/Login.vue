@@ -23,8 +23,6 @@
                 :class="{ 'button--spinner': loadStatus }"
                 class-name="login-form__button"/>
 
-            <!--<a href="#" @click="toggleClass()">Spin!</a>-->
-
             <p class="login-form__signup">Don&rsquo;t have an account?
                 <router-link class="login-form__link" to="/signup">Sign Up</router-link>
             </p>
@@ -34,8 +32,6 @@
 </template>
 
 <script>
-// @todo Doubt I need this, remove here and from package.json
-// import AmplifyVue from '@aws-amplify/ui-vue';
 import { mapActions, mapGetters } from 'vuex';
 import Brand from '../components/Brand';
 import Button from '../components/Button';
@@ -53,8 +49,7 @@ export default {
     data() {
         return {
             emailInput: null,
-            passwordInput: null,
-            spin: false
+            passwordInput: null
         }
     },
     computed: {
@@ -78,9 +73,6 @@ export default {
                 this.$refs.inputfield.validateField();
                 console.log('Trigger forced validation...');
             }*/
-        },
-        toggleClass() {
-            this.spin = !this.spin;
         }
     }
 }
@@ -108,11 +100,11 @@ export default {
     $this: &; // Let's cache the root selector @todo remove if not used
     display: flex;
     flex-flow: column;
-    margin: 94px auto 0;
+    margin: 125px auto 0;
     width: 290px;
 
     &__button {
-        margin-top: 26px;
+        margin-top: 28px;
     }
 
     &__forgot {
@@ -120,12 +112,19 @@ export default {
             size: 1.2rem;
             weight: var(--weight-medium);
         }
+        margin-top: 8px;
         text-align: right;
+    }
+
+    &__link {
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &__signup {
         font-size: 1.2rem;
-        margin-top: 12px;
+        margin-top: 65px;
         text-align: center;
     }
 }

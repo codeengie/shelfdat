@@ -86,7 +86,8 @@ export default {
         color: var(--input-error-color);
         display: block;
         font-size: 1.2rem;
-        margin-top: 8px;
+        letter-spacing: .1px;
+        margin-top: 10px;
     }
 
     &__group {
@@ -95,7 +96,7 @@ export default {
         }
 
         &--input {
-            height: 63px;
+            height: 70px;
             position: relative;
 
             &.focused {
@@ -125,7 +126,9 @@ export default {
         }
         color: var(--input-text-color);
         font-size: 1.6rem;
-        margin-top: 20px;
+        letter-spacing: .95px;
+        margin-top: 24px;
+        padding-bottom: 6px;
         position: relative;
         width: 100%;
         z-index: 1;
@@ -137,7 +140,7 @@ export default {
         left: 0;
         position: absolute;
         top: 0;
-        transform: translateY(20px);
+        transform: translateY(25px);
         transition: all .2s;
     }
 }
