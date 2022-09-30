@@ -4,8 +4,9 @@
 
         <!-- Search Inventory -->
         <Search
+            :search-data="inventoryData"
             placeholder-text="search"
-            v-model="searchInput"/>
+            @searched-inventory="setFilteredData"/>
 
         <!-- Filters -->
         <div class="filters">
@@ -18,44 +19,24 @@
         <!-- Inventory -->
         <div class="inventory">
             <Poster
-                v-for="media in mediaSearch"
-                :key="media.id"
-                :poster-id="media.id"
+                v-for="inventory in filteredInventoryData"
+                :key="inventory.id"
+                :poster-id="inventory.id"
                 poster-height="162"
-                :poster-title="media.title"
+                :poster-title="inventory.title"
                 poster-width="108"
-                :poster-src="media.imageurl"
+                :poster-src="inventory.imageurl"
                 @broadcast-id="showDetails"/>
         </div>
-
-        <!-- Redo this component to use Dynamic Props 93 -->
-        <!--<section>
-            <nas-modwrap modifier="grid">
-                <template #default v-if="inventoryData">
-                    <Items
-                        v-for="media in mediaSearch"
-                        :key="media.id"
-                        :id="media.id"
-                        :container="media.container"
-                        :type="media.type"
-                        :format="media.format"
-                        :image="media.imageurl"
-                        :title="media.title"
-                        :location="media.location"
-                        :created="media.createdate"
-                        :notes="media.notes"
-                        @relay-inventory-id="deleteMedia"/>
-                </template>
-            </nas-modwrap>
-        </section>-->
     </div>
     <Details
-        :bin="details.bin"
         :collection="details.collection"
+        :container="details.container"
+        :createdate="details.createdate"
         :format="details.format"
-        :img-src="details.image"
+        :imageurl="details.imageurl"
         :location="details.location"
-        :timestamp="details.timestamp"
+        :notes="details.notes"
         :title="details.title"
         :type="details.type"
         ref="details"/>
@@ -64,7 +45,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import FilterButton from '../components/FilterButton';
-//import Items from '../components/Items';
 import Search from '../components/Search';
 import Poster from '../components/Poster';
 import Details from '../components/Details';
@@ -75,50 +55,52 @@ export default {
         Details,
         Poster,
         FilterButton,
-        //Items,
         Search
     },
     data() {
         return {
             filterLabels: ['All', '4K', 'BRAY', 'DVD'],
             pageTitle: this.$route.meta.title,
-            searchInput: '',
             details: {
-                bin: 0,
+                container: 0,
                 collection: false,
+                createdate: '',
                 format: '',
-                image: '',
+                imageurl: '',
                 location: '',
-                timestamp: '',
+                notes: '',
                 title: '',
                 type: ''
-            }
+            },
+            filteredInventoryData: null
         }
     },
-    created() {
-        this.getInventory();
+    mounted() {
+        // No `async` magic needed since we've already set store state
+        this.filteredInventoryData = this.inventoryData;
     },
     computed: {
         ...mapGetters(['inventoryData', 'loadStatus']),
-        mediaSearch() {
-            return this.inventoryData.filter(media => {
-                return media.title.toLowerCase().includes(this.searchInput.toLowerCase());
-            });
-        }
     },
     methods: {
         ...mapActions(['getInventory']),
+        // Use the emitted inventory data and set it to initial prop
+        setFilteredData(event) {
+            this.filteredInventoryData = event;
+        },
+        // Use the emitted UID to find specific inventory item and display it in the details
         showDetails(event) {
-            //console.log('UID received from Poster: ', event);
             const found = this.inventoryData.find(element => element.id === event);
-            this.details.bin = found.container;
-            this.details.collection = found.collection;
-            this.details.format = found.format;
-            this.details.image = found.imageurl;
-            this.details.location = found.location;
-            this.details.timestamp = found.createdate;
-            this.details.title = found.title;
-            this.details.type = found.type;
+
+            // Iterate through `found` and set the new data for `details` object
+            Object.entries(found).forEach(([key, value]) => {
+               for (const detail in this.details) {
+                   if (detail === key) {
+                       this.details[detail] = value;
+                   }
+               }
+            });
+
             this.$refs.details.toggleDialog();
         },
         async deleteMedia(event) {

@@ -80,6 +80,7 @@ router.beforeEach((to, from, next) => {
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
     //next(); // This should only be called once, reference vue docs when you start expanding
 
+    // @todo Need to fix this routing `isUserLoggedIn` logic
     if (to.name !== 'Login' && !store.state.isAuthenticated && !isUserLoggedIn) {
         next({ name: 'Login' });
     } else {

@@ -20,10 +20,10 @@
                     v-if="collection" title="Collection">Collection</li>
             </ul>
             <h4 class="details__header">Location</h4>
-            <p class="details__text">{{ location }}<span class="details__bullet">Bin:</span> {{ bin }}</p>
+            <p class="details__text">{{ location }}<span class="details__bullet">Bin:</span> {{ container }}</p>
 
             <h4 class="details__header">Notes</h4>
-            <p class="details__text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.</p>
+            <p class="details__text">{{ notes }}</p>
 
             <time class="details__date" datetime="2022-09-17T18:36:22.473Z">{{ prettyDate }}</time>
         </div>
@@ -34,13 +34,14 @@
 export default {
     name: 'Details',
     props: {
-        bin: Number,
         collection: Boolean,
+        container: Number,
+        createdate: String,
         format: String,
-        imgSrc: String,
+        imageurl: String,
         location: String,
+        notes: String,
         title: String,
-        timestamp: String,
         type: String
     },
     data() {
@@ -53,8 +54,8 @@ export default {
             return this.isDialogOpen ? 'details--open' : '';
         },
         prettyDate() {
-            if (this.timestamp) {
-                const newDate = new Date(this.timestamp).toDateString().split(' ');
+            if (this.createdate) {
+                const newDate = new Date(this.createdate).toDateString().split(' ');
                 return `${newDate[1]} ${newDate[2]}, ${newDate[3]}`;
             } else {
                 return 'No date available';
@@ -73,7 +74,7 @@ export default {
             }
         },
         setImage() {
-            return this.imgSrc ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.imgSrc}` : 'images/global/placeholder.svg';
+            return this.imageurl ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.imageurl}` : 'images/global/placeholder.svg';
         },
         titles() {
             return this.title.split(/[:(]/).map(title => {

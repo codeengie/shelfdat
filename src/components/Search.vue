@@ -2,9 +2,9 @@
     <div class="search">
         <input
             :placeholder="placeholderText"
-            @keyup="searchList"
-            @input="$emit('update:modelValue', $event.target.value)"
-            class="search__box">
+            @input="searchInventory"
+            class="search__box"
+            v-model="searchQuery">
     </div>
 </template>
 
@@ -12,22 +12,31 @@
 export default {
     name: 'Search',
     props: {
-        placeholderText: String
+        placeholderText: String,
+        searchData: Array
     },
-    emits: ['update:modelValue'],
+    emits: ['searchedInventory'],
     data() {
         return {
-            timeout: 900
+            timeout: 1000,
+            searchQuery: ''
         }
     },
     methods: {
-        // @todo Keep an eye on this, might need a conditional so it doesn't fire when empty
-        // Added a `setTimeout()` to help with the minor stuttering I've observed
-        searchList(event) {
-            clearTimeout(delayTime);
+        /**
+         * The `this` dilemma...setTimeout is invoked with a `this` of its own, which is why
+         * without it the search method fires as many times as the user types. There are a few
+         * ways of working around it, via a wrapper or bind. I found applying `this` to delayTime
+         * works.
+         */
+        searchInventory() {
+            clearTimeout(this.delayTime);
 
-            const delayTime = setTimeout(() => {
-                console.log('Searching with delay: ', event.target.value);
+            this.delayTime = setTimeout(() => {
+                let filtered = this.searchData.filter(data =>
+                    data.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+
+                this.$emit('searchedInventory', filtered);
             }, this.timeout);
         }
     }
