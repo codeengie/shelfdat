@@ -9,8 +9,10 @@
 export default {
     name: 'FilterButton',
     props: {
-        buttonName: String
+        buttonName: String,
+        filterData: Array
     },
+    emits: ['filteredInventory'],
     computed: {
         isActive() {
             return this.active ? 'filter__button--active' : '';
@@ -25,6 +27,10 @@ export default {
 
             buttons.forEach(button => button.classList.remove('filter__button--active'));
             currElement.classList.add('filter__button--active');
+
+            let filtered = this.filterData.filter(data => data.format.toLowerCase().includes(currElement.value.toLowerCase()));
+
+            this.$emit('filteredInventory', filtered);
         }
     }
 }

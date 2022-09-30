@@ -59,7 +59,6 @@ const store = createStore({
             try {
                 const session = (await Auth.currentSession()).getIdToken().getJwtToken();
                 const user = (await Auth.currentUserInfo());
-                // console.log(user);
 
                 if (session) {
                     dispatch('getUserSession', user);

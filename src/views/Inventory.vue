@@ -13,7 +13,9 @@
             <FilterButton
                 v-for="filterLabel in filterLabels"
                 :key="filterLabel"
-                :button-name="filterLabel"/>
+                :button-name="filterLabel"
+                :filter-data="filteredInventoryData"
+                @filtered-inventory="setFilteredData"/>
         </div>
 
         <!-- Inventory -->
