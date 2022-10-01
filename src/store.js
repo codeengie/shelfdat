@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from './aws/auth/config';
 import router from './routes';
+import logger from './utils/logger';
 
 Amplify.configure(awsconfig);
 
@@ -66,7 +67,7 @@ const store = createStore({
                     commit('setAuthenticated', true);
                 }
             } catch(err) {
-                console.log('There was an error with verifying session', err);
+                logger('There was an error verifying session.', err);
             }
         },
         getUserSession(context, payload) {
@@ -90,7 +91,7 @@ const store = createStore({
                 await router.push('/dashboard');
 
             } catch(err) {
-                console.log('There was an error with the login', err);
+                logger('There was an error authenticating user.', err);
             }
         },
         async logout(context) {
@@ -103,7 +104,7 @@ const store = createStore({
                     context.commit('setAuthenticated', false);
                     await router.push('/login');
                 } catch (err) {
-                    console.log('There was an error signing out: ', err);
+                    logger('There was an error signing out.', err);
                 }
             }
         },
@@ -128,6 +129,7 @@ const store = createStore({
                     commit('setLoadStatus', false);
                 } catch(err) {
                     console.error(err);
+                    logger('There was an error fetching inventory.', err);
                     throw err;
                 }
             }

@@ -3,7 +3,7 @@
         <Brand img-height="35"/>
 
         <!-- @todo Add `novalidate` attribute once you implement input field validation -->
-        <form class="login-form" @submit.prevent="submitForm()">
+        <form class="login-form" @submit.prevent="submitLogin()">
             <InputField
                 field-name="Email"
                 field-type="email"
@@ -60,19 +60,10 @@ export default {
     },
     methods: {
         ...mapActions(['login']),
-        submitForm() {
+        submitLogin() {
             if (this.emailInput && this.passwordInput) {
-                this.login({email: this.emailInput, password: this.passwordInput});
+                this.login({ email: this.emailInput, password: this.passwordInput });
             }
-        },
-        submitLoginForm() {
-            console.log('submitLoginForm');
-            /*if (this.emailInput || this.passwordInput) {
-                console.log(`Submitting login form: ${this.emailInput}, ${this.passwordInput}`);
-            } else {
-                this.$refs.inputfield.validateField();
-                console.log('Trigger forced validation...');
-            }*/
         }
     }
 }
