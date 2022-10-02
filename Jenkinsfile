@@ -1,33 +1,98 @@
+def setBuildVersion() {
+    date = new Date()
+    year = date.getYear() + 1900
+    week = date.getAt(Calendar.WEEK_OF_YEAR)
+    return "${year}.${week}."
+}
+
+def getJobName() {
+    return "${JOB_NAME.toLowerCase()}"
+}
+
 node {
-    stage('Initialize') {
-        // Clean workspace
-        echo 'Cleaning workspace'
-        deleteDir()
+    env.NODEJS_HOME = "${tool '14.15.0'}"
+    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+
+    stage('Init') {
+        //echo 'Cleaning workspace'
+        //deleteDir()
 
         // Initialize build parameters
-        echo 'Setting build name and description'
-        currentBuild.displayName = ""
-        currentBuild.description = ""
+        echo 'Setting build parameters'
+        currentBuild.displayName = "${setBuildVersion()}${BUILD_NUMBER}"
     }
 
     stage('Git') {
-        // Clone git repo
         echo "Cloning repo"
+
+        /**
+         * I wasn't able to use withCredentials() because it was not able to access the GitLab API Token
+         * even through I modified it to access the class. Also, interpolating the credentials variable into
+         * the repo url is a no go since it poses a security risk.
+         * Reference: @link https://github.com/jenkinsci/gitlab-plugin/issues/536
+         *
+         * Using checkout() required a bit of trickery in order to access the credentialsId. Apparently, accessing
+         * the token I created in GitLab cannot be accessed here if its not a ssh or username/password. So, I went
+         * back into credentials manager and created a username/password entry. This solution fixes two issues I
+         * ran into: credentials exposure during the job running and hardcoding the token in the url parameter.
+         * Reference: @link https://cloudaffaire.com/faq/secret-text-git-credentials-not-showing-up-in-jenkins-project-source-code-management-section/
+         */
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: '*/master']],
+            extensions: [
+                [$class: 'CleanBeforeCheckout']
+            ],
+            userRemoteConfigs: [
+                [credentialsId: 'gitlab-api-token', url: 'https://gitlab.com/codeengie/shelfdat']
+            ]
+        ])
     }
 
+    /**
+     * Since you are running Jenkins in a Docker you need to use `sh` and not `bat` or `powershell` to run scripts. Also,
+     * in order to run `npm install` you need to configure NodeJS as a global tool and declaring environment variables
+     * in the script.
+     */
     stage('NPM') {
-        // Install node modules
         echo 'Installing node modules'
+        dir("${WORKSPACE}") {
+            sh 'npm install'
+        }
     }
 
     stage('Build') {
-        // Run script to build app
-        echo 'Running production build'
+        echo 'Building for production'
+        dir("${WORKSPACE}") {
+            sh 'npm run build'
+        }
     }
 
     stage('Deploy') {
-        // Upload to S3 bucket
         echo 'Uploading artifact to S3 bucket'
+        s3Upload consoleLogLevel: 'INFO',
+        dontSetBuildResultOnFailure: false,
+        dontWaitForConcurrentBuildCompletion: false,
+        entries: [
+            [
+                bucket: "${getJobName()}.com",
+                excludedFile: '',
+                flatten: false,
+                gzipFiles: false,
+                keepForever: false,
+                managedArtifacts: false,
+                noUploadOnFailure: true,
+                selectedRegion: 'us-east-1',
+                showDirectlyInBrowser: false,
+                sourceFile: 'dist/**',
+                storageClass: 'STANDARD',
+                uploadFromSlave: false,
+                useServerSideEncryption: false
+            ]
+        ],
+        pluginFailureResultConstraint: 'FAILURE',
+        profileName: "jenkins-upload-${getJobName()}",
+        userMetadata: []
     }
 
     stage('Finish') {
