@@ -64,6 +64,26 @@ node {
         }
     }
 
+    /*
+     * I placed and created this step after 'Git' because invoking `checkout()` with parameter `CleanBeforeCheckout` removes
+     * the files created as part of a build. In this case the '.env.production' file I was initially creating in 'Init' stage.
+     * It drove me nuts before I caught on, went so far as setting folder permissions in shell.
+     */
+    stage('Pre-Flight') {
+        echo 'Set app environment variables'
+        fileOperations([
+        	fileCreateOperation(fileContent:
+        		'''
+        			NODE_ENV=production
+        			VUE_APP_API_URL="${VUE_API_URL}"
+        			VUE_APP_S3_BUCKET_URL="${VUE_BUCKET_URL}"
+        			VUE_APP_TITLE="${VUE_TITLE}"
+        		''',
+        		fileName: "${WORKSPACE}/.env.production"
+        	)
+        ])
+    }
+
     stage('Build') {
         echo 'Building for production'
         dir("${WORKSPACE}") {
