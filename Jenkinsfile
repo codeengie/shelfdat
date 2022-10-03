@@ -76,7 +76,7 @@ node {
         		'''
         			NODE_ENV=production
         			VUE_APP_API_URL="${VUE_API_URL}"
-        			VUE_APP_S3_BUCKET_URL="${VUE_BUCKET_URL}"
+        			VUE_APP_CACHE_BUCKET_URL="${VUE_CACHE_BUCKET_URL}"
         			VUE_APP_TITLE="${VUE_TITLE}"
         		''',
         		fileName: "${WORKSPACE}/.env.production"
