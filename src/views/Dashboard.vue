@@ -120,7 +120,7 @@ export default {
     .chart-stat {
         &__label {
             font-size: 1.6rem;
-            margin-top: 12px;
+            margin-top: 16px;
         }
 
         &__number {
@@ -137,7 +137,7 @@ export default {
 .category {
     background-color: var(--primary-bg-color);
     display: flex;
-    margin-top: 28px;
+    margin-top: 23px;
     padding: 8px;
 
     .chart-stat {
@@ -158,8 +158,10 @@ export default {
 
 // @todo Apply this globally if you add LineLoader component in other pages
 .content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     padding-bottom: 20px;
+    position: relative;
 }
 
 .donut {
@@ -169,7 +171,7 @@ export default {
     flex-direction: column;
     height: 410px;
     margin-bottom: 48px; // Addresses the offset of the categories
-    padding-top: 32px;
+    padding-top: 35px;
 
     &__constrain {
         height: 180px;
@@ -185,7 +187,7 @@ export default {
     }
 
     &__wrap {
-        margin-top: 26px;
+        margin-top: 22px;
         position: relative;
 
         .chart-stat {
@@ -199,15 +201,13 @@ export default {
     }
 }
 
-.latest {
-    display: inline-block; // Fix collapsible margin
-    margin-top: 32px;
-    width: 100%; // Compliments `inline-block` above
+.recent {
+    margin-top: 25px;
 }
 
 .segments {
     display: flex;
-    margin-top: 26px;
+    margin-top: 25px;
 
     .chart-stat {
         &:nth-child(even) {

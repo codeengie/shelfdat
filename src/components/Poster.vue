@@ -50,6 +50,9 @@ export default {
 
 <style lang="scss" scoped>
 .poster {
-    background-color: var(--shark);
+    &__img {
+        height: auto;
+        width: 100%;
+    }
 }
 </style>

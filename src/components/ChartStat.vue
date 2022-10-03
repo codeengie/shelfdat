@@ -48,10 +48,10 @@ export default {
 
     &__label {
         font: {
-            size: 1.4rem;
+            size: 1.2rem;
             weight: var(--weight-medium);
         }
-        margin-top: 4px;
+        margin-top: 7px;
     }
 
     &__number {

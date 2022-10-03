@@ -50,11 +50,8 @@ export default {
     &__wrap {
         display: grid;
         gap: 29px;
-        grid: {
-            template-columns: repeat(auto-fill, 108px);
-            auto-rows: 162px;
-        }
-        margin-top: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+        margin-top: 12px;
     }
 }
 </style>
