@@ -72,6 +72,7 @@ const store = createStore({
         },
         getUserSession(context, payload) {
             const userData =  {
+                id: payload.attributes.sub,
                 email: payload.attributes.email,
                 name: payload.attributes.name,
                 picture: payload.attributes.picture,

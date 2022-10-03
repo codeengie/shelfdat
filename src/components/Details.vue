@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'Details',
     props: {
@@ -50,6 +52,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['userInfo']),
         dialogMod() {
             return this.isDialogOpen ? 'details--open' : '';
         },
@@ -74,7 +77,7 @@ export default {
             }
         },
         setImage() {
-            return this.imageurl ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.imageurl}` : 'images/global/placeholder.svg';
+            return this.imageurl ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.imageurl}` : 'images/global/placeholder.svg';
         },
         titles() {
             return this.title.split(/[:(]/).map(title => {

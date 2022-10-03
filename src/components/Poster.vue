@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'Poster',
     emits: ['broadcastId'],
@@ -33,8 +35,9 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['userInfo']),
         srcImage() {
-            return this.posterSrc ? `${process.env.VUE_APP_S3_BUCKET_URL}images/inventory/posters/${this.posterSrc}` : 'images/global/placeholder.svg';
+            return this.posterSrc ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.posterSrc}` : 'images/global/placeholder.svg';
         }
     },
     methods: {
