@@ -1,9 +1,11 @@
 <template>
     <div class="search">
+        <label class="search__label" for="search-box"></label>
         <input
             :placeholder="placeholderText"
             @input="searchInventory"
             class="search__box"
+            id="search-box"
             v-model="searchQuery">
     </div>
 </template>
@@ -31,12 +33,15 @@ export default {
          */
         searchInventory() {
             clearTimeout(this.delayTime);
+            //const domElement = event.target.closest('div');
+            //domElement.classList.toggle('search--loader');
 
             this.delayTime = setTimeout(() => {
                 let filtered = this.searchData.filter(data =>
                     data.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
 
                 this.$emit('searchedInventory', filtered);
+                //event.target.closest('div').classList.toggle('search--loader');
             }, this.timeout);
         }
     }
@@ -45,22 +50,86 @@ export default {
 
 <style lang="scss" scoped>
 .search {
+    $self: &;
+    display: flex;
+
     &__box {
-        color: var(--search-text-color);
-        background: var(--search-bg-color) url('/images/icons/search.svg') 10px center/22px no-repeat;
+        background-color: var(--search-bg-color);
         border: 0;
+        color: var(--search-text-color);
         font: {
             family: 'Montserrat', sans-serif;
             size: 1.4rem;
         }
         height: 40px;
-        padding: 0 44px;
+        padding: 0 48px 0 2px;
         width: 100%;
 
         &::placeholder {
             color: var(--search-text-color);
             opacity: 1;
         }
+    }
+
+    &__label {
+        align-items: center;
+        background-color: var(--search-bg-color);
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        position: relative;
+        width: 48px;
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+        }
+
+        // Magnifying glass icon
+        &::after {
+            background: transparent url('/images/icons/search.svg') center center/22px no-repeat;
+            height: 22px;
+            scale: 1;
+            width: 22px;
+        }
+
+        // Loader icon
+        &::before {
+            border: 2px solid var(--dusty-gray) {
+                bottom-color: var(--cobalt);
+                radius: 50%;
+            }
+            height: 16px;
+            scale: 0;
+            width: 16px;
+        }
+    }
+
+    // Modifier
+    &--loader {
+        #{$self}__label {
+            &::after {
+                animation: swappa .8s linear reverse;
+                scale: 0;
+            }
+
+            &::before {
+                animation: swappa .8s, spin 1s linear infinite;
+                scale: 1;
+            }
+        }
+    }
+
+    // @todo Refactor with the same animation from button and place it globally scoped
+    @keyframes spin {
+        0% { rotate: 0deg; }
+        100% { rotate: 360deg; }
+    }
+
+    @keyframes swappa {
+        0% { scale: 0; }
+        100% { scale: 1 }
     }
 }
 </style>
