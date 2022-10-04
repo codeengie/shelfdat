@@ -47,14 +47,14 @@ export default {
 .search {
     &__box {
         color: var(--search-text-color);
-        background: var(--search-bg-color) url('/images/icons/search.svg') 16px center/22px no-repeat;
+        background: var(--search-bg-color) url('/images/icons/search.svg') 10px center/22px no-repeat;
         border: 0;
         font: {
             family: 'Montserrat', sans-serif;
             size: 1.4rem;
         }
         height: 40px;
-        padding: 0 60px;
+        padding: 0 44px;
         width: 100%;
 
         &::placeholder {

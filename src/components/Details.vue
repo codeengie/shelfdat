@@ -110,7 +110,6 @@ export default {
 
 .details {
     background-color: var(--dialog-bg-color);
-    //height: 0;
     inset: 0; // Equivalent to top, right, bottom, left = 0
     overflow: hidden;
     position: fixed;
@@ -127,10 +126,11 @@ export default {
     &__close {
         @extend %hide-text;
         background: transparent url('/images/icons/arrow.svg') 0 0/20px no-repeat;
+        filter: drop-shadow(2px 2px 3px #000);
         height: 20px;
         left: 20px;
         position: absolute;
-        top: 26px;
+        top: 16px;
         width: 20px;
         z-index: 1;
     }
@@ -149,7 +149,7 @@ export default {
     &__date {
         display: block;
         font-size: 1.2rem;
-        margin-top: 28px;
+        margin-top: 27px;
         text-align: right;
     }
 
@@ -188,12 +188,12 @@ export default {
             size: 1.8rem;
             weight: var(--weight-normal);
         }
-        margin-top: 30px;
+        margin-top: 45px;
     }
 
     &__icons {
         display: flex;
-        margin-top: 18px;
+        margin-top: 12px;
 
         &-item {
             &:not(:first-child) {
@@ -240,7 +240,6 @@ export default {
     &__img {
         position: absolute;
         height: 100vh;
-        //inset: 0;
         object-fit: cover;
         top: -50%;
         width: 100vw;
@@ -254,16 +253,20 @@ export default {
 
     &__subtitle {
         font-size: 1.4rem;
-        margin-top: 20px;
+        margin-top: 16px;
     }
 
     &__text {
-        line-height: 1.2;
-        margin-top: 12px;
+        line-height: 1.28;
+        margin-top: 15px;
     }
 
+    &__year {
+        margin-left: 9px;
+    }
+
+    // Modifier(s)
     &--open {
-        //height: 100%;
         top: 52px;
         transform: translateY(0);
         transition: all .2s cubic-bezier(.65,.05,.36,1);;

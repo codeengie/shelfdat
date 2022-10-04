@@ -129,7 +129,7 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-    padding: 0 var(--block-spacing);
+    padding: 35px var(--block-spacing) 24px;
 
     &__title {
         color: var(--secondary-text-color);
@@ -137,13 +137,13 @@ export default {
             size: var(--primary-text-size);
             weight: var(--weight-medium);
         }
-        margin-top: 32px;
+        //margin-top: 32px;
     }
 }
 
 .filters {
     display: grid;
-    gap: 8px;
+    gap: 10px;
     grid-template-columns: repeat(4, 60px);
     margin-top: 16px;
 }
@@ -159,6 +159,6 @@ export default {
 }
 
 .search {
-    margin-top: 18px;
+    margin-top: 22px;
 }
 </style>
