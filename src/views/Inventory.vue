@@ -11,10 +11,12 @@
         <!-- Filters -->
         <div class="filters">
             <FilterButton
-                v-for="filterLabel in filterLabels"
-                :key="filterLabel"
-                :button-name="filterLabel"
-                :filter-data="filteredInventoryData"
+                v-for="(filter, index) in filters.labels"
+                :key="filter"
+                :button-name="filter"
+                :class="{ 'filter__button--active': index === 0 }"
+                :filter-data="inventoryData"
+                :keyword="filters.keywords[index]"
                 @filtered-inventory="setFilteredData"/>
         </div>
 
@@ -65,7 +67,10 @@ export default {
     },
     data() {
         return {
-            filterLabels: ['All', '4K', 'BRAY', 'DVD'],
+            filters: {
+                keywords: ['', '4K Blu-ray', 'Blu-ray', 'DVD'],
+                labels: ['All', '4K', 'BRAY', 'DVD'],
+            },
             pageTitle: this.$route.meta.title,
             details: {
                 container: 0,
@@ -80,6 +85,9 @@ export default {
             },
             filteredInventoryData: null
         }
+    },
+    created() {
+        this.getInventory();
     },
     mounted() {
         // No `async` magic needed since we've already set store state
@@ -137,7 +145,6 @@ export default {
             size: var(--primary-text-size);
             weight: var(--weight-medium);
         }
-        //margin-top: 32px;
     }
 }
 
@@ -151,10 +158,7 @@ export default {
 .inventory {
     display: grid;
     gap: 24px;
-    grid: {
-        template-columns: repeat(auto-fill, 108px);
-        auto-rows: 162px;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
     margin-top: 40px;
 }
 

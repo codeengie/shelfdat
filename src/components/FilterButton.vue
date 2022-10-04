@@ -1,7 +1,7 @@
 <template>
     <button
         @click="filterBy"
-        :value="buttonName"
+        :value="keyword"
         class="filter__button">{{ buttonName }}</button>
 </template>
 
@@ -10,7 +10,8 @@ export default {
     name: 'FilterButton',
     props: {
         buttonName: String,
-        filterData: Array
+        filterData: Array,
+        keyword: String
     },
     emits: ['filteredInventory'],
     computed: {
@@ -20,17 +21,25 @@ export default {
     },
     methods: {
         filterBy(event) {
-            let currElement = event.target;
-            const buttons = currElement
-                .closest('div')
-                .querySelectorAll('.filter__button--active');
+            const currElement = event.target;
 
-            buttons.forEach(button => button.classList.remove('filter__button--active'));
-            currElement.classList.add('filter__button--active');
+            this.filterToggle(currElement);
 
-            let filtered = this.filterData.filter(data => data.format.toLowerCase().includes(currElement.value.toLowerCase()));
-
+            // Filter inventory data using filter keyword
+            let filtered = this.filterData.filter(data =>
+                data.format.toLowerCase().includes(currElement.value.toLowerCase()));
             this.$emit('filteredInventory', filtered);
+        },
+        // Toggle the active state of the filter buttons
+        filterToggle(buttonElement) {
+            // Get all the filter buttons
+            const buttons = buttonElement.closest('div').querySelectorAll('.filter__button');
+
+            // Find and remove `--active` class from previously clicked filter button
+            buttons.forEach(button => button.classList.remove('filter__button--active'));
+
+            // Add `--active` class to filter button that was clicked
+            buttonElement.classList.add('filter__button--active');
         }
     }
 }
@@ -44,11 +53,13 @@ $button-spacing: 4px;
         color: var(--filter-button-text-color);
         background-color: var(--filter-button-bg);
         height: 32px;
+        transition: all .2s ease-out;
         width: 60px;
 
         &:hover {
             background-color: var(--filter-button-hover);
             color: var(--filter-button-text-hover);
+            transition: all .4s ease-in;
         }
 
         &--active {
