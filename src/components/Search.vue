@@ -31,17 +31,18 @@ export default {
          * ways of working around it, via a wrapper or bind. I found applying `this` to delayTime
          * works.
          */
-        searchInventory() {
+        searchInventory(event) {
             clearTimeout(this.delayTime);
-            //const domElement = event.target.closest('div');
-            //domElement.classList.toggle('search--loader');
+            const domElement = event.target.closest('div');
+
+            domElement.classList.add('search--loader');
 
             this.delayTime = setTimeout(() => {
                 let filtered = this.searchData.filter(data =>
                     data.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
 
                 this.$emit('searchedInventory', filtered);
-                //event.target.closest('div').classList.toggle('search--loader');
+                domElement.classList.remove('search--loader');
             }, this.timeout);
         }
     }
@@ -90,7 +91,9 @@ export default {
         &::after {
             background: transparent url('/images/icons/search.svg') center center/22px no-repeat;
             height: 22px;
+            opacity: 1;
             scale: 1;
+            transition: all .3s;
             width: 22px;
         }
 
@@ -101,7 +104,9 @@ export default {
                 radius: 50%;
             }
             height: 16px;
+            opacity: 0;
             scale: 0;
+            transition: all .3s;
             width: 16px;
         }
     }
@@ -109,13 +114,17 @@ export default {
     // Modifier
     &--loader {
         #{$self}__label {
+            // Magnifying glass icon
             &::after {
-                animation: swappa .8s linear reverse;
+                animation: swappa .2s linear reverse, ghost .1s ease;
+                opacity: 0;
                 scale: 0;
             }
 
+            // Loader icon
             &::before {
-                animation: swappa .8s, spin 1s linear infinite;
+                animation: swappa .4s cubic-bezier(.16, 1, .3, 1), spin .8s linear infinite;
+                opacity: 1;
                 scale: 1;
             }
         }
@@ -129,7 +138,12 @@ export default {
 
     @keyframes swappa {
         0% { scale: 0; }
-        100% { scale: 1 }
+        100% { scale: 1; }
+    }
+
+    @keyframes ghost {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
     }
 }
 </style>
