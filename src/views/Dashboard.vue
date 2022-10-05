@@ -73,17 +73,9 @@ export default {
             donutTypes: ['Movies', 'TV Shows']
         };
     },
-    created() {
-        this.getInventory();
-    },
     async mounted() {
-        try {
-            await this.getInventory();
-            this.donutData.datasets[0].data = this.donutSegmentData;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
+        await this.getInventory();
+        this.donutData.datasets[0].data = this.donutSegmentData;
     },
     computed: {
         ...mapGetters([

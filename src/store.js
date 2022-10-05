@@ -124,12 +124,12 @@ const store = createStore({
                 try {
                     const response = await fetch(process.env.VUE_APP_API_URL, settings);
                     const responseData = await response.json();
+
                     commit('setInventory', responseData.data);
                     dispatch('calcDonutLegend', {data: state.inventory, key: 'format', mutant:'setDonutSegments'});
                     dispatch('calcDonutLegend', {data: state.inventory, key: 'type', mutant: 'setDonutTypes'})
                     commit('setLoadStatus', false);
                 } catch(err) {
-                    console.error(err);
                     logger('There was an error fetching inventory.', err);
                     throw err;
                 }

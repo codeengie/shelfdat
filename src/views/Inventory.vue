@@ -86,11 +86,8 @@ export default {
             filteredInventoryData: null
         }
     },
-    created() {
-        this.getInventory();
-    },
-    mounted() {
-        // No `async` magic needed since we've already set store state
+    async created() {
+        await this.getInventory();
         this.filteredInventoryData = this.inventoryData;
     },
     computed: {
