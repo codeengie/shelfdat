@@ -2,19 +2,21 @@
     <div class="account-menu">
         <img class="account-menu__pic" :src="profileImage(userInfo.picture)" width="20" height="20" alt="Simple humanoid upper body surrounded by a black circle">
         <p class="account-menu__user"><span>{{ userInfo.username }}</span></p>
-        <div class="account-menu__drawer">
-            <div class="account-menu__drawer-profile">
-                <span class="account-menu__drawer-name">{{ userInfo.name }}</span>
-                <span class="account-menu__drawer-email">{{ userInfo.email }}</span>
+        <div class="account-menu__drawer" ref="drawer">
+            <div class="account-menu__wrap">
+                <div class="account-menu__drawer-profile">
+                    <span class="account-menu__drawer-name">{{ userInfo.name }}</span>
+                    <span class="account-menu__drawer-email">{{ userInfo.email }}</span>
+                </div>
+                <ul class="account-menu__drawer-list">
+                    <li class="account-menu__drawer-item">
+                        <a class="account-menu__drawer-link account-menu__drawer-link--account" href="#">Account</a>
+                    </li>
+                    <li class="account-menu__drawer-item">
+                        <a class="account-menu__drawer-link account-menu__drawer-link--logout" href="#" @click.prevent="logout()">Logout</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="account-menu__drawer-list">
-                <li class="account-menu__drawer-item">
-                    <a class="account-menu__drawer-link account-menu__drawer-link--account" href="#">Account</a>
-                </li>
-                <li class="account-menu__drawer-item">
-                    <a class="account-menu__drawer-link account-menu__drawer-link--logout" href="#" @click.prevent="logout()">Logout</a>
-                </li>
-            </ul>
         </div>
     </div>
 </template>
@@ -48,18 +50,19 @@ export default {
 
     &:hover {
         #{$this}__drawer {
-            display: block;
+            max-height: 164px;
+            transition: max-height .4s cubic-bezier(.7, 0, .84, 0);
         }
     }
 
     &__drawer {
         background: var(--account-menu-bg-color);
-        border-radius: 12px;
-        display: none;
-        padding: 20px;
+        max-height: 0;
+        overflow: hidden;
         position: absolute;
-        right: 0;
+        right: -20px;
         top: 38px;
+        transition: max-height .2s cubic-bezier(.16, 1, .3, 1);
         z-index: 2;
 
         &-email,
@@ -93,7 +96,7 @@ export default {
                 size: 1.4rem;
                 weight: var(--weight-medium);
             }
-            padding: 4px;
+            padding: 8px;
             text-decoration: none;
             transition: all .2s ease-out;
 
@@ -113,27 +116,27 @@ export default {
                 &::before {
                     content: '';
                     display: block;
-                    height: 22px;
-                    margin-right: 6px;
-                    width: 22px;
+                    height: 18px;
+                    margin-right: 12px;
+                    width: 18px;
                 }
             }
 
             &--account {
                 &::before {
-                    background: transparent url('/images/icons/account.svg') 0 0/22px no-repeat;
+                    background: transparent url('/images/icons/account.svg') 0 0/18px no-repeat;
                 }
             }
 
             &--logout {
                 &::before {
-                    background: transparent url('/images/icons/logout.svg') 0 0/22px no-repeat;
+                    background: transparent url('/images/icons/logout.svg') 0 0/18px no-repeat;
                 }
             }
         }
 
         &-list {
-            margin-top: 16px;
+            margin-top: 20px;
         }
 
         &-name {
@@ -153,6 +156,10 @@ export default {
         }
         padding-left: 6px;
         white-space: nowrap;
+    }
+
+    &__wrap {
+        padding: 20px;
     }
 }
 </style>
