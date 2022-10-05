@@ -197,7 +197,7 @@ export default {
 
         &-item {
             &:not(:first-child) {
-                margin-left: 10px;
+                margin-left: 12px;
             }
 
             &--collection,
@@ -224,7 +224,7 @@ export default {
             }
 
             &--movie {
-                background: transparent url('/images/icons/movie.svg') center center/24px no-repeat;
+                background: transparent url('/images/icons/movie.svg') center center/22px no-repeat;
             }
 
             &--sd {
