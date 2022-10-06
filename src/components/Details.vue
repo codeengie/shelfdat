@@ -10,7 +10,7 @@
                 width="412">
         </figure>
         <div class="details__content">
-            <button class="details__edit" @click="edit">Edit</button>
+            <button class="details__edit" @click="edit" v-if="userInfo.role === 'superadmin'">Edit</button>
             <h2 class="details__title">{{ titles[0] }} <span class="details__year">{{ titles[2] }}</span></h2>
             <h3 class="details__subtitle">{{ titles[1] }}</h3>
             <ul class="details__icons">

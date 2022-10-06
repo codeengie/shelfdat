@@ -16,7 +16,7 @@ const router = createRouter({
             component: Login,
             meta: {
                 title: 'Login',
-                description: 'Quisque id volutpat risus.',
+                description: 'Log in to your ShelfDat account, the only app you\'ll ever need to manage your collections',
                 header: false,
                 navbar: false,
                 requiresAuth: false
@@ -28,7 +28,7 @@ const router = createRouter({
             component: Dashboard,
             meta: {
                 title: 'Dashboard',
-                description: 'Praesent rhoncus id ligula id consequat',
+                description: 'The dashboard peers into your collections and gives you stats at a glance',
                 header: true,
                 navbar: true,
                 requiresAuth: true
@@ -40,7 +40,7 @@ const router = createRouter({
             component: NotFound,
             meta: {
                 title: '404',
-                description: '404 Error Page',
+                description: '(404) We could\'t find the page you\'re looking for',
                 header: false,
                 navbar: false,
                 requiresAuth: false
@@ -52,7 +52,7 @@ const router = createRouter({
             component: Inventory,
             meta: {
                 title: 'Inventory',
-                description: 'In id eros et est dignissim suscipit',
+                description: 'View your entire collection with options to read details, search and filter',
                 header: true,
                 navbar: true,
                 requiresAuth: true
@@ -65,7 +65,7 @@ const router = createRouter({
             component: Create,
             meta: {
                 title: 'Create',
-                description: 'Aenean finibus, massa in lacinia viverra',
+                description: 'Add an item to any of your collections',
                 header: true,
                 navbar: true,
                 requiresAuth: true
@@ -74,14 +74,34 @@ const router = createRouter({
     ]
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
+    document.querySelector('meta[name="description"]').setAttribute('content', to.meta.description);
 
-    if (to.name !== 'Login' && !store.state.isAuthenticated) {
-        next({ name: 'Login' });
+    if (!store.state.isAuthenticated) {
+        await store.dispatch('reAuth');
+    }
+
+    /**
+     *  At the moment, if you hit the 'Login' page directly it fires `reAuth()` but doesn't redirect because it doesn't
+     *  know where you are going. But if you hit 'Dashboard', 'Inventory', 'Create' it redirects as expected.
+     * @todo Create another condition to redirect from 'Login'
+     */
+    if (to.matched.some(route => route.meta.requiresAuth)) {
+        if (!store.state.isAuthenticated) {
+            next({ name: 'Login' });
+        } else {
+            next();
+        }
     } else {
         next();
     }
+
+    /*if (to.name !== 'Login' && !store.state.isAuthenticated) {
+        next({ name: 'Login' });
+    } else {
+        next();
+    }*/
 });
 
 export default router;

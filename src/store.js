@@ -52,7 +52,7 @@ const store = createStore({
      * with the `store.dispatch` method.
      */
     actions: {
-        // Re-authenticate the user if they return to the site and a valid access token exists which has not expired
+        // Re-authenticate user if a valid access token exists and has not expired
         async reAuth({commit, dispatch}) {
             try {
                 const session = (await Auth.currentSession()).getIdToken().getJwtToken();
@@ -63,7 +63,7 @@ const store = createStore({
                     commit('setAuthenticated', true);
                 }
             } catch(err) {
-                logger('There was an error verifying session.', err);
+                logger('Re-auth failed. A valid token was not found.', err);
             }
         },
         // Retrieve user information from authentication
@@ -73,6 +73,9 @@ const store = createStore({
                 email: payload.attributes.email,
                 name: payload.attributes.name,
                 picture: payload.attributes.picture,
+                // @todo Throws errors, might require different method in `reAuth()`
+                //role: payload.signInUserSession.idToken.payload['cognito:groups'][0],
+                role: 'superadmin',
                 username: payload.attributes.preferred_username
             }
 
