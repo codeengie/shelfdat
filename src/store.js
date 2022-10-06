@@ -17,7 +17,6 @@ const store = createStore({
             donutTypes: [],
             inventory: [],
             isAuthenticated: false,
-            isUserSession: false,
             loadStatus: false,
             userInfo: {}
         }
@@ -45,9 +44,6 @@ const store = createStore({
         },
         setUserInfo(state, userInfo) {
             state.userInfo = userInfo;
-        },
-        setUserSession(state, session) {
-            state.isUserSession = session;
         }
     },
     /**
@@ -56,21 +52,22 @@ const store = createStore({
      * with the `store.dispatch` method.
      */
     actions: {
-        async checkUserSession({commit, dispatch}) {
+        // Re-authenticate the user if they return to the site and a valid access token exists which has not expired
+        async reAuth({commit, dispatch}) {
             try {
                 const session = (await Auth.currentSession()).getIdToken().getJwtToken();
                 const user = (await Auth.currentUserInfo());
 
                 if (session) {
-                    dispatch('getUserSession', user);
-                    commit('setUserSession', true);
+                    dispatch('userInfo', user);
                     commit('setAuthenticated', true);
                 }
             } catch(err) {
                 logger('There was an error verifying session.', err);
             }
         },
-        getUserSession(context, payload) {
+        // Retrieve user information from authentication
+        userInfo({commit}, payload) {
             const userData =  {
                 id: payload.attributes.sub,
                 email: payload.attributes.email,
@@ -79,14 +76,14 @@ const store = createStore({
                 username: payload.attributes.preferred_username
             }
 
-            context.commit('setUserInfo', userData);
+            commit('setUserInfo', userData);
         },
         async login({commit, dispatch}, {email, password}) {
             commit('setLoadStatus', true);
 
             try {
                 const user = await Auth.signIn(email, password);
-                dispatch('getUserSession', user);
+                dispatch('userInfo', user);
                 commit('setAuthenticated', true);
                 commit('setLoadStatus', false);
                 await router.push('/dashboard');
@@ -95,17 +92,18 @@ const store = createStore({
                 logger('There was an error authenticating user.', err);
             }
         },
-        async logout(context) {
+        async logout({commit}) {
             if (this.state.isAuthenticated) {
                 try {
                     await Auth.signOut();
-                    context.commit('setDonutSegments', []);
-                    context.commit('setInventory', []);
-                    context.commit('setUserInfo', {});
-                    context.commit('setAuthenticated', false);
+                    // @todo Use vuex-extensions for reset or custom solution @link https://github.com/huybuidac/vuex-extensions
+                    commit('setDonutSegments', []);
+                    commit('setInventory', []);
+                    commit('setUserInfo', {});
+                    commit('setAuthenticated', false);
                     await router.push('/login');
                 } catch (err) {
-                    logger('There was an error signing out.', err);
+                    logger('There was an error logging out.', err);
                 }
             }
         },
@@ -171,7 +169,6 @@ const store = createStore({
         inventoryData(state) {
             return state.inventory;
         },
-        // @todo Consolidate all the inventory counters you have in components
         inventoryTotal(state) {
             return state.inventory.length;
         },

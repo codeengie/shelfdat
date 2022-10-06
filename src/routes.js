@@ -35,7 +35,6 @@ const router = createRouter({
             }
         },
         {
-            // path: '/:pathMatch(.*)*',
             path: '/:notFound(.*)',
             name: '404',
             component: NotFound,
@@ -76,12 +75,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const isUserLoggedIn = store.dispatch('checkUserSession');
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
-    //next(); // This should only be called once, reference vue docs when you start expanding
 
-    // @todo Need to fix this routing `isUserLoggedIn` logic
-    if (to.name !== 'Login' && !store.state.isAuthenticated && !isUserLoggedIn) {
+    if (to.name !== 'Login' && !store.state.isAuthenticated) {
         next({ name: 'Login' });
     } else {
         next();
