@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <Brand img-height="35"/>
+        <Brand img-height="44" img-width="205"/>
 
         <!-- @todo Add `novalidate` attribute once you implement input field validation -->
         <form class="login-form" @submit.prevent="submitLogin()">

@@ -25,9 +25,10 @@ export default {
 
             this.filterToggle(currElement);
 
-            // Filter inventory data using filter keyword
+            // Filter inventory data using filter keyword and return only exact matches
             let filtered = this.filterData.filter(data =>
-                data.format.toLowerCase().includes(currElement.value.toLowerCase()));
+                data.format.toLowerCase() === currElement.value.toLowerCase());
+
             this.$emit('filteredInventory', filtered);
         },
         // Toggle the active state of the filter buttons
