@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <h1 class="content__title">{{ pageTitle }} - Media</h1>
+        <h1 class="content__title">{{ pageTitle }}</h1>
 
         <!-- Search Inventory -->
         <Search
@@ -14,6 +14,7 @@
                 v-for="(filter, index) in filters.labels"
                 :key="filter"
                 :button-name="filter"
+                :category="filters.categories[index]"
                 :class="{ 'filter__button--active': index === 0 }"
                 :filter-data="inventoryData"
                 :keyword="filters.keywords[index]"
@@ -52,7 +53,6 @@ import { mapActions, mapGetters } from 'vuex';
 import FilterButton from '../components/FilterButton';
 import Search from '../components/Search';
 import Poster from '../components/Poster';
-//import Details from '../components/Details';
 
 // Let's be lazy
 const Details = defineAsyncComponent(() => import('../components/Details'));
@@ -68,8 +68,9 @@ export default {
     data() {
         return {
             filters: {
-                keywords: ['', '4K Blu-ray', 'Blu-ray', 'DVD'],
-                labels: ['All', '4K', 'BRAY', 'DVD'],
+                categories: ['', 'format', 'format', 'format', 'type', 'type'],
+                keywords: ['', '4K Blu-ray', 'Blu-ray', 'DVD', 'Movie', 'TV'],
+                labels: ['All', '4K', 'BRAY', 'DVD', 'Movie', 'TV'],
             },
             pageTitle: this.$route.meta.title,
             details: {
@@ -148,7 +149,7 @@ export default {
 .filters {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(4, 60px);
+    grid-template-columns: repeat(6, 1fr) calc(100vw - 50rem);
     margin-top: 16px;
 }
 

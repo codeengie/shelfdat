@@ -1,6 +1,7 @@
 <template>
     <button
         @click="filterBy"
+        :data-category="category"
         :value="keyword"
         class="filter__button">{{ buttonName }}</button>
 </template>
@@ -10,6 +11,7 @@ export default {
     name: 'FilterButton',
     props: {
         buttonName: String,
+        category: String,
         filterData: Array,
         keyword: String
     },
@@ -25,9 +27,18 @@ export default {
 
             this.filterToggle(currElement);
 
-            // Filter inventory data using filter keyword and return only exact matches
-            let filtered = this.filterData.filter(data =>
-                data.format.toLowerCase() === currElement.value.toLowerCase());
+            // Filter inventory data using keyword values within categories for format and type
+            let filtered = this.filterData.filter(data => {
+                switch(this.category) {
+                    case 'format':
+                        return data.format.toLowerCase() === currElement.value.toLowerCase();
+                    case 'type':
+                        console.log('type');
+                        return data.type.toLowerCase().includes(currElement.value.toLowerCase());
+                    default:
+                        return this.filterData;
+                }
+            });
 
             this.$emit('filteredInventory', filtered);
         },
@@ -55,7 +66,6 @@ $button-spacing: 4px;
         background-color: var(--filter-button-bg);
         height: 32px;
         transition: all .2s ease-out;
-        width: 60px;
 
         &:hover {
             background-color: var(--filter-button-hover);
