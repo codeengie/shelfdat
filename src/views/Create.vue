@@ -1,6 +1,10 @@
 <template>
     <div class="content">
-        <h1>{{ pageTitle }} Media</h1>
+        <h1 class="content__title">{{ pageTitle }} New</h1>
+
+        <form class="create__form">
+            <InputFile/>
+        </form>
 
         <!-- New Media Form -->
          <NewMedia media-db-data @addLastMedia="updateMedia"/>
@@ -9,10 +13,11 @@
 
 <script>
 import NewMedia from '../components/NewMedia';
+import InputFile from '../components/InputFile';
 
 export default {
     name: 'Create',
-    components: { NewMedia },
+    components: { InputFile, NewMedia },
     data() {
         return {
             pageTitle: this.$route.meta.title
@@ -28,12 +33,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-    font: {
-        size: 1.6rem;
-        weight: 500;
+// @todo Globalize, its repeated in other views
+.content {
+    padding: 35px var(--block-spacing) 24px;
+
+    &__title {
+        color: var(--secondary-text-color);
+        font: {
+            size: var(--primary-text-size);
+            weight: var(--weight-medium);
+        }
     }
-    margin-top: 15px;
-    padding: 0 15px;
+}
+
+.create__form {
+    margin-top: 22px;
 }
 </style>
