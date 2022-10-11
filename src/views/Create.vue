@@ -2,7 +2,7 @@
     <div class="content">
         <h1 class="content__title">{{ pageTitle }} New</h1>
 
-        <form class="create__form">
+        <form class="create__form" @submit.prevent="createNew()">
             <InputFile/>
             <InputText
                 label="title"
@@ -14,10 +14,24 @@
                 :label="radio.label"
                 :options="radio.options"
                 v-model="formInputs[radio.label]"/>
-            <p v-if="formInputs.collection === 'Yes'">Add to collection</p><br/><br/>
+            <DynamicInputField v-if="formInputs.collection === 'Yes'"/>
+            <InputText
+                label="year"
+                placeholder="1930"
+                v-model="formInputs.year"/>
+            <InputText
+                label="location"
+                placeholder="Some Room"
+                v-model="formInputs.location"/>
+            <InputText
+                label="bin"
+                placeholder="000"
+                v-model="formInputs.container"/>
+            <InputText
+                label="notes"
+                placeholder="Addional notes"
+                v-model="formInputs.notes"/>
         </form>
-
-        <p>{{ formInputs }}</p>
 
         <!-- New Media Form -->
          <NewMedia media-db-data @addLastMedia="updateMedia"/>
@@ -25,14 +39,18 @@
 </template>
 
 <script>
+import {defineAsyncComponent} from 'vue';
 import NewMedia from '../components/NewMedia';
 import InputFile from '../components/InputFile';
 import InputText from '../components/InputText';
 import InputRadio from '../components/InputRadio';
 
+// Let's be lazy
+const DynamicInputField = defineAsyncComponent(() => import('../components/DynamicInputField'));
+
 export default {
     name: 'Create',
-    components: { InputRadio, InputText, InputFile, NewMedia },
+    components: { DynamicInputField, InputRadio, InputText, InputFile, NewMedia },
     data() {
         return {
             formInputs: {},
@@ -54,6 +72,9 @@ export default {
         }
     },
     methods: {
+        createNew() {
+            console.log('Creating new');
+        },
         updateMedia(mediaRecord) {
             // this.mediaDbData.push(mediaRecord);
             console.log(`Added latest media record: ${mediaRecord}`);

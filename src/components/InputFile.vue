@@ -88,7 +88,6 @@ export default {
     width: 372px;
 
     &__button {
-        background-color: transparent;
         height: 14px;
         margin: 0 30px 0 auto;
         width: 14px;
