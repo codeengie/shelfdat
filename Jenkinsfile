@@ -13,7 +13,7 @@ def getJobName() {
 def branch = (BUILD_BRANCH) ? BUILD_BRANCH : 'master'
 
 node {
-    env.NODEJS_HOME = "${tool '14.15.0'}"
+    env.NODEJS_HOME = "${tool '16.18.0'}"
     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
     stage('Init') {
