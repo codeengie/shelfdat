@@ -17,8 +17,10 @@ node {
     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
     stage('Init') {
-        //echo 'Cleaning workspace'
-        //deleteDir()
+        if (DEBUG) {
+            echo 'Cleaning workspace'
+            deleteDir()
+        }
 
         // Initialize build parameters
         echo 'Setting build parameters'
