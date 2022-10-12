@@ -3,10 +3,9 @@
         <h1 class="content__title">{{ pageTitle }} New</h1>
 
         <form class="create__form" @submit.prevent="createNew()">
-            <InputFile/>
+            <InputFile v-model="formInputs.file"/>
             <InputText
                 label="title"
-                placeholder="Enter a title"
                 v-model="formInputs.title"/>
             <InputRadio
                 v-for="radio in radioInputs"
@@ -14,24 +13,25 @@
                 :label="radio.label"
                 :options="radio.options"
                 v-model="formInputs[radio.label]"/>
-            <DynamicInputField v-if="formInputs.collection === 'Yes'"/>
+            <DynamicInputField
+                v-if="formInputs.collection === 'Yes'"
+                v-model="formInputs.other"/>
             <InputText
                 label="year"
-                placeholder="1930"
                 v-model="formInputs.year"/>
             <InputText
                 label="location"
-                placeholder="Some Room"
                 v-model="formInputs.location"/>
             <InputText
                 label="bin"
-                placeholder="000"
                 v-model="formInputs.container"/>
             <InputText
                 label="notes"
-                placeholder="Addional notes"
                 v-model="formInputs.notes"/>
+            <Button button-text="Save"/>
         </form>
+
+        <p>{{ formInputs.other }}</p>
 
         <!-- New Media Form -->
          <NewMedia media-db-data @addLastMedia="updateMedia"/>
@@ -44,16 +44,19 @@ import NewMedia from '../components/NewMedia';
 import InputFile from '../components/InputFile';
 import InputText from '../components/InputText';
 import InputRadio from '../components/InputRadio';
+import Button from '../components/Button';
 
 // Let's be lazy
 const DynamicInputField = defineAsyncComponent(() => import('../components/DynamicInputField'));
 
 export default {
     name: 'Create',
-    components: { DynamicInputField, InputRadio, InputText, InputFile, NewMedia },
+    components: { Button, DynamicInputField, InputRadio, InputText, InputFile, NewMedia },
     data() {
         return {
-            formInputs: {},
+            formInputs: {
+                other: []
+            },
             pageTitle: this.$route.meta.title,
             radioInputs: [
                 {

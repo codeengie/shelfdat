@@ -6,7 +6,9 @@
             class="dynamic__wrap">
             <InputText
                 :label="input.label"
-                :placeholder="input.placeholder"/>
+                :placeholder="input.placeholder"
+                :value="input.value"
+                @input="$emit('update:modelValue', $event.target.value)"/>
             <button
                 v-if="index !== 0"
                 @click.prevent="removeInputField(index)"
@@ -25,14 +27,18 @@ import InputText from './InputText';
 export default {
     name: 'DynamicInputField',
     components: { InputText },
+    emits: ['update:modelValue'],
     data() {
         return {
             inputs: [
                 {
                     label: 'title',
-                    placeholder: ''
+                    placeholder: '',
+                    value: '',
+                    vm: 'modelo'
                 }
-            ]
+            ],
+            modeloObj: []
         }
     },
     methods: {
@@ -40,7 +46,10 @@ export default {
             this.inputs.push(this.inputs[0]);
         },
         removeInputField(index) {
+            console.log(index);
+
             if (index !== 0) {
+                console.log(index);
                 this.inputs.splice(index, 1);
             }
         }
@@ -77,7 +86,7 @@ export default {
 
     &__close {
         position: absolute;
-        right: 22px;
+        right: 28px;
         top: 50%;
         transform: translateY(-50%);
 

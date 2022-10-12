@@ -93,7 +93,7 @@ export default {
         display: flex;
         height: 40px;
         margin: 0;
-        padding: 4px 4px 4px 100px;
+        padding: 4px 4px 4px 110px;
         position: relative;
     }
 }
