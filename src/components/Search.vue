@@ -89,7 +89,7 @@ export default {
 
         // Magnifying glass icon
         &::after {
-            background: transparent url('/images/icons/search.svg') center center/22px no-repeat;
+            background: transparent url('../assets/icons/search.svg') center center/22px no-repeat;
             height: 22px;
             opacity: 1;
             scale: 1;

@@ -17,6 +17,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
+// This seems Mickey Mouse @todo Find a better solution for JS image src
+import placeholderImg from '../assets/global/placeholder.svg'
 
 export default {
     name: 'Poster',
@@ -37,7 +39,7 @@ export default {
     computed: {
         ...mapGetters(['userInfo']),
         srcImage() {
-            return this.posterSrc ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.posterSrc}` : 'images/global/placeholder.svg';
+            return this.posterSrc ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.posterSrc}` : placeholderImg;
         }
     },
     methods: {

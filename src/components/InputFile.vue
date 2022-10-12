@@ -93,7 +93,7 @@ export default {
         width: 14px;
 
         &-icon {
-            background: transparent url('/images/icons/close.svg') center center no-repeat;
+            background: transparent url('../assets/icons/close.svg') center center no-repeat;
             display: block;
             height: 14px;
             width: 14px;
@@ -169,7 +169,7 @@ export default {
         }
 
         &::before {
-            background: transparent url('/images/icons/upload_image.svg') center center no-repeat;
+            background: transparent url('../assets/icons/upload_image.svg') center center no-repeat;
             content: '';
             display: block;
             height: 24px;

@@ -9,7 +9,7 @@
                         alt="Dashboard"
                         class="navbar__icon"
                         height="22"
-                        src="images/icons/dashboard.svg"
+                        src="../assets/icons/dashboard.svg"
                         width="22">
                 </router-link>
             </li>
@@ -20,7 +20,7 @@
                         alt="Inventory"
                         class="navbar__icon"
                         height="22"
-                        src="images/icons/inventory.svg"
+                        src="../assets/icons/inventory.svg"
                         width="22">
                 </router-link>
             </li>
@@ -31,7 +31,7 @@
                         alt="Add Item"
                         class="navbar__icon"
                         height="22"
-                        src="images/icons/library_add.svg"
+                        src="../assets/icons/library_add.svg"
                         width="22">
                 </router-link>
             </li>

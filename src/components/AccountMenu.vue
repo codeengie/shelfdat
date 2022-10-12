@@ -124,13 +124,13 @@ export default {
 
             &--account {
                 &::before {
-                    background: transparent url('/images/icons/account.svg') 0 0/18px no-repeat;
+                    background: transparent url('../assets/icons/account.svg') 0 0/18px no-repeat;
                 }
             }
 
             &--logout {
                 &::before {
-                    background: transparent url('/images/icons/logout.svg') 0 0/18px no-repeat;
+                    background: transparent url('../assets/icons/logout.svg') 0 0/18px no-repeat;
                 }
             }
         }

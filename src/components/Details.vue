@@ -32,6 +32,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
+// This seems Mickey Mouse @todo Find a better solution for JS image src
+import placeholderImg from '../assets/global/placeholder.svg'
 
 export default {
     name: 'Details',
@@ -77,7 +79,7 @@ export default {
             }
         },
         setImage() {
-            return this.imageurl ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.imageurl}` : 'images/global/placeholder.svg';
+            return this.imageurl ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.imageurl}` : placeholderImg;
         },
         titles() {
             return this.title.split(/[:(]/).map(title => {
@@ -125,7 +127,7 @@ export default {
 
     &__close {
         @extend %hide-text;
-        background: transparent url('/images/icons/arrow.svg') 0 0/20px no-repeat;
+        background: transparent url('../assets/icons/arrow.svg') 0 0/20px no-repeat;
         filter: drop-shadow(2px 2px 3px #000);
         height: 20px;
         left: 20px;
@@ -155,7 +157,7 @@ export default {
 
     &__edit {
         @extend %hide-text;
-        background: var(--cobalt) url('/images/icons/edit.svg') center center/26px no-repeat;
+        background: var(--cobalt) url('../assets/icons/edit.svg') center center/26px no-repeat;
         border-radius: 50%;
         height: 60px;
         position: absolute;
@@ -212,27 +214,27 @@ export default {
             }
 
             &--collection {
-                background: transparent url('/images/icons/collections.svg') center center/24px no-repeat;
+                background: transparent url('../assets/icons/collections.svg') center center/24px no-repeat;
             }
 
             &--fourkay {
-                background: transparent url('/images/icons/4k.svg') center center/24px no-repeat;
+                background: transparent url('../assets/icons/4k.svg') center center/24px no-repeat;
             }
 
             &--hd {
-                background: transparent url('/images/icons/hd.svg') center center/24px no-repeat;
+                background: transparent url('../assets/icons/hd.svg') center center/24px no-repeat;
             }
 
             &--movie {
-                background: transparent url('/images/icons/movie.svg') center center/22px no-repeat;
+                background: transparent url('../assets/icons/movie.svg') center center/22px no-repeat;
             }
 
             &--sd {
-                background: transparent url('/images/icons/sd.svg') center center/24px no-repeat;
+                background: transparent url('../assets/icons/sd.svg') center center/24px no-repeat;
             }
 
             &--tv {
-                background: transparent url('/images/icons/tv.svg') center center/24px no-repeat;
+                background: transparent url('../assets/icons/tv.svg') center center/24px no-repeat;
             }
         }
     }

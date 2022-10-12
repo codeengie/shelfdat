@@ -6,11 +6,11 @@
                     alt="Command line window displaying error"
                     class="not-found__img"
                     height="218"
-                    src="/images/pages/404/error.svg"
+                    src="../assets/pages/404/error.svg"
                     width="306">
             </figure>
             <p class="not-found__text">We couldn&rsquo;t find the page you&rsquo;re looking for</p>
-            <router-link to="/login" class="not-found__button" tag="button">Go Back</router-link>
+            <router-link to="/login" class="not-found__button">Go Back</router-link>
         </div>
     </div>
 </template>

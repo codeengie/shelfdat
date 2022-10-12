@@ -74,7 +74,7 @@ export default {
             position: relative;
 
             &::before {
-                background: transparent url('/images/icons/add.svg') center center no-repeat;
+                background: transparent url('../assets/icons/add.svg') center center no-repeat;
                 content: '';
                 height: 15px;
                 left: 0;
@@ -91,7 +91,7 @@ export default {
         transform: translateY(-50%);
 
         &-icon {
-            background: transparent url('/images/icons/close.svg') center center no-repeat;
+            background: transparent url('../assets/icons/close.svg') center center no-repeat;
             display: block;
             height: 14px;
             width: 14px;
