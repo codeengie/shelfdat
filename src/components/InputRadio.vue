@@ -11,8 +11,10 @@
                         :name="label"
                         :value="option"
                         @change="$emit('update:modelValue', $event.target.value)"
+                        @focus="$emit('update:modelValue', $event.target.value)"
                         class="radio__input"
-                        type="radio">
+                        type="radio"
+                        :ref="`radio${label}`">
                     <label
                         :for="`${label}Choice${index}`"
                         class="radio__label">{{ option }}</label>

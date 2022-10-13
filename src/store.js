@@ -137,6 +137,28 @@ const store = createStore({
             }
 
         },
+        async addNewItem(context, payload) {
+            console.log(payload);
+            //logger('newItem', payload, 'info');
+
+            const settings = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': (await Auth.currentSession()).getIdToken().getJwtToken()
+                },
+                body: JSON.stringify(payload)
+            };
+
+            try {
+                const response = await fetch(process.env.VUE_APP_API_URL, settings);
+                const responseData = await response.json();
+                console.log(responseData);
+            } catch(err) {
+                logger('There was a problem adding a new item.', err);
+                throw err;
+            }
+        },
         // Action cannot have multiple parameters e.g,. foobar(state, {payload, url})
         calcDonutLegend({commit, state}, payload) {
             let legendLabels = [];

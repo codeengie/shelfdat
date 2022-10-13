@@ -11,7 +11,10 @@
                 @blur="handleBlur"
                 @input="$emit('update:modelValue', $event.target.value)"
                 class="input__field"
-                type="text">
+                type="text"
+                :max="maxNum"
+                :min="minNum"
+                v-bind="$attrs">
         </div>
         <div class="input__error">Please enter a {{ label }}</div>
     </div>
@@ -37,6 +40,14 @@ export default {
         },
         validateField() {
             return this.isValid ? 'input--error' : '';
+        },
+        // In VueJS an attribute can only be omitted if set to null or undefined
+        maxNum() {
+            const date = new Date();
+            return (this.$attrs['type'] === 'number') ? date.getFullYear() : null;
+        },
+        minNum() {
+            return (this.$attrs['type'] === 'number') ? 1950 : null;
         }
     },
     methods: {

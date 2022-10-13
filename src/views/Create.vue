@@ -2,8 +2,8 @@
     <div class="content">
         <h1 class="content__title">{{ pageTitle }} New</h1>
 
-        <form class="create__form" @submit.prevent="createNew()">
-            <InputFile v-model="formInputs.file"/>
+        <form class="create__form" @submit.prevent="submitItem()">
+            <InputFile v-model="formInputs.file" ref="fileUpload"/>
             <InputText
                 label="title"
                 v-model="formInputs.title"/>
@@ -12,35 +12,34 @@
                 :key="radio"
                 :label="radio.label"
                 :options="radio.options"
-                v-model="formInputs[radio.label]"/>
+                v-model="formInputs[radio.label]"
+                ref="renderedRadios"/>
             <DynamicInputField
                 v-if="formInputs.collection === 'Yes'"
                 v-model="formInputs.other"/>
             <InputText
                 label="year"
+                pattern="\d*"
+                placeholder="YYYY"
+                type="number"
                 v-model="formInputs.year"/>
             <InputText
                 label="location"
                 v-model="formInputs.location"/>
             <InputText
                 label="bin"
-                v-model="formInputs.container"/>
+                v-model="formInputs.bin"/>
             <InputText
                 label="notes"
                 v-model="formInputs.notes"/>
             <Button button-text="Save"/>
         </form>
-
-        <p>{{ formInputs.other }}</p>
-
-        <!-- New Media Form -->
-         <NewMedia media-db-data @addLastMedia="updateMedia"/>
     </div>
 </template>
 
 <script>
-import {defineAsyncComponent} from 'vue';
-import NewMedia from '../components/NewMedia';
+import { defineAsyncComponent } from 'vue';
+import { mapActions } from 'vuex';
 import InputFile from '../components/InputFile';
 import InputText from '../components/InputText';
 import InputRadio from '../components/InputRadio';
@@ -51,12 +50,10 @@ const DynamicInputField = defineAsyncComponent(() => import('../components/Dynam
 
 export default {
     name: 'Create',
-    components: { Button, DynamicInputField, InputRadio, InputText, InputFile, NewMedia },
+    components: { Button, DynamicInputField, InputRadio, InputText, InputFile },
     data() {
         return {
-            formInputs: {
-                other: []
-            },
+            formInputs: {},
             pageTitle: this.$route.meta.title,
             radioInputs: [
                 {
@@ -65,7 +62,7 @@ export default {
                 },
                 {
                     label: 'format',
-                    options: ['4K', 'BRAY', 'DVD']
+                    options: ['4K Blu-ray', 'Blu-ray', 'DVD']
                 },
                 {
                     label: 'collection',
@@ -74,13 +71,46 @@ export default {
             ]
         }
     },
+    mounted() {
+        // Focus radio button to set the initial value, this prevents user from clicking twice
+        this.radioInputs.forEach((input, index) => {
+            let labelVal = `radio${input.label}`;
+            `${this.$refs.renderedRadios[index].$refs[labelVal][0].focus()}`;
+        });
+    },
     methods: {
-        createNew() {
-            console.log('Creating new');
+        ...mapActions(['addNewItem']),
+        resetForm() {
+            this.formInputs = {};
+            // @todo Look into expose instead of $refs to access methods inside components
+            this.$refs.fileUpload.deleteFile();
         },
-        updateMedia(mediaRecord) {
-            // this.mediaDbData.push(mediaRecord);
-            console.log(`Added latest media record: ${mediaRecord}`);
+        submitItem() {
+            if (this.formInputs.file &&
+                this.formInputs.title &&
+                this.formInputs.year &&
+                this.formInputs.location &&
+                this.formInputs.bin) {
+
+                let newItemData = {
+                    title: `${this.formInputs.title} (${this.formInputs.year})`,
+                    type: this.formInputs.type,
+                    format: this.formInputs.format,
+                    collection: (this.formInputs.collection === 'Yes'),
+                    location: this.formInputs.location,
+                    container: this.formInputs.bin,
+                    createdate: new Date(Date.now()).toISOString(),
+                    imageurl: this.formInputs.file.name
+                }
+
+                if (this.formInputs.notes) {
+                    newItemData.notes = this.formInputs.notes;
+                }
+
+                // Add new item to database, reset form, and update store with new item
+                this.addNewItem(newItemData);
+                this.resetForm();
+            }
         }
     }
 }
