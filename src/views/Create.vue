@@ -107,7 +107,7 @@ export default {
                     newItemData.notes = this.formInputs.notes;
                 }
 
-                // Add new item to database, reset form, and update store with new item
+                // Add new item to database and reset form
                 this.addNewItem(newItemData);
                 this.resetForm();
             }

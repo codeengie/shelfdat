@@ -44,6 +44,9 @@ const store = createStore({
         },
         setUserInfo(state, userInfo) {
             state.userInfo = userInfo;
+        },
+        addInventoryItem(state, item) {
+            state.inventory.push(item);
         }
     },
     /**
@@ -137,9 +140,8 @@ const store = createStore({
             }
 
         },
-        async addNewItem(context, payload) {
-            console.log(payload);
-            //logger('newItem', payload, 'info');
+        async addNewItem({commit}, payload) {
+            logger('newItem', payload, 'info');
 
             const settings = {
                 method: 'POST',
@@ -153,7 +155,13 @@ const store = createStore({
             try {
                 const response = await fetch(process.env.VUE_APP_API_URL, settings);
                 const responseData = await response.json();
-                console.log(responseData);
+
+                // Update store with added item
+                if (responseData.body === 'OK') {
+                    logger('Item successfully added to database', responseData.result, 'info');
+                    commit('addInventoryItem', responseData.result);
+                }
+
             } catch(err) {
                 logger('There was a problem adding a new item.', err);
                 throw err;

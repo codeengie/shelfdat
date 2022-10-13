@@ -24,7 +24,8 @@ exports.handler = async (event) => {
 
         response = {
             statusCode: 200,
-            body: 'OK'
+            body: 'OK',
+            result: db
         }
     } catch(err) {
         console.log(err);
@@ -59,6 +60,7 @@ async function putNewMedia(data) {
             id: {S: recordId},
             location: {S: data.location},
             other: {L: [{S: 'N/A'}]},
+            notes: {S: data.notes},
             title: {S: data.title},
             type: {S: data.type}
         }
@@ -67,5 +69,18 @@ async function putNewMedia(data) {
     console.log(`Generating new DynamoDB record, with ID: ${recordId}`);
     console.log(`Params: ${JSON.stringify(params)}`);
 
-    return dynamodb.putItem(params).promise();
+    try {
+        await dynamodb.putItem(params).promise();
+
+        // Add the UUID to the original data we received since sending the params is a no-go
+        data.id = recordId;
+        console.log(`Data with UUID added: ${data}`);
+
+        return data;
+    } catch(err) {
+        console.log('There was an error with putItem(), new item not added');
+        return err;
+    }
+
+    //return dynamodb.putItem(params).promise();
 }
