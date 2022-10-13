@@ -7,7 +7,8 @@
             <InputField
                 field-name="Email"
                 field-type="email"
-                v-model="emailInput"/>
+                v-model="emailInput"
+                ref="emailField"/>
 
             <InputField
                 field-name="Password"
@@ -51,6 +52,10 @@ export default {
             emailInput: null,
             passwordInput: null
         }
+    },
+    mounted() {
+        // Autofocus the email field for our users
+        this.$refs.emailField.$el.querySelector('.form__input').focus();
     },
     computed: {
         ...mapGetters(['loadStatus']),
