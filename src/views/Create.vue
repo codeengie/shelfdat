@@ -2,8 +2,8 @@
     <div class="content">
         <h1 class="content__title">{{ pageTitle }} New</h1>
 
-        <form class="create__form" @submit.prevent="submitItem()">
-            <InputFile v-model="formInputs.file" ref="fileUpload"/>
+        <form class="create-form" @submit.prevent="submitItem()">
+            <InputFile class="create-form__upload" v-model="formInputs.file" ref="fileUpload"/>
             <InputText
                 label="title"
                 v-model="formInputs.title"/>
@@ -32,7 +32,7 @@
             <InputText
                 label="notes"
                 v-model="formInputs.notes"/>
-            <Button button-text="Save"/>
+            <Button button-text="Save" class="create-form__button"/>
         </form>
     </div>
 </template>
@@ -130,7 +130,18 @@ export default {
     }
 }
 
-.create__form {
-    margin-top: 22px;
+.create-form {
+    display: flex;
+    flex-direction: column;
+    margin: 22px auto 0;
+    width: 372px;
+
+    &__button {
+        margin-top: 20px;
+    }
+
+    &__upload {
+        align-self: center;
+    }
 }
 </style>

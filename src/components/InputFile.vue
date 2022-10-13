@@ -143,6 +143,7 @@ export default {
         &-wrap {
             align-items: center;
             display: flex;
+            height: auto;
         }
     }
 
