@@ -142,7 +142,6 @@ const store = createStore({
         },
         async addNewItem({commit}, payload) {
             commit('setLoadStatus', true);
-            logger('newItem', payload, 'info');
 
             const settings = {
                 method: 'POST',

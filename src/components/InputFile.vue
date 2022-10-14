@@ -9,7 +9,7 @@
             <!-- This input is hidden -->
             <input
                 @change="fileSelected"
-                accept="image/jpg, image/jpeg, image/png"
+                accept="image/jpg, image/jpeg, image/png, image/webp"
                 class="uploader__input"
                 id="uploader"
                 name="uploader"
@@ -164,14 +164,14 @@ export default {
         position: relative;
 
         &::after {
-            content: 'Supports, JPG, JPEG, PNG';
+            content: 'Supports: JPG, JPEG, PNG, WEBP';
             font-size: 1rem;
             left: 50%;
             position: absolute;
             text-align: center;
             top: 30px;
             transform: translateX(-50%);
-            width: 132px;
+            width: 168px;
         }
 
         &::before {
