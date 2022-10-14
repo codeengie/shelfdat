@@ -24,7 +24,7 @@
                     class="uploader__pic"
                     height="86"
                     width="158">
-                <figcaption class="uploader__filename">{{ fileName }}<span class="uploader__filesize">{{ fileSize }}</span></figcaption>
+                <figcaption class="uploader__filename" :title="fileName">{{ fileName }}<span class="uploader__filesize">{{ fileSize }}</span></figcaption>
             </figure>
             <button @click="deleteFile" class="uploader__button">
                 <span class="uploader__button-icon"></span>

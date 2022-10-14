@@ -59,7 +59,6 @@ export default {
 
 <style lang="scss" scoped>
 .dynamic {
-    margin-top: 20px;
 
     &__add {
         background-color: transparent;
