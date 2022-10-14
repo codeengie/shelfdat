@@ -1,6 +1,6 @@
 <template>
     <button
-        :class="className"
+        :class="{ 'button--spinner': loadStatus }"
         :disabled="isDisabled"
         class="button">
         <span class="button__text">{{ buttonText }}</span>
@@ -8,12 +8,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
     name: 'Button',
     props: {
         buttonText: String,
-        className: String,
         isDisabled: Boolean
+    },
+    computed: {
+        ...mapGetters(['loadStatus'])
     }
 }
 </script>
@@ -67,8 +71,8 @@ export default {
     }
 
     &:disabled {
-        background-color: grey;
-        color: darkgrey;
+        background-color: var(--shark);
+        color: var(--dusty-gray);
         cursor: not-allowed;
     }
 

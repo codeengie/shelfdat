@@ -32,7 +32,9 @@
             <InputText
                 label="notes"
                 v-model="formInputs.notes"/>
-            <Button button-text="Save" class="create-form__button"/>
+            <Button
+                button-text="Save"
+                class="create-form__button"/>
         </form>
     </div>
 </template>

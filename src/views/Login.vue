@@ -21,8 +21,7 @@
             <Button
                 button-text="Login"
                 :is-disabled="toggleForm"
-                :class="{ 'button--spinner': loadStatus }"
-                class-name="login-form__button"/>
+                class="login-form__button"/>
 
             <p class="login-form__signup">Don&rsquo;t have an account?
                 <router-link class="login-form__link" to="/signup">Sign Up</router-link>
@@ -33,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import Brand from '../components/Brand';
 import Button from '../components/Button';
 import Footer from '../components/Footer';
@@ -58,7 +57,6 @@ export default {
         this.$refs.emailField.$el.querySelector('.form__input').focus();
     },
     computed: {
-        ...mapGetters(['loadStatus']),
         toggleForm() {
             return !(this.emailInput && this.passwordInput);
         }

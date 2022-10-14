@@ -113,6 +113,10 @@ export default {
     &__filename {
         font-size: 1.4rem;
         margin-left: 24px;
+        padding-right: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     &__filesize {
@@ -140,10 +144,11 @@ export default {
     }
 
     &__pic {
+        height: auto;
+
         &-wrap {
             align-items: center;
             display: flex;
-            height: auto;
         }
     }
 

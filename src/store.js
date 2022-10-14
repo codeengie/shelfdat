@@ -141,6 +141,7 @@ const store = createStore({
 
         },
         async addNewItem({commit}, payload) {
+            commit('setLoadStatus', true);
             logger('newItem', payload, 'info');
 
             const settings = {
@@ -160,6 +161,7 @@ const store = createStore({
                 if (responseData.body === 'OK') {
                     logger('Item successfully added to database', responseData.result, 'info');
                     commit('addInventoryItem', responseData.result);
+                    commit('setLoadStatus', false);
                 }
 
             } catch(err) {
