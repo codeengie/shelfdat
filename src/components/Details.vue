@@ -10,7 +10,9 @@
                 width="412">
         </figure>
         <div class="details__content">
-            <button class="details__edit" @click="edit" v-if="userInfo.role === 'superadmin'">Edit</button>
+            <ContextMenu
+                v-if="userInfo.role === 'superadmin'"
+                class="details__edit"/>
             <h2 class="details__title">{{ titles[0] }} <span class="details__year">{{ titles[2] }}</span></h2>
             <h3 class="details__subtitle">{{ titles[1] }}</h3>
             <ul class="details__icons">
@@ -34,9 +36,14 @@
 import { mapGetters } from 'vuex';
 // This seems Mickey Mouse @todo Find a better solution for JS image src
 import placeholderImg from '../assets/global/placeholder.svg'
+import {defineAsyncComponent} from 'vue';
+
+// Let's be lazy
+const ContextMenu = defineAsyncComponent(() => import('../components/ContextMenu'));
 
 export default {
     name: 'Details',
+    components: { ContextMenu },
     props: {
         collection: Boolean,
         container: Number,
@@ -92,9 +99,6 @@ export default {
         }
     },
     methods: {
-        edit() {
-            console.log('Edit');
-        },
         // @todo Need to clear all data on close
         toggleDialog() {
             this.isDialogOpen = !this.isDialogOpen;
@@ -156,14 +160,9 @@ export default {
     }
 
     &__edit {
-        @extend %hide-text;
-        background: var(--cobalt) url('../assets/icons/edit.svg') center center/26px no-repeat;
-        border-radius: 50%;
-        height: 60px;
         position: absolute;
         right: 20px;
         top: -30px;
-        width: 60px;
     }
 
     &__fig {
