@@ -37,13 +37,19 @@ export default {
 }
 </script>
 
+<style>
+.context-menu {
+    position: relative;
+}
+</style>
+
 <style lang="scss" scoped>
 $bun-space: 8px;
 $bun-width: 20px;
 $weenie-width: 32px;
 $weenie-height: 4px;
 $menu-diameter: 60px;
-$item-diameter: $menu-diameter / 1.4;
+$item-diameter: calc($menu-diameter / 1.4);
 
 .context-menu {
     $self: &;
@@ -51,7 +57,6 @@ $item-diameter: $menu-diameter / 1.4;
     display:flex;
     height: $menu-diameter;
     justify-content: center;
-    position: relative;
     width: $menu-diameter;
 
     &__button {
