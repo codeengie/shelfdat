@@ -1,4 +1,5 @@
 <template>
+    <LineLoader v-if="loadStatus"/>
     <div class="content">
         <h1 class="content__title">{{ pageTitle }}</h1>
 
@@ -51,8 +52,9 @@
 import { defineAsyncComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import FilterButton from '../components/FilterButton';
-import Search from '../components/Search';
+import LineLoader from '../components/LineLoader';
 import Poster from '../components/Poster';
+import Search from '../components/Search';
 
 // Let's be lazy
 const Details = defineAsyncComponent(() => import('../components/Details'));
@@ -61,8 +63,9 @@ export default {
     name: 'Inventory',
     components: {
         Details,
-        Poster,
         FilterButton,
+        LineLoader,
+        Poster,
         Search
     },
     data() {

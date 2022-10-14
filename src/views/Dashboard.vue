@@ -48,16 +48,16 @@
 import { mapActions, mapGetters } from 'vuex';
 import ChartStat from '../components/ChartStat';
 import DoughnutChart from '../components/DoughnutChart';
-import Recent from '../components/Recent';
 import LineLoader from '../components/LineLoader';
+import Recent from '../components/Recent';
 
 export default {
     name: 'Dashboard',
     components: {
         ChartStat,
         DoughnutChart,
-        Recent,
-        LineLoader
+        LineLoader,
+        Recent
     },
     data() {
         return {
