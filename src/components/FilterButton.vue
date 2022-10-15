@@ -33,7 +33,6 @@ export default {
                     case 'format':
                         return data.format.toLowerCase() === currElement.value.toLowerCase();
                     case 'type':
-                        console.log('type');
                         return data.type.toLowerCase().includes(currElement.value.toLowerCase());
                     default:
                         return this.filterData;

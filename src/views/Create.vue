@@ -136,7 +136,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin: 22px auto 0;
-    width: 372px;
+    min-width: 320px;
 
     &__button {
         margin-top: 20px;

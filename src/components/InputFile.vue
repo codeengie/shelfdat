@@ -85,7 +85,7 @@ export default {
     background-color: var(--shark);
     height: 86px;
     overflow: hidden;
-    width: 372px;
+    min-width: 320px;
 
     &__button {
         height: 14px;

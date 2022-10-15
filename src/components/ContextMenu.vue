@@ -44,10 +44,10 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-$bun-space: 8px;
-$bun-width: 20px;
 $weenie-width: 32px;
 $weenie-height: 4px;
+$bun-space: 10px;
+$bun-width: calc($weenie-width - 12px);
 $menu-diameter: 60px;
 $item-diameter: calc($menu-diameter / 1.4);
 
@@ -75,7 +75,7 @@ $item-diameter: calc($menu-diameter / 1.4);
         &-line {
             background-color: var(--white);
             display: flex;
-            height: 4px;
+            height: $weenie-height;
             justify-content: center;
             position: relative;
             width: $weenie-width;
@@ -110,11 +110,11 @@ $item-diameter: calc($menu-diameter / 1.4);
                 }
 
                 &::after {
-                    transform: translateY(3px);
+                    transform: translateY(-4px);
                 }
 
                 &::before {
-                    transform: translateY(-3px);
+                    transform: translateY(4px);
                 }
             }
         }
@@ -159,13 +159,19 @@ $item-diameter: calc($menu-diameter / 1.4);
     &--open {
         #{$self} {
             &__button {
-                background-color: var(--dusty-gray);
+                background-color: var(--shark);
                 rotate: 90deg;
+                scale: .8;
                 transition: all .4s ease;
+
+                &-line,
+                &-line::after,
+                &-line::before {
+                    background-color: var(--dusty-gray);
+                }
             }
 
             &__item {
-                //transform: translate(0, -80px);
                 transition: all .4s ease;
 
                 &--delete {
