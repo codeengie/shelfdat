@@ -8,6 +8,7 @@
                 :poster-id="dataItem.id"
                 :poster-src="dataItem.imageurl"
                 poster-height="162"
+                :poster-title="dataItem.title"
                 poster-width="108"/>
         </div>
     </div>
