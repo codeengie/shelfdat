@@ -1,7 +1,7 @@
 {
   "name": "shelfdat",
-  "version": "1.0.0",
-  "description": "Media manager.",
+  "version": "1.0.1",
+  "description": "Inventory manager.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.817.0",
-    "uui": "^1.0.7"
+    "formidable": "^2.0.1",
+    "uuid": "^9.0.0"
   }
 }
