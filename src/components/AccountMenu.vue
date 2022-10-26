@@ -32,7 +32,7 @@ export default {
     methods: {
         ...mapActions(['logout']),
         profileImage(imageName) {
-            return imageName ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/profile/${imageName}` : 'images/icons/account_circle.svg';
+            return imageName ? `${process.env.VUE_APP_CACHE_BUCKET_URL}users/${this.userInfo.id}/profile/${imageName}` : 'images/icons/account_circle.svg';
         }
     }
 }

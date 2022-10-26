@@ -86,7 +86,7 @@ export default {
             }
         },
         setImage() {
-            return this.imageurl ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.imageurl}` : placeholderImg;
+            return this.imageurl ? `${process.env.VUE_APP_CACHE_BUCKET_URL}users/${this.userInfo.id}/inventory/${this.imageurl}` : placeholderImg;
         },
         titles() {
             return this.title.split(/[:(]/).map(title => {

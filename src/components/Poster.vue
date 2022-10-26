@@ -39,7 +39,7 @@ export default {
     computed: {
         ...mapGetters(['userInfo']),
         srcImage() {
-            return this.posterSrc ? `${process.env.VUE_APP_CACHE_BUCKET_URL}images/users/${this.userInfo.id}/inventory/${this.posterSrc}` : placeholderImg;
+            return this.posterSrc ? `${process.env.VUE_APP_CACHE_BUCKET_URL}users/${this.userInfo.id}/inventory/${this.posterSrc}` : placeholderImg;
         }
     },
     methods: {
