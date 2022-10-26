@@ -39,6 +39,12 @@ $ npm run serveprod # Prod
 $ npm run build # Build for Prod
 ```
 
+## Lambda
+The `convert-image` lambda function requires a Linux version of the library. If you are developing on a PC and do a typical `npm install sharp` you'll see errors in CloudWatch about not finding Sharp modules. In order to get the correct Sharp libraries that will work in a serverless environment you need to issue the following:
+```bash
+npm install --platform=linux --arch=x64 sharp
+```
+
 ## Developer
 [Cesar Villanueva Jr](https://codeengie.com)
 
