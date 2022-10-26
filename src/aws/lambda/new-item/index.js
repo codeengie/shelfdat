@@ -1,12 +1,11 @@
 'use strict';
 
-//const raw = require('./raw');
-const parser = require('./parser');
-const uploader = require('./uploader');
-const putter = require('./putter');
+//const raw = require('./test/raw');
+const parser = require('./utils/parser');
+const uploader = require('./utils/uploader');
+const putter = require('./utils/putter');
 
 exports.handler = async (event) => {
-//const foobar = async (event) => {
     console.log('RAW Payload:', event);
 
     const formData = await parser(event);
@@ -26,5 +25,3 @@ exports.handler = async (event) => {
     };
     return response;
 };
-
-//foobar(raw);
