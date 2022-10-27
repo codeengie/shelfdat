@@ -14,8 +14,8 @@ const parseFormData = (data) => {
         // Storage for extracted form fields and file data
         const fields = {};
 
-        const decoded = Buffer.from(data.body, 'base64').toString('ascii');
-        console.log(decoded);
+        //const decoded = Buffer.from(data.body, 'base64').toString('ascii');
+        //console.log(decoded);
 
         // Get the headers from the raw payload, this aids in extracting multipart/form-data boundaries
         const contentType = data.headers['Content-Type'] || data.headers['content-type'];
@@ -23,21 +23,24 @@ const parseFormData = (data) => {
 
         // Instantiate busboy instance
         const bb = busboy( { headers: { 'content-type': contentType } } );
+        // Container for image chunks
+        let chunks = [];
 
         // Parse file(s)
         bb.on('file', (name, file, info) => {
             const { filename, encoding, mimeType } = info;
             console.log(`File [${name}]: filename: ${filename}, encoding: ${encoding}, mimeType: ${mimeType}`);
 
+            fields[name] = {
+                filename,
+                type: mimeType
+            };
+
             file.on('data', (data) => {
                 console.log(`File [${name}] got ${data.length} bytes`);
-                fields[name] = {
-                    filename,
-                    type: mimeType,
-                    content: data,
-                    encoded: encoding
-                };
+                chunks.push(data);
             }).on('close', () => {
+                fields[name].content = Buffer.concat(chunks);
                 console.log(`File [${name}] done`);
             });
         });

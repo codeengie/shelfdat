@@ -15,26 +15,10 @@ const s3 = new AWS.S3({
  */
 const uploader = async (file) => {
     return new Promise((resolve, reject) => {
-        let chunks = [];
-
-        // Necessary to properly upload file but not needed for buffer
-        let fileEncoding = file.encoded;
-        delete file.encoded;
-
-        // Iterate through file keys and make them into Buffer objects
-        Object.values(file).forEach(val => {
-            if (!Buffer.isBuffer(val)) {
-               chunks.push(Buffer.from(val));
-            } else {
-               chunks.push(val);
-            }
-        });
-
         const params = {
             Bucket: process.env.S3_BUCKET,
             Key: file.filename,
-            Body: Buffer.concat(chunks),
-            ContentEncoding: fileEncoding,
+            Body: file.content,
             ContentType: file.type
         };
 
