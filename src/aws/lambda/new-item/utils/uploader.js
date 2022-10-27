@@ -11,15 +11,17 @@ const s3 = new AWS.S3({
 /**
  * Upload a single image to S3 bucket
  * @param {Object} file - File object
+ * @param {String} uid - User's UUID
  * @returns {Promise<void>}
  */
-const uploader = async (file) => {
+const uploader = async (file, uid) => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: process.env.S3_BUCKET,
             Key: file.filename,
             Body: file.content,
-            ContentType: file.type
+            ContentType: file.type,
+            Metadata: { uid: uid },
         };
 
         s3.upload(params, (err, data) => {

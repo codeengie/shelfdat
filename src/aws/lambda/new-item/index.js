@@ -12,7 +12,7 @@ exports.handler = async (event) => {
     console.log(formData);
 
     // Run concurrently
-    const uploadFile = await uploader(formData.file);
+    const uploadFile = await uploader(formData.file, formData.id);
     const newItem = await putter(formData);
 
     await Promise.all([uploadFile, newItem])
@@ -21,7 +21,7 @@ exports.handler = async (event) => {
 
     const response = {
         statusCode: 200,
-        body: JSON.stringify('Hello from Lambda!')
+        body: JSON.stringify('OK')
     };
     return response;
 };

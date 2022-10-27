@@ -32,14 +32,14 @@ exports.handler = async (event) => {
         console.log('Converted image:', convertedImg);
 
         const putParams = {
-            Bucket: 'images.shelfdat.com',
+            Bucket: `${process.env.S3_BUCKET}/users/${image.Metadata.uid}/inventory`,
             Key: key.replace(/\.(jpeg|jpg|png)/g, '.webp'),
             Body: convertedImg,
             ContentType: 'image/webp'
         };
 
-        const foobar = await s3.upload(putParams).promise();
-        console.log(foobar);
+        const uploadNewImage = await s3.upload(putParams).promise();
+        console.log(uploadNewImage);
 
     } catch(err) {
         console.log(err);
