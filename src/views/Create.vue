@@ -3,7 +3,10 @@
         <h1 class="content__title">{{ pageTitle }} New</h1>
 
         <form class="create-form" @submit.prevent="submitItem()">
-            <InputFile class="create-form__upload" v-model="formInputs.file" ref="fileUpload"/>
+            <InputFile
+                class="create-form__upload"
+                v-model="formInputs.file"
+                ref="fileUpload"/>
             <InputText
                 label="title"
                 v-model="formInputs.title"/>
@@ -28,7 +31,7 @@
                 v-model="formInputs.location"/>
             <InputText
                 label="bin"
-                v-model="formInputs.bin"/>
+                v-model="formInputs.container"/>
             <InputText
                 label="notes"
                 v-model="formInputs.notes"/>
@@ -41,7 +44,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import InputFile from '../components/InputFile';
 import InputText from '../components/InputText';
 import InputRadio from '../components/InputRadio';
@@ -80,6 +83,9 @@ export default {
             `${this.$refs.renderedRadios[index].$refs[labelVal][0].focus()}`;
         });
     },
+    computed: {
+        ...mapGetters(['userInfo'])
+    },
     methods: {
         ...mapActions(['addNewItem']),
         resetForm() {
@@ -88,29 +94,24 @@ export default {
             this.$refs.fileUpload.deleteFile();
         },
         submitItem() {
+            const formData = new FormData();
+
             if (this.formInputs.file &&
                 this.formInputs.title &&
                 this.formInputs.year &&
                 this.formInputs.location &&
-                this.formInputs.bin) {
+                this.formInputs.container) {
 
-                let newItemData = {
-                    title: `${this.formInputs.title} (${this.formInputs.year})`,
-                    type: this.formInputs.type,
-                    format: this.formInputs.format,
-                    collection: (this.formInputs.collection === 'Yes'),
-                    location: this.formInputs.location,
-                    container: this.formInputs.bin,
-                    createdate: new Date(Date.now()).toISOString(),
-                    imageurl: this.formInputs.file.name
-                }
+                // Build form data
+                Object.keys(this.formInputs).forEach(key => {
+                    formData.append(key, this.formInputs[key]);
+                });
 
-                if (this.formInputs.notes) {
-                    newItemData.notes = this.formInputs.notes;
-                }
+                // Setting here because I didn't feel comfortable having it in a hidden field
+                formData.append('id', this.userInfo.id);
 
                 // Add new item to database and reset form
-                this.addNewItem(newItemData);
+                this.addNewItem(formData);
                 this.resetForm();
             }
         }
