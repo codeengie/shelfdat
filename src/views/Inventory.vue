@@ -45,6 +45,7 @@
         :notes="details.notes"
         :title="details.title"
         :type="details.type"
+        :year="details.year"
         ref="details"/>
 </template>
 
@@ -85,7 +86,8 @@ export default {
                 location: '',
                 notes: '',
                 title: '',
-                type: ''
+                type: '',
+                year: 0
             },
             filteredInventoryData: null
         }

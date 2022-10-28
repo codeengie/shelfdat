@@ -13,7 +13,7 @@
             <ContextMenu
                 v-if="userInfo.role === 'superadmin'"
                 class="details__edit"/>
-            <h2 class="details__title">{{ titles[0] }} <span class="details__year">{{ titles[2] }}</span></h2>
+            <h2 class="details__title">{{ titles[0] }} <span class="details__year">{{ `(${year})` }}</span></h2>
             <h3 class="details__subtitle">{{ titles[1] }}</h3>
             <ul class="details__icons">
                 <li class="details__icons-item" :class="rez" :title="format">{{ format }}</li>
@@ -53,7 +53,8 @@ export default {
         location: String,
         notes: String,
         title: String,
-        type: String
+        type: String,
+        year: Number
     },
     data() {
         return {
@@ -89,9 +90,7 @@ export default {
             return this.imageurl ? `${process.env.VUE_APP_CACHE_BUCKET_URL}users/${this.userInfo.id}/inventory/${this.imageurl}` : placeholderImg;
         },
         titles() {
-            return this.title.split(/[:(]/).map(title => {
-                return (/[)]/.test(title)) ? title = '('.concat(title) : title.trim();
-            });
+            return this.title.split(/:/).map(title => title.trim());
         },
         typeSet() {
             let modifier = 'details__icons-item--';

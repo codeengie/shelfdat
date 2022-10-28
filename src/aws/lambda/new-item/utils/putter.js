@@ -33,7 +33,8 @@ const putter = async (file) => {
                 other: { L: [{ S: 'N/A' }] },
                 notes: { S: file.notes },
                 title: { S: file.title },
-                type: { S: file.type }
+                type: { S: file.type },
+                year: { N: file.year }
             }
         };
 
