@@ -32,6 +32,7 @@
                 :poster-title="inventory.title"
                 poster-width="108"
                 :poster-src="inventory.imageurl"
+                :poster-year="inventory.year"
                 @broadcast-id="showDetails"/>
         </div>
     </div>

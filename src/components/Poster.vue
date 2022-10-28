@@ -5,7 +5,7 @@
                 :data-uid="posterId"
                 :height="posterHeight"
                 :src="srcImage"
-                :title="posterTitle"
+                :title="titleAndYear"
                 :width="posterWidth"
                 @click="getId"
                 alt="Poster"
@@ -34,12 +34,16 @@ export default {
         posterWidth: {
             default: '166',
             type: String
-        }
+        },
+        posterYear: Number
     },
     computed: {
         ...mapGetters(['userInfo']),
         srcImage() {
             return this.posterSrc ? `${process.env.VUE_APP_CACHE_BUCKET_URL}users/${this.userInfo.id}/inventory/${this.posterSrc}` : placeholderImg;
+        },
+        titleAndYear() {
+            return `${this.posterTitle} (${this.posterYear})`;
         }
     },
     methods: {

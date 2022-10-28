@@ -9,7 +9,8 @@
                 :poster-src="dataItem.imageurl"
                 poster-height="162"
                 :poster-title="dataItem.title"
-                poster-width="108"/>
+                poster-width="108"
+                :poster-year="dataItem.year"/>
         </div>
     </div>
 </template>
