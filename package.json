@@ -16,6 +16,7 @@
   "scripts": {
     "servedev": "vue-cli-service serve --mode dev",
     "serve": "vue-cli-service serve --mode prod",
+    "serveprod": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
