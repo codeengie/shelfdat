@@ -146,10 +146,9 @@ const store = createStore({
             const settings = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authorization': (await Auth.currentSession()).getIdToken().getJwtToken()
                 },
-                body: JSON.stringify(payload)
+                body: payload
             };
 
             try {
@@ -161,6 +160,10 @@ const store = createStore({
                     logger('Item successfully added to database', responseData.result, 'info');
                     commit('addInventoryItem', responseData.result);
                     commit('setLoadStatus', false);
+                // @todo Its possible this might not be needed, recheck after New-Item and Get-Image Lambda Functions are complete
+                } else {
+                    commit('setLoadStatus', false);
+                    logger('Response was not OK', responseData.body, 'error');
                 }
 
             } catch(err) {
