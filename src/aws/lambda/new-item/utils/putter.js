@@ -28,6 +28,7 @@ const putter = async (file) => {
                 createdate: { S: timestamp },
                 format: { S: file.format },
                 id: { S: recordId },
+                imageurl: { S: file.file.filename.replace(/\.(jpeg|jpg|png)/g, '.webp') },
                 location: { S: file.location },
                 other: { L: [{ S: 'N/A' }] },
                 notes: { S: file.notes },
