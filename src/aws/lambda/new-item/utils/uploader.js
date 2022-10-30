@@ -29,7 +29,7 @@ const uploader = async (file, uid) => {
                 reject(err);
             }
             console.log(`File ${file.filename} uploaded successfully to: ${data.Location}`);
-            resolve(data.Location);
+            resolve(data);
         });
     });
 };

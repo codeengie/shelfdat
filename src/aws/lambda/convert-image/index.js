@@ -41,13 +41,12 @@ exports.handler = async (event) => {
         const uploadNewImage = await s3.upload(putParams).promise();
         console.log(uploadNewImage);
 
+        // Delete image once Sharp has made the conversion
+        await s3.deleteObject(getParams).promise();
+        console.log('Image conversion and deletion successful');
+
     } catch(err) {
         console.log(err);
+        console.log('Image conversion and/or deletion failed');
     }
-
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify('Hello from Lambda! Image converted')
-    }
-    return response;
 };
