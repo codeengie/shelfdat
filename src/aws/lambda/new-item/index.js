@@ -35,14 +35,6 @@ exports.handler = async (event) => {
     const uploadFile = await uploader(formData.file, formData.id);
     const newItem = await putter(formData);
 
-    // Wait for all promises to resolve and send data back to client
-    /*const [upload, item] = await Promise.allSettled([uploadFile, newItem]);
-    console.log('UploadFile Return:', upload);
-    console.log('Item Return:', item)*/
-
-    /*const statuses = await Promise.allSettled([uploadFile, newItem]);
-    console.log('Promises:', statuses);*/
-
     try {
         const statuses = await Promise.allSettled([uploadFile, newItem]);
         console.log('Promises:', statuses);
