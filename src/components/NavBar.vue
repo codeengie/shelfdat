@@ -24,7 +24,7 @@
                         width="22">
                 </router-link>
             </li>
-            <li class="navbar__list-item">
+            <li class="navbar__list-item" v-if="userInfo.role === 'superadmin'">
                 <router-link to="/create" class="navbar__link">
                     <span class="navbar__text">Add Item</span>
                     <img
@@ -40,8 +40,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    computed: {
+        ...mapGetters(['userInfo']),
+    }
 }
 </script>
 
