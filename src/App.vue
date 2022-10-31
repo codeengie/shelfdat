@@ -15,7 +15,6 @@
     display: grid;
     grid-template: {
         areas: 'header' 'main' 'navbar';
-        columns: 1fr;
         rows: auto 1fr auto;
     }
     height: 100vh;

@@ -1,6 +1,6 @@
 <template>
     <!-- @todo Convert image icons into a font -->
-    <nav class="navbar">
+    <nav class="navbar" :class="isMobileOrTablet">
         <ul class="navbar__list">
             <li class="navbar__list-item">
                 <router-link to="/dashboard" class="navbar__link">
@@ -41,11 +41,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { isMobile } from 'mobile-device-detect';
 
 export default {
     name: 'NavBar',
     computed: {
         ...mapGetters(['userInfo']),
+        isMobileOrTablet() {
+            return isMobile ? 'navbar--sticky': '';
+        }
     }
 }
 </script>
@@ -104,6 +108,13 @@ $nav-height: 60px;
 
     &__text {
         display: none;
+    }
+
+    // Modifier(s)
+    &--sticky {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
     }
 }
 </style>
