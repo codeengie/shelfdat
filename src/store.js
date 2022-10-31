@@ -58,11 +58,11 @@ const store = createStore({
         // Re-authenticate user if a valid access token exists and has not expired
         async reAuth({commit, dispatch}) {
             try {
-                const session = (await Auth.currentSession()).getIdToken().getJwtToken();
-                const user = (await Auth.currentUserInfo());
+                const session = await Auth.currentAuthenticatedUser();
+                const userSession = session.signInUserSession.idToken;
 
-                if (session) {
-                    dispatch('userInfo', user);
+                if (userSession.jwtToken) {
+                    dispatch('userInfo', userSession.payload);
                     commit('setAuthenticated', true);
                 }
             } catch(err) {
@@ -72,14 +72,12 @@ const store = createStore({
         // Retrieve user information from authentication
         userInfo({commit}, payload) {
             const userData =  {
-                id: payload.attributes.sub,
-                email: payload.attributes.email,
-                name: payload.attributes.name,
-                picture: payload.attributes.picture,
-                // @todo Throws errors, might require different method in `reAuth()`
-                //role: payload.signInUserSession.idToken.payload['cognito:groups'][0],
-                role: 'superadmin',
-                username: payload.attributes.preferred_username
+                id: payload.sub,
+                email: payload.email,
+                name: payload.name,
+                picture: payload.picture,
+                role: payload['cognito:groups'][0],
+                username: payload.preferred_username
             }
 
             commit('setUserInfo', userData);
@@ -89,7 +87,7 @@ const store = createStore({
 
             try {
                 const user = await Auth.signIn(email, password);
-                dispatch('userInfo', user);
+                dispatch('userInfo', user.signInUserSession.idToken.payload);
                 commit('setAuthenticated', true);
                 commit('setLoadStatus', false);
                 await router.push('/dashboard');
