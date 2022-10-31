@@ -154,17 +154,15 @@ const store = createStore({
             try {
                 const response = await fetch(process.env.VUE_APP_API_URL, settings);
                 const responseData = await response.json();
-                console.log(responseData);
 
                 // Update store with added item
                 if (responseData.status === 'fulfilled') {
                     logger('Item successfully added to database', responseData.value, 'info');
                     commit('addInventoryItem', responseData.value);
                     commit('setLoadStatus', false);
-                // @todo Its possible this might not be needed, recheck after New-Item and Get-Image Lambda Functions are complete
                 } else {
                     commit('setLoadStatus', false);
-                    logger('Response was not OK', responseData.body, 'error');
+                    logger('Item was not added to database', responseData, 'error');
                 }
 
             } catch(err) {
