@@ -78,6 +78,10 @@ router.beforeEach(async (to, from, next) => {
     document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`;
     document.querySelector('meta[name="description"]').setAttribute('content', to.meta.description);
 
+    // Mickey Mouse scrolling on route change because the documented way did not work or was not consistently functional
+    document.querySelector('.app__main').scrollTop = 0;
+
+
     if (!store.state.isAuthenticated) {
         await store.dispatch('reAuth');
     }
