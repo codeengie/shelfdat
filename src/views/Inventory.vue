@@ -78,18 +78,7 @@ export default {
                 labels: ['All', '4K', 'BRAY', 'DVD', 'Movie', 'TV'],
             },
             pageTitle: this.$route.meta.title,
-            details: {
-                container: 0,
-                collection: false,
-                createdate: '',
-                format: '',
-                imageurl: '',
-                location: '',
-                notes: '',
-                title: '',
-                type: '',
-                year: 0
-            },
+            details: this.initialState(),
             filteredInventoryData: null
         }
     },
@@ -106,8 +95,26 @@ export default {
         setFilteredData(event) {
             this.filteredInventoryData = event;
         },
+        // Save and set the initial state of details data
+        initialState() {
+            return {
+                container: 0,
+                collection: false,
+                createdate: '',
+                format: '',
+                imageurl: '',
+                location: '',
+                notes: '',
+                title: '',
+                type: '',
+                year: 0
+            };
+        },
         // Use the emitted UID to find specific inventory item and display it in the details
         showDetails(event) {
+            // Reset details data
+            Object.assign(this.$data.details, this.initialState());
+
             const found = this.inventoryData.find(element => element.id === event);
 
             // Iterate through `found` and set the new data for `details` object
@@ -164,6 +171,11 @@ export default {
     gap: 24px;
     grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
     margin-top: 40px;
+
+    // Using the latest hotness, unfortunately neither desktop or mobile/tablet Safari supports it
+    @media (width >= 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+    }
 }
 
 .search {
