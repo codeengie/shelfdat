@@ -17,12 +17,19 @@ const s3 = new AWS.S3({
 const uploader = async (file, uid) => {
     return new Promise((resolve, reject) => {
         const params = {
-            Bucket: process.env.S3_BUCKET,
+            Bucket: process.env.S3_BUCKET_NOFACE,
             Key: file.filename,
             Body: file.content,
             ContentType: file.type,
             Metadata: { uid: uid },
         };
+
+        // If the file is already '.webp' then upload it directly to the user's folder
+        if (file.type === 'image/webp') {
+            params.Bucket = `${process.env.S3_BUCKET_IMAGES}/users/${uid}/inventory`;
+            delete params.Metadata;
+            console.log('Image is already in webp format, uploading directly to images');
+        }
 
         s3.upload(params, (err, data) => {
             if (err) {
