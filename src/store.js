@@ -3,6 +3,7 @@ import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from './aws/auth/config';
 import router from './routes';
 import logger from './utils/logger';
+import detectMobile from './utils/detect-mobile';
 
 Amplify.configure(awsconfig);
 
@@ -17,6 +18,7 @@ const store = createStore({
             donutTypes: [],
             inventory: [],
             isAuthenticated: false,
+            isMobile: false,
             loadStatus: false,
             userInfo: {}
         }
@@ -47,6 +49,9 @@ const store = createStore({
         },
         addInventoryItem(state, item) {
             state.inventory.push(item);
+        },
+        setMobile(state, status) {
+            state.isMobile = status;
         }
     },
     /**
@@ -63,6 +68,7 @@ const store = createStore({
 
                 if (userSession.jwtToken) {
                     dispatch('userInfo', userSession.payload);
+                    commit('setMobile', detectMobile());
                     commit('setAuthenticated', true);
                 }
             } catch(err) {
@@ -89,6 +95,7 @@ const store = createStore({
                 const user = await Auth.signIn(email, password);
                 dispatch('userInfo', user.signInUserSession.idToken.payload);
                 commit('setAuthenticated', true);
+                commit('setMobile', detectMobile());
                 commit('setLoadStatus', false);
                 await router.push('/dashboard');
 
@@ -208,6 +215,9 @@ const store = createStore({
         },
         loadStatus(state) {
             return state.loadStatus;
+        },
+        mobileDevice(state) {
+            return state.isMobile;
         },
         userInfo(state) {
             return state.userInfo;

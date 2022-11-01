@@ -24,7 +24,7 @@
     "aws-amplify": "^4.3.35",
     "chart.js": "^3.9.1",
     "core-js": "^3.8.3",
-    "mobile-device-detect": "^0.4.3",
+    "ua-parser-js": "^1.0.32",
     "vue": "^3.2.13",
     "vue-chartjs": "^4.1.1",
     "vue-router": "^4.0.6",
