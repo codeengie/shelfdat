@@ -40,7 +40,7 @@
         <!-- Display recent inventory items -->
         <Recent
             :db-data="inventoryData"
-            :display-num="6"/>
+            :display-num="16"/>
     </div>
 </template>
 
@@ -148,7 +148,6 @@ export default {
     }
 }
 
-// @todo Apply this globally if you add LineLoader component in other pages
 .content {
     display: flex;
     flex-direction: column;

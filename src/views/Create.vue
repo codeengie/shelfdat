@@ -120,7 +120,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @todo Globalize, its repeated in other views
 .content {
     padding: 35px var(--block-spacing) 24px;
 
