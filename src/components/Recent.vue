@@ -52,8 +52,12 @@ export default {
     &__wrap {
         display: grid;
         gap: 29px;
-        grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
         margin-top: 12px;
+
+        @media (width >= 768px) {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
     }
 }
 </style>
