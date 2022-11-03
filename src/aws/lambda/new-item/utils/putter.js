@@ -59,7 +59,7 @@ const putter = async (file) => {
              */
             response = {
                 collection: boolCollection,
-                container: file.container,
+                container: parseInt(file.container),
                 createdate: timestamp,
                 format: file.format,
                 id: recordId,
@@ -69,7 +69,7 @@ const putter = async (file) => {
                 notes: file.notes,
                 title: file.title,
                 type: file.type,
-                year: file.year
+                year: parseInt(file.year)
             }
             console.log(`Item successfully inserted: ${JSON.stringify(response)}`);
             console.log(`This is the PutItemOutput (data) and is empty: ${data}`);

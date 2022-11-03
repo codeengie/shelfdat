@@ -24,8 +24,10 @@
             <h4 class="details__header">Location</h4>
             <p class="details__text">{{ location }}<span class="details__bullet">Bin:</span> {{ container }}</p>
 
-            <h4 class="details__header">Notes</h4>
-            <p class="details__text">{{ notes }}</p>
+            <div v-if="notes">
+                <h4 class="details__header">Notes</h4>
+                <p class="details__text">{{ notes }}</p>
+            </div>
 
             <time class="details__date" datetime="2022-09-17T18:36:22.473Z">{{ prettyDate }}</time>
         </div>
@@ -98,7 +100,6 @@ export default {
         }
     },
     methods: {
-        // @todo Need to clear all data on close
         toggleDialog() {
             this.isDialogOpen = !this.isDialogOpen;
         }

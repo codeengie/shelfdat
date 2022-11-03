@@ -1,17 +1,15 @@
 <template>
     <figure class="poster">
-        <a class="poster__link" href="#">
-            <img
-                :data-uid="posterId"
-                :height="posterHeight"
-                :src="srcImage"
-                :title="titleAndYear"
-                :width="posterWidth"
-                @click="getId"
-                alt="Poster"
-                class="poster__img"
-                loading="lazy">
-        </a>
+        <img
+            :data-uid="posterId"
+            :height="posterHeight"
+            :src="srcImage"
+            :title="titleAndYear"
+            :width="posterWidth"
+            @click="getId"
+            alt="Poster"
+            class="poster__img"
+            loading="lazy">
     </figure>
 </template>
 
