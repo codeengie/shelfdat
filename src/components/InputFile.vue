@@ -4,7 +4,6 @@
             <!-- You can also proxy the label to a button using Vue refs -->
             <label class="uploader__label" for="uploader">
                 <span class="uploader__text">Add Poster</span>
-                <!--<span class="uploader__subtext">Supports JPG, JPEG, PNG</span>-->
             </label>
             <!-- This input is hidden -->
             <input
@@ -83,9 +82,10 @@ export default {
 <style lang="scss" scoped>
 .uploader {
     background-color: var(--shark);
-    height: 86px;
+    min-height: 86px;
     overflow: hidden;
     min-width: 320px;
+    width: 100%;
 
     &__button {
         height: 14px;
@@ -100,8 +100,7 @@ export default {
         }
     }
 
-    &__default,
-    &__display {
+    &__default {
         height: 86px;
     }
 

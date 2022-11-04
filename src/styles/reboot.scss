@@ -37,7 +37,8 @@ img {
   max-width: 100%;
 }
 
-input {
+input,
+textarea {
   border: 0;
   padding: 0;
   &:focus {
@@ -62,4 +63,5 @@ ol, ul, menu {
 
 textarea {
   white-space: revert;
+  resize: none;
 }
