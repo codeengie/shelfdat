@@ -1,17 +1,18 @@
 <template>
     <div class="content">
         <h1 class="content__title">{{ pageTitle }} New</h1>
-
         <form class="create-form" @submit.prevent="submitItem()">
             <InputFile
                 class="create-form__upload"
                 v-model="formInputs.file"
                 ref="fileUpload"/>
             <InputText
+                class="create-form__title"
                 label="title"
                 v-model="formInputs.title"/>
             <InputRadio
-                v-for="radio in radioInputs"
+                v-for="(radio, index) in radioInputs"
+                :class="`create-form__radio-${index}`"
                 :key="radio"
                 :label="radio.label"
                 :options="radio.options"
@@ -21,19 +22,24 @@
                 v-if="formInputs.collection === 'Yes'"
                 v-model="formInputs.other"/>
             <InputText
+                class="create-form__year"
                 label="year"
                 pattern="\d*"
                 placeholder="YYYY"
                 type="number"
                 v-model="formInputs.year"/>
             <InputText
+                class="create-form__location"
                 label="location"
                 v-model="formInputs.location"/>
             <InputText
+                class="create-form__container"
                 label="bin"
                 v-model="formInputs.container"/>
-            <InputText
+            <InputTextArea
+                class="create-form__textbox"
                 label="notes"
+                max-chars="250"
                 v-model="formInputs.notes"/>
             <Button
                 button-text="Save"
@@ -49,13 +55,14 @@ import InputFile from '../components/InputFile';
 import InputText from '../components/InputText';
 import InputRadio from '../components/InputRadio';
 import Button from '../components/Button';
+import InputTextArea from '@/components/InputTextArea';
 
 // Let's be lazy
 const DynamicInputField = defineAsyncComponent(() => import('../components/DynamicInputField'));
 
 export default {
     name: 'Create',
-    components: { Button, DynamicInputField, InputRadio, InputText, InputFile },
+    components: {InputTextArea, Button, DynamicInputField, InputRadio, InputText, InputFile },
     data() {
         return {
             formInputs: {},
@@ -138,8 +145,73 @@ export default {
     margin: 22px auto 0;
     min-width: 320px;
 
-    &__button {
-        margin-top: 20px;
+    &__button,
+    &__container,
+    &__location,
+    &__radio-0,
+    &__radio-1,
+    &__radio-2,
+    &__textbox,
+    &__title,
+    &__year {
+        @media (width <= 768px ) {
+            margin-top: 20px;
+        }
+    }
+
+    @media (width >= 768px) {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(40px, auto);
+        grid-template-areas:
+            'cfu cft'
+            'cfu cfr0'
+            'cfu cfr1'
+            'cfu cfr2'
+            'cfl cfc'
+            'cftb cftb'
+            'cfb cfb';
+
+        &__button {
+            grid-area: cfb;
+        }
+
+        &__container {
+            grid-area: cfc;
+        }
+
+        &__location {
+            grid-area: cfl;
+        }
+
+        &__radio-0 {
+            grid-area: cfr0;
+        }
+
+        &__radio-1 {
+            grid-area: cfr1;
+        }
+
+        &__radio-2 {
+            grid-area: cfr2;
+        }
+
+        &__textbox {
+            grid-area: cftb;
+        }
+
+        &__title {
+            grid-area: cft;
+        }
+
+        &__upload {
+            grid-area: cfu;
+        }
+
+        &__year {
+            grid-area: cfl;
+        }
     }
 
     &__upload {

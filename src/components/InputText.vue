@@ -61,7 +61,6 @@ export default {
 <style lang='scss' scoped>
 .input {
     $self: &;
-    margin-top: 20px;
 
     &__field,
     &__label {

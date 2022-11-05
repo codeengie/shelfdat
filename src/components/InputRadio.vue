@@ -47,7 +47,6 @@ export default {
 <style lang="scss" scoped>
 .radio {
     background-color: var(--shark);
-    margin-top: 20px;
 
     &__group {
         align-items: center;

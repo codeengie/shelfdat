@@ -62,6 +62,7 @@ ol, ul, menu {
 }
 
 textarea {
-  white-space: revert;
+  margin: 0;
   resize: none;
+  white-space: revert;
 }
