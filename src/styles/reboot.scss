@@ -41,11 +41,12 @@ input,
 textarea {
   border: 0;
   padding: 0;
+
   &:focus {
     outline: none;
   }
 
-  // Lines 47-55 removes the up/down arrows
+  // Removes the up/down arrows
   // @todo See if the bundler is generating this if I just use `outer-spin-button`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {

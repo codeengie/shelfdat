@@ -9,6 +9,7 @@
             <InputText
                 class="create-form__title"
                 label="title"
+                placeholder="An Awesome Movie"
                 v-model="formInputs.title"/>
             <InputRadio
                 v-for="(radio, index) in radioInputs"
@@ -32,10 +33,12 @@
             <InputText
                 class="create-form__location"
                 label="location"
+                placeholder="Junk Room"
                 v-model="formInputs.location"/>
             <InputText
                 class="create-form__container"
                 label="bin"
+                placeholder="000"
                 type="number"
                 v-model="formInputs.container"/>
             <InputTextArea

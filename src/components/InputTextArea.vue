@@ -91,6 +91,10 @@ export default {
         margin-top: 8px;
         padding: 0 16px;
         width: 100%;
+
+        &::placeholder {
+            opacity: .2;
+        }
     }
 
     &__counter {

@@ -90,8 +90,11 @@ export default {
     &__field {
         background-color: transparent;
         color: var(--white);
-        //height: 80%;
         width: 100%;
+
+        &::placeholder {
+            opacity: .2;
+        }
     }
 
     &__label {
