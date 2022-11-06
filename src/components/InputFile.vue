@@ -1,5 +1,5 @@
 <template>
-    <div class="uploader">
+    <div class="uploader" :class="focusState">
         <div class="uploader__default" v-if="!displayFile">
             <!-- You can also proxy the label to a button using Vue refs -->
             <label class="uploader__label" for="uploader">
@@ -7,7 +7,9 @@
             </label>
             <!-- This input is hidden -->
             <input
+                @blur="handleBlur"
                 @change="fileSelected"
+                @focus="handleFocus"
                 accept="image/jpg, image/jpeg, image/png, image/webp"
                 class="uploader__input"
                 id="uploader"
@@ -41,6 +43,7 @@ export default {
             fileName: '',
             fileSize: '',
             isFile: true,
+            isFocused: false,
             selectedFile: null
         }
     },
@@ -48,9 +51,15 @@ export default {
     computed: {
         file() {
             return this.isFile;
+        },
+        focusState() {
+            return this.isFocused ? 'uploader--focus' : '';
         }
     },
     methods: {
+        deleteFile() {
+            this.displayFile = '';
+        },
         fileSelected(event) {
             this.selectedFile = event.target.files[0];
             this.previewFile(this.selectedFile, this.selectedFile.name, this.selectedFile.size);
@@ -67,13 +76,19 @@ export default {
 
             return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
         },
-        deleteFile() {
-            this.displayFile = '';
+        handleBlur() {
+            this.toggleFocus();
+        },
+        handleFocus() {
+            this.toggleFocus();
         },
         previewFile(data, name, size) {
             this.displayFile = URL.createObjectURL(data);
             this.fileName = name;
             this.fileSize = this.formatBytes(size, 0);
+        },
+        toggleFocus() {
+            this.isFocused = !this.isFocused;
         }
     }
 }
@@ -182,5 +197,18 @@ export default {
             width: 24px;
         }
     }
+
+    @media (width >= 768px) {
+        height: 100%;
+
+        &__default {
+            height: 100%;
+        }
+    }
+
+    // Modifier(s)
+    /*&--focus {
+        outline: 2px solid var(--deep-cerulean);
+    }*/
 }
 </style>

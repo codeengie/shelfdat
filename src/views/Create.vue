@@ -21,6 +21,7 @@
             <DynamicInputField
                 v-if="formInputs.collection === 'Yes'"
                 v-model="formInputs.other"/>
+            <!-- Maxlength attribute is ignored when input is set to number -->
             <InputText
                 class="create-form__year"
                 label="year"
@@ -35,11 +36,13 @@
             <InputText
                 class="create-form__container"
                 label="bin"
+                type="number"
                 v-model="formInputs.container"/>
             <InputTextArea
                 class="create-form__textbox"
                 label="notes"
                 max-chars="250"
+                placeholder="Enter a note..."
                 v-model="formInputs.notes"/>
             <Button
                 button-text="Save"
@@ -62,7 +65,14 @@ const DynamicInputField = defineAsyncComponent(() => import('../components/Dynam
 
 export default {
     name: 'Create',
-    components: {InputTextArea, Button, DynamicInputField, InputRadio, InputText, InputFile },
+    components: {
+        Button,
+        DynamicInputField,
+        InputFile,
+        InputRadio,
+        InputText,
+        InputTextArea
+    },
     data() {
         return {
             formInputs: {},
@@ -107,7 +117,8 @@ export default {
                 this.formInputs.title &&
                 this.formInputs.year &&
                 this.formInputs.location &&
-                this.formInputs.container) {
+                this.formInputs.container &&
+                this.formInputs.notes) {
 
                 // Build form data
                 Object.keys(this.formInputs).forEach(key => {
@@ -162,16 +173,16 @@ export default {
     @media (width >= 768px) {
         display: grid;
         gap: 20px;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: minmax(40px, auto);
         grid-template-areas:
-            'cfu cft'
-            'cfu cfr0'
-            'cfu cfr1'
-            'cfu cfr2'
-            'cfl cfc'
-            'cftb cftb'
-            'cfb cfb';
+            'cfu cft cft'
+            'cfu cfr0 cfr0'
+            'cfu cfr1 cfr1'
+            'cfu cfr2 cfr2'
+            'cfy cfl cfc'
+            'cftb cftb cftb'
+            'cfb cfb cfb';
 
         &__button {
             grid-area: cfb;
@@ -210,7 +221,7 @@ export default {
         }
 
         &__year {
-            grid-area: cfl;
+            grid-area: cfy;
         }
     }
 

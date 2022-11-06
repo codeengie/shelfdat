@@ -1,14 +1,14 @@
 <template>
     <div class="input" :class="validateField">
-        <div class="input__wrap">
+        <div class="input__wrap" :class="focusState">
             <label
                 class="input__label"
                 :for="label">{{ capitalizeLabel }}</label>
             <input
                 :id="label"
-                :placeholder="placeholder"
                 :value="modelValue"
                 @blur="handleBlur"
+                @focus="handleFocus"
                 @input="$emit('update:modelValue', $event.target.value)"
                 class="input__field"
                 type="text"
@@ -25,12 +25,12 @@ export default {
     name: 'InputText',
     props: {
         label: String,
-        modelValue: [String, Number],
-        placeholder: String
+        modelValue: [String, Number]
     },
     emits: ['update:modelValue'],
     data() {
         return {
+            isFocused: false,
             isValid: false
         }
     },
@@ -48,11 +48,21 @@ export default {
         },
         minNum() {
             return (this.$attrs['type'] === 'number') ? 1950 : null;
+        },
+        focusState() {
+            return this.isFocused ? 'input--focus': '';
         }
     },
     methods: {
         handleBlur(event) {
+            this.toggleFocus();
             this.isValid = !(event.target.value);
+        },
+        handleFocus() {
+            this.toggleFocus();
+        },
+        toggleFocus() {
+            this.isFocused = !this.isFocused;
         }
     }
 }
@@ -98,6 +108,10 @@ export default {
     }
 
     // Modifiers
+    &--focus {
+        outline: 2px solid var(--deep-cerulean);
+    }
+
     &--error {
         #{$self}__error {
             display: block;

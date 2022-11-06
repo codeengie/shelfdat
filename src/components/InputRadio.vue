@@ -1,6 +1,6 @@
 <template>
     <div class="radio">
-        <fieldset class="radio__wrap">
+        <fieldset class="radio__wrap" :class="focusState">
             <legend class="radio__legend">{{ capitalizeLabel }}</legend>
             <div class="radio__group"
                 v-for="(option, index) in options"
@@ -10,8 +10,9 @@
                         :id="`${label}Choice${index}`"
                         :name="label"
                         :value="option"
+                        @blur="handleBlur"
                         @change="$emit('update:modelValue', $event.target.value)"
-                        @focus="$emit('update:modelValue', $event.target.value)"
+                        @focus="handleFocus"
                         class="radio__input"
                         type="radio"
                         :ref="`radio${label}`">
@@ -31,12 +32,30 @@ export default {
         options: [Array, String]
     },
     emits: ['update:modelValue'],
+    data() {
+        return {
+            isFocused: false
+        }
+    },
     computed: {
         capitalizeLabel() {
             return `${this.label.charAt(0).toUpperCase()}${this.label.slice(1)}`;
         },
+        focusState() {
+            return this.isFocused ? 'radio--focus' : '';
+        }
     },
     methods: {
+        handleBlur() {
+            this.toggleFocus();
+        },
+        handleFocus(event) {
+            this.toggleFocus();
+            this.$emit('update:modelValue', event.target.value);
+        },
+        toggleFocus() {
+            this.isFocused = !this.isFocused;
+        },
         setChecked(digit) {
             return (digit === 0);
         }
@@ -96,6 +115,11 @@ export default {
         margin: 0;
         padding: 4px 4px 4px 110px;
         position: relative;
+    }
+
+    // Modifier(s)
+    &--focus {
+        outline: 2px solid var(--deep-cerulean);
     }
 }
 </style>
