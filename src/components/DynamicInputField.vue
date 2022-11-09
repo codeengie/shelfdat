@@ -98,6 +98,7 @@ export default {
     }
 
     &__wrap {
+        margin-top: 20px;
         position: relative;
     }
 }

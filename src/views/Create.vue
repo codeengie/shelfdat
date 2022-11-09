@@ -102,6 +102,9 @@ export default {
             let labelVal = `radio${input.label}`;
             `${this.$refs.renderedRadios[index].$refs[labelVal][0].focus()}`;
         });
+
+        // Set file upload focus on load
+        this.$refs.fileUpload.$refs.inputfile.focus();
     },
     computed: {
         ...mapGetters(['userInfo'])

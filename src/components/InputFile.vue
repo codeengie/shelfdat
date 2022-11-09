@@ -14,7 +14,8 @@
                 class="uploader__input"
                 id="uploader"
                 name="uploader"
-                type="file">
+                type="file"
+                ref="inputfile">
         </div>
         <!-- Displays image to be uploaded and some information -->
         <div class="uploader__display" v-if="displayFile">
@@ -207,8 +208,8 @@ export default {
     }
 
     // Modifier(s)
-    /*&--focus {
+    &--focus {
         outline: 2px solid var(--deep-cerulean);
-    }*/
+    }
 }
 </style>
