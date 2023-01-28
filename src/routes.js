@@ -59,7 +59,6 @@ const router = createRouter({
             }
         },
         {
-            // @todo Remove page and route once you integrate the redesigned inventory form
             path: '/create',
             name: 'Create',
             component: Create,

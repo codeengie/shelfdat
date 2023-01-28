@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-// import { createRouter, createWebHistory } from 'vue-router';
 import store from './store';
 import router from './routes';
 

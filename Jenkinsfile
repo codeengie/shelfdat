@@ -31,7 +31,7 @@ node {
         echo "Cloning repo"
 
         /**
-         * I wasn't able to use withCredentials() because it was not able to access the GitLab API Token
+         * I wasn't able to use withCredentials() because Jenkins was not able to access the GitLab API Token
          * even through I modified it to access the class. Also, interpolating the credentials variable into
          * the repo url is a no go since it poses a security risk.
          * Reference: @link https://github.com/jenkinsci/gitlab-plugin/issues/536
@@ -55,7 +55,7 @@ node {
     }
 
     /**
-     * Since you are running Jenkins in a Docker you need to use `sh` and not `bat` or `powershell` to run scripts. Also,
+     * Since Jenkins is running in a Docker you need to use `sh` and not `bat` or `powershell` to run scripts. Also,
      * in order to run `npm install` you need to configure NodeJS as a global tool and declaring environment variables
      * in the script.
      */

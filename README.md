@@ -1,7 +1,7 @@
 # ShelfDat
 
 ## Overview
-An app I created to help manage and track my massive media library. Of course, it can be used to manage other items (this will be implemented in phase 2).
+ShelfDat is a web application I created to help inventory, manage and track my collections.
 
 ## Technology
 + AWS
@@ -17,7 +17,7 @@ An app I created to help manage and track my massive media library. Of course, i
 + JavaScript
 + Node.js
 + NPM
-+ Vue.js 4
++ Vue.js
 
 ## Prerequisites
 In order to build and run the app you'll need a minimum `node >= 14.15.0` and `vue-cli >= 5.0.8`. Also, I've been running this project with `https` enabled and configured my local environment with a tool called [mkcert](https://github.com/FiloSottile/mkcert). This tools creates locally-trusted development certificates.

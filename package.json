@@ -1,7 +1,7 @@
 {
   "name": "shelfdat",
   "version": "0.1.0",
-  "description": "ShelfDat is a web app I created to help manage and inventory my massive media library",
+  "description": "ShelfDat is a web application I created to help inventory, manage and track my collections.",
   "homepage": "https://shelfdat.com",
   "license": "UNLICENSED",
   "repository": {
