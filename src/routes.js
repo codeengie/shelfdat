@@ -1,9 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from './views/Login';
-import Dashboard from "./views/Dashboard";
-import NotFound from "./views/NotFound";
-import Inventory from './views/Inventory';
-import Create from './views/Create';
 import store from './store';
 
 const router = createRouter({
@@ -13,7 +8,7 @@ const router = createRouter({
         {
             path: '/login',
             name: 'Login',
-            component: Login,
+            component: () => import('./views/Login.vue'),
             meta: {
                 title: 'Login',
                 description: 'Log in to your ShelfDat account, the only app you\'ll ever need to manage your collections',
@@ -25,7 +20,7 @@ const router = createRouter({
         {
             path: '/dashboard',
             name: 'Dashboard',
-            component: Dashboard,
+            component: () => import('./views/Dashboard.vue'),
             meta: {
                 title: 'Dashboard',
                 description: 'The dashboard peers into your collections and gives you stats at a glance',
@@ -37,7 +32,7 @@ const router = createRouter({
         {
             path: '/:notFound(.*)',
             name: '404',
-            component: NotFound,
+            component: () => import('./views/NotFound.vue'),
             meta: {
                 title: '404',
                 description: '(404) We could\'t find the page you\'re looking for',
@@ -49,7 +44,7 @@ const router = createRouter({
         {
             path: '/inventory',
             name: 'Inventory',
-            component: Inventory,
+            component: () => import('./views/Inventory.vue'),
             meta: {
                 title: 'Inventory',
                 description: 'View your entire collection with options to read details, search and filter',
@@ -61,7 +56,7 @@ const router = createRouter({
         {
             path: '/create',
             name: 'Create',
-            component: Create,
+            component: () => import('./views/Create.vue'),
             meta: {
                 title: 'Create',
                 description: 'Add an item to any of your collections',
