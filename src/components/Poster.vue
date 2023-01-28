@@ -54,15 +54,22 @@ export default {
 
 <style lang="scss" scoped>
 .poster {
+    $self: &;
+
     &__img {
         transition: all .2s ease-in-out;
         height: auto;
         scale: 1;
         width: 100%;
+    }
 
-        &:hover {
-            transition: all .2s ease-in;
-            scale: 1.2;
+    // Modifier(s)
+    &--hover {
+        #{$self}__img {
+            &:hover {
+                transition: all .2s ease-in;
+                scale: 1.2;
+            }
         }
     }
 }

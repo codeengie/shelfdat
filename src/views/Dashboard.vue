@@ -40,7 +40,7 @@
         <!-- Display recent inventory items -->
         <Recent
             :db-data="inventoryData"
-            :display-num="16"/>
+            :display-num="10"/>
     </div>
 </template>
 

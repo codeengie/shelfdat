@@ -27,6 +27,7 @@
             <Poster
                 v-for="inventory in filteredInventoryData"
                 :key="inventory.id"
+                class="poster--hover"
                 :poster-id="inventory.id"
                 poster-height="162"
                 :poster-title="inventory.title"
