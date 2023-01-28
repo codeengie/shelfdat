@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { defineConfig } = require('@vue/cli-service');
+//const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // @todo Look for a better way to achieve this without repeating yourself
 if (process.env.NODE_ENV !== 'production') {
@@ -12,6 +13,17 @@ if (process.env.NODE_ENV !== 'production') {
             },
             port: 443
         },
+        /*configureWebpack: {
+            plugins: [
+                new BrowserSyncPlugin({
+                    host: 'localhost',
+                    port: 3000,
+                    proxy: 'https://shelfdat.com'
+                },{
+                    reload: false
+                })
+            ],
+        },*/
         transpileDependencies: true
     });
 } else {
