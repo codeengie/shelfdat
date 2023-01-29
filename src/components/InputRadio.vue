@@ -9,7 +9,7 @@
                         :checked="setChecked(index)"
                         :id="`${label}Choice${index}`"
                         :name="label"
-                        :value="option"
+                        :value="`${values[index]}`"
                         @blur="handleBlur"
                         @change="$emit('update:modelValue', $event.target.value)"
                         @focus="handleFocus"
@@ -29,7 +29,8 @@ export default {
     name: 'InputRadio',
     props: {
         label: String,
-        options: [Array, String]
+        options: [Array, String],
+        values: [Array, String]
     },
     emits: ['update:modelValue'],
     data() {

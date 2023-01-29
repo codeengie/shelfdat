@@ -17,6 +17,7 @@
                 :key="radio"
                 :label="radio.label"
                 :options="radio.options"
+                :values="radio.values"
                 v-model="formInputs[radio.label]"
                 ref="renderedRadios"/>
             <DynamicInputField
@@ -80,18 +81,22 @@ export default {
         return {
             formInputs: {},
             pageTitle: this.$route.meta.title,
+            // @todo I know `values` is redundant, try using multidimensional arrays
             radioInputs: [
                 {
                     label: 'type',
-                    options: ['Movie', 'TV Show']
+                    options: ['Movie', 'TV Show'],
+                    values: ['Movie', 'TV Show']
                 },
                 {
                     label: 'format',
-                    options: ['4K Blu-ray', 'Blu-ray', 'DVD']
+                    options: ['4K', 'BRAY', 'DVD'],
+                    values: ['4K Blu-ray', 'Blu-ray', 'DVD']
                 },
                 {
                     label: 'collection',
-                    options: ['No', 'Yes']
+                    options: ['No', 'Yes'],
+                    values: ['No', 'Yes']
                 }
             ]
         }

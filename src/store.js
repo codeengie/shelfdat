@@ -136,7 +136,7 @@ const store = createStore({
 
                     commit('setInventory', responseData.data);
                     dispatch('calcDonutLegend', {data: state.inventory, key: 'format', mutant:'setDonutSegments'});
-                    dispatch('calcDonutLegend', {data: state.inventory, key: 'type', mutant: 'setDonutTypes'})
+                    dispatch('calcDonutLegend', {data: state.inventory, key: 'type', mutant: 'setDonutTypes'});
                     commit('setLoadStatus', false);
                 } catch(err) {
                     logger('There was an error fetching inventory.', err);
@@ -145,7 +145,7 @@ const store = createStore({
             }
 
         },
-        async addNewItem({commit}, payload) {
+        async addNewItem({commit, dispatch, state}, payload) {
             commit('setLoadStatus', true);
 
             const settings = {
@@ -164,6 +164,8 @@ const store = createStore({
                 if (responseData.status === 'fulfilled') {
                     logger('Item successfully added to database', responseData.value, 'info');
                     commit('addInventoryItem', responseData.value);
+                    dispatch('calcDonutLegend', {data: state.inventory, key: 'format', mutant:'setDonutSegments'});
+                    dispatch('calcDonutLegend', {data: state.inventory, key: 'type', mutant: 'setDonutTypes'});
                     commit('setLoadStatus', false);
                 } else {
                     commit('setLoadStatus', false);
