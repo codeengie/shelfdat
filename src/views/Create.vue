@@ -197,6 +197,7 @@ export default {
 
         &__button {
             grid-area: cfb;
+            margin: 0 auto;
         }
 
         &__container {
