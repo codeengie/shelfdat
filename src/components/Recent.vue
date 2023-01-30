@@ -85,13 +85,18 @@ export default {
 
 <style lang="scss" scoped>
 .carousel {
+    $self: &;
     margin-top: 12px;
 
-    &__slide {
+    &__item {
         margin-right: 10px;
+    }
 
+    &__slide {
         &:last-child {
+            #{$self}__item {
             margin-right: 0;
+        }
         }
     }
 }
