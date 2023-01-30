@@ -3,7 +3,7 @@
         <h2 class="recent__title">Recent</h2>
 
         <Carousel :settings="settings" :breakpoints="breakpoints">
-            <Slide v-for="slide in 10" :key="slide">
+            <Slide v-for="slide in displayNum" :key="slide">
                 <div class="carousel__item">
                     <Poster
                         :poster-id="filterRecent[slide - 1].id"
@@ -70,12 +70,24 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.carousel {
+    &__icon {
+        fill: var(--white);
+    }
+
+    &__next,
+    &__prev {
+        background: var(--dark-shark);
+    }
+}
+</style>
+
 <style lang="scss" scoped>
 .carousel {
     margin-top: 12px;
 
     &__slide {
-        //margin-right: 29px; // bigger viewports
         margin-right: 10px;
 
         &:last-child {
