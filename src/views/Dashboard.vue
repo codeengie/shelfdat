@@ -39,6 +39,7 @@
         </div>
         <!-- Display recent inventory items -->
         <Recent
+            v-if="inventoryData.length"
             :db-data="inventoryData"
             :display-num="10"/>
     </div>
@@ -73,9 +74,13 @@ export default {
             donutTypes: ['Movies', 'TV Shows']
         };
     },
-    async mounted() {
+    async created() {
         await this.getInventory();
         this.donutData.datasets[0].data = this.donutSegmentData;
+    },
+    async mounted() {
+        //await this.getInventory();
+        //this.donutData.datasets[0].data = this.donutSegmentData;
     },
     computed: {
         ...mapGetters([

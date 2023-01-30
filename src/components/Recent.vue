@@ -1,27 +1,60 @@
 <template>
     <div class="recent">
-        <h2 class="recent__title">Recent Additions</h2>
-        <div class="recent__wrap">
-            <Poster
-                v-for="dataItem in filterRecent"
-                :key="dataItem.id"
-                :poster-id="dataItem.id"
-                :poster-src="dataItem.imageurl"
-                poster-height="162"
-                :poster-title="dataItem.title"
-                poster-width="108"
-                :poster-year="dataItem.year"/>
-        </div>
+        <h2 class="recent__title">Recent</h2>
+
+        <Carousel :settings="settings" :breakpoints="breakpoints">
+            <Slide v-for="slide in 10" :key="slide">
+                <div class="carousel__item">
+                    <Poster
+                        :poster-id="filterRecent[slide - 1].id"
+                        :poster-src="filterRecent[slide - 1].imageurl"
+                        poster-height="162"
+                        :poster-title="filterRecent[slide - 1].title"
+                        poster-width="108"
+                        :poster-year="filterRecent[slide - 1].year"/>
+                </div>
+            </Slide>
+            <template #addons>
+                <Navigation/>
+            </template>
+        </Carousel>
     </div>
 </template>
 
 <script>
 import Poster from './Poster';
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Navigation, Slide } from 'vue3-carousel'
 
 export default {
     name: 'Recent',
     components: {
-        Poster
+        Carousel,
+        Navigation,
+        Poster,
+        Slide
+    },
+    data() {
+        return {
+            breakpoints: {
+                0: {
+                    itemsToShow: 3.5,
+                    snapAlign: 'center'
+                },
+                768: {
+                    itemsToShow: 4.5,
+                    snapAlign: 'center'
+                },
+                992: {
+                    itemsToShow: 5,
+                    snapAlign: 'center'
+                }
+            },
+            settings: {
+                itemsToShow: 1,
+                snapAlign: 'center'
+            }
+        };
     },
     props: {
         dbData: Object,
@@ -38,6 +71,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.carousel {
+    margin-top: 12px;
+
+    &__slide {
+        //margin-right: 29px; // bigger viewports
+        margin-right: 10px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
 .recent {
     padding: 0 15px;
 
