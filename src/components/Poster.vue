@@ -57,9 +57,10 @@ export default {
     $self: &;
 
     &__img {
-        transition: all .2s ease-in-out;
+        background-color: var(--shark);
         height: auto;
         scale: 1;
+        transition: all .2s ease-in-out;
         width: 100%;
     }
 
