@@ -3,15 +3,15 @@
         <h2 class="recent__title">Recent</h2>
 
         <Carousel :settings="settings" :breakpoints="breakpoints">
-            <Slide v-for="slide in displayNum" :key="slide">
+            <Slide v-for="(slide, index) in displayNum" :key="slide">
                 <div class="carousel__item">
                     <Poster
-                        :poster-id="filterRecent[slide - 1].id"
-                        :poster-src="filterRecent[slide - 1].imageurl"
+                        :poster-id="filterRecent[index].id"
+                        :poster-src="filterRecent[index].imageurl"
                         poster-height="162"
-                        :poster-title="filterRecent[slide - 1].title"
+                        :poster-title="filterRecent[index].title"
                         poster-width="108"
-                        :poster-year="filterRecent[slide - 1].year"/>
+                        :poster-year="filterRecent[index].year"/>
                 </div>
             </Slide>
             <template #addons>
