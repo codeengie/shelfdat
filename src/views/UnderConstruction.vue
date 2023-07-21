@@ -29,11 +29,17 @@ export default {
   justify-content: center;
   padding: 0 20px;
 
+  &__subtitle,
+  &__title {
+    text-align: center;
+  }
+
   &__subtitle {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   &__title {
+    line-height: 1.3;
     margin-top: 10px;
   }
 }
