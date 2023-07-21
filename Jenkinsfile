@@ -97,7 +97,7 @@ node {
     stage('Delete') {
         echo "Deleting S3 bucket files for: ${getJobName()}.com"
 
-        withAWS(region: 'us-west-1', credentials: 'aws-creds') {
+        withAWS(region: 'us-east-1', credentials: 'aws-creds') {
             s3Delete bucket: "${getJobName()}.com", path: '/'
         }
     }
@@ -105,7 +105,7 @@ node {
     stage('Upload') {
         echo "Uploading files to S3 bucket: ${getJobName()}.com"
 
-        withAWS(region: 'us-west-1', credentials: 'aws-creds') {
+        withAWS(region: 'us-east-1', credentials: 'aws-creds') {
             s3Upload acl: 'Private', bucket: "${getJobName()}.com", cacheControl: 'max-age=31536000', includePathPattern: '*/**', workingDir: 'dist'
         }
     }
@@ -113,7 +113,7 @@ node {
     stage('Invalidate') {
         echo "Invalidating files from CloudFront edge caches for: ${getJobName()}.com"
 
-        withAWS(region: 'us-west-1', credentials: 'aws-creds') {
+        withAWS(region: 'us-east-1', credentials: 'aws-creds') {
             cfInvalidate(distribution: "${DISTRO_ID}", paths: ['/*'], waitForCompletion: true)
         }
     }
