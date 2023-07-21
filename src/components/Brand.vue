@@ -13,8 +13,14 @@
 export default {
     name: 'Brand',
     props: {
-        imgHeight: String,
-        imgWidth: String
+      imgHeight: {
+        required: true,
+        type: String
+      },
+      imgWidth: {
+        required: true,
+        type: String
+      }
     }
 }
 </script>

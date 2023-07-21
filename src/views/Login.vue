@@ -15,7 +15,7 @@
                 field-type="password"
                 v-model="passwordInput"/>
 
-            <router-link class="login-form__forgot" to="/forgot-password">Forgot Password?</router-link>
+            <router-link class="login-form__forgot" to="/under-construction">Forgot Password?</router-link>
 
             <!-- Do not add `type="button"`, Vue no like, disable @submit -->
             <Button
@@ -24,7 +24,7 @@
                 class="login-form__button"/>
 
             <p class="login-form__signup">Don&rsquo;t have an account?
-                <router-link class="login-form__link" to="/signup">Sign Up</router-link>
+                <router-link class="login-form__link" to="/under-construction">Sign Up</router-link>
             </p>
         </form>
         <Footer/>

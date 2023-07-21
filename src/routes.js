@@ -42,6 +42,18 @@ const router = createRouter({
             }
         },
         {
+            path: '/under-construction',
+            name: 'Under',
+            component: () => import('./views/UnderConstruction.vue'),
+            meta: {
+                title: 'Under Construction',
+                description: 'This page will be coming soon',
+                header: false,
+                navbar: false,
+                requiresAuth: false
+            }
+        },
+        {
             path: '/inventory',
             name: 'Inventory',
             component: () => import('./views/Inventory.vue'),
