@@ -93,31 +93,29 @@ node {
         }
     }
 
-    stage('Deploy') {
-        echo 'Uploading artifact to S3 bucket'
-        s3Upload consoleLogLevel: 'INFO',
-        dontSetBuildResultOnFailure: false,
-        dontWaitForConcurrentBuildCompletion: false,
-        entries: [
-            [
-                bucket: "${getJobName()}.com",
-                excludedFile: '',
-                flatten: false,
-                gzipFiles: false,
-                keepForever: false,
-                managedArtifacts: false,
-                noUploadOnFailure: true,
-                selectedRegion: 'us-east-1',
-                showDirectlyInBrowser: false,
-                sourceFile: 'dist/**',
-                storageClass: 'STANDARD',
-                uploadFromSlave: false,
-                useServerSideEncryption: false
-            ]
-        ],
-        pluginFailureResultConstraint: 'FAILURE',
-        profileName: "jenkins-upload-${getJobName()}",
-        userMetadata: []
+    // In order to tap into AWS you need to create a user and generate credentials for Jenkins to use
+    stage('Delete') {
+        echo "Deleting S3 bucket files for: ${getJobName()}.com"
+
+        withAWS(region: 'us-west-1', credentials: 'aws-creds') {
+            s3Delete bucket: "${getJobName()}.com", path: '/'
+        }
+    }
+
+    stage('Upload') {
+        echo "Uploading files to S3 bucket: ${getJobName()}.com"
+
+        withAWS(region: 'us-west-1', credentials: 'aws-creds') {
+            s3Upload acl: 'Private', bucket: "${getJobName()}.com", cacheControl: 'max-age=31536000', includePathPattern: '*/**', workingDir: 'dist'
+        }
+    }
+
+    stage('Invalidate') {
+        echo "Invalidating files from CloudFront edge caches for: ${getJobName()}.com"
+
+        withAWS(region: 'us-west-1', credentials: 'aws-creds') {
+            cfInvalidate(distribution: "${DISTRO_ID}", paths: ['/*'], waitForCompletion: true)
+        }
     }
 
     stage('Finish') {
