@@ -49,7 +49,7 @@ node {
                 [$class: 'CleanBeforeCheckout']
             ],
             userRemoteConfigs: [
-                [credentialsId: 'gitlab-api-token', url: 'https://gitlab.com/codeengie/shelfdat']
+                [credentialsId: 'gitlab-api-token', url: "${GIT_URL}"]
             ]
         ])
     }

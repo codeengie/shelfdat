@@ -1,12 +1,11 @@
 {
   "name": "shelfdat",
   "version": "0.1.0",
-  "description": "ShelfDat is a web application I created to help inventory, manage and track my collections.",
+  "description": "ShelfDat is a powerful and user-friendly solution designed to help individuals manage their inventory efficiently. Keeping track of personal items, this app provides the tools you need to stay organized and informed.",
   "homepage": "https://shelfdat.com",
-  "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:codeengie/shelfdat.git"
+    "url": "git@github.com:codeengie/shelfdat.git"
   },
   "engines": {
     "npm": ">=6.14.8",

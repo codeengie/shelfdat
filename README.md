@@ -1,7 +1,6 @@
 # ShelfDat
 
-## Overview
-ShelfDat is a web application I created to help inventory, manage and track my collections.
+ShelfDat is a powerful and user-friendly solution designed to help individuals manage their inventory efficiently. Keeping track of personal items, this app provides the tools you need to stay organized and informed.
 
 ## Technology
 + AWS
@@ -46,11 +45,12 @@ npm install --platform=linux --arch=x64 sharp
 ```
 
 ## Developer
-[Cesar Villanueva Jr](https://codeengie.com)
-
-## Credits
-Designed and built by Ardent Forms.
+[Cesar Villanueva Jr](https://ardentforms.com)
 
 ## License
-+ You do not have my written, implied or expressed permission to use.
-+ Copyright 2022 @ Ardent Forms.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+This license allows you to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the following conditions:
+
+- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+- The software is provided "as is", without warranty of any kind.

@@ -106,12 +106,6 @@ router.beforeEach(async (to, from, next) => {
     } else {
         next();
     }
-
-    /*if (to.name !== 'Login' && !store.state.isAuthenticated) {
-        next({ name: 'Login' });
-    } else {
-        next();
-    }*/
 });
 
 export default router;
